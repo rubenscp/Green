@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<f:view contentType="text/html" encoding="UTF-8"
+	locale="#{languageController.locale}">
+
+	<f:loadBundle basename="properties.SITISWeb" var="propertiesSitisWeb" />
+
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<link type="text/css" rel="stylesheet"
+				href="#{request.contextPath}/templates/css/SITISWebStyle.css" />
+			<title>#{labels['sitis.web.shortName']}</title>
+
+		</f:facet>
+	</h:head>
+
+	<h:body>
+
+		<p:layout fullPage="true" id="divMain" styleClass="sitisLayout">
+
+			<div id="divTop">
+				<ui:insert name="divTop">
+					<ui:include src="../templates/top.xhtml" />
+				</ui:insert>
+			</div>
+
+			<div id="divLeft">
+				<ui:insert name="divLeft">
+					<ui:include src="../templates/left.xhtml" />
+				</ui:insert>
+			</div>
+
+			<div id="divCenter">
+				<ui:insert name="divCenter">
+					<ui:include src="../templates/center.xhtml" />
+				</ui:insert>
+			</div>
+
+			<div id="divBottom">
+				<ui:insert name="divBottom">
+					<ui:include src="../templates/bottom.xhtml" />
+				</ui:insert>
+			</div>
+
+		</p:layout>
+
+	</h:body>
+
+</f:view>
+
+</html>

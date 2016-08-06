@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: center.xhtml
+	Description: This code defines center content of the main form  
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 01/09/2015
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition>
+
+		<h:outputStylesheet name="/templates/css/GreenStyle.css" />
+
+		<!-- Center of main form -->
+		<p:layoutUnit id="Center_Green" position="center" size="200"
+			resizable="false" closable="false" collapsible="false">
+
+			<p:panel styleClass="greenFunctionTitlePanel">
+				<h:outputLabel for="functionTitle" />
+				<h:outputLabel id="functionTitle" value="" />
+			</p:panel>
+
+			<ui:insert name="center" />
+
+		</p:layoutUnit>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

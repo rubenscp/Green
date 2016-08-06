@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: bottom.xhtml
+	Description: This code defines bottom content of the main form  
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 01/09/2015
+ -->
+ 
+ <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition>
+
+		<h:outputStylesheet name="/templates/css/GreenStyle.css" />
+
+		<!-- Footer region of the main form -->	 
+		<p:layoutUnit id="Bottom_Green"  position="south" size="45" resizable="false" closable="false" collapsible="true">			
+			<table width="100%" class="footer">
+				<tr>
+					<td class="footerTitle">
+						<h:outputText
+							value="&copy; 2015 #{labels['company.name']} - ;;;;;; #{labels['green.shortName']} | #{labels['green.copyright']} | #{labels['green.version']}"/>					
+					</td>
+				</tr>  
+			</table>		
+		</p:layoutUnit>
+ 
+ 	</ui:composition>
+ 
+</h:body>
+
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_SITIS" version="3.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+	<display-name>Green</display-name>
+
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>/WEB-INF/faces-config.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>#{themeController.theme}</param-value>
+	</context-param>
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!-- <context-param> <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name> 
+		<param-value>messages</param-value> </context-param> -->
+
+	<!-- JSF Mapping -->
+	<servlet>
+		<display-name>FacesServlet</display-name>
+		<servlet-name>FacesServlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- JSF Files Mapping -->
+	<servlet-mapping>
+		<servlet-name>FacesServlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FacesServlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	<!-- Rest/Json Technologies -->
+	<!-- <servlet> <servlet-name>Resteasy</servlet-name> <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class> 
+		<init-param> <param-name>resteasy.servlet.mapping.prefix</param-name> <param-value>/services</param-value> 
+		</init-param> <init-param> <param-name>resteasy.resources</param-name> <param-value>br.embrapa.siexp.mweb.ws.rest.RestServiceBean</param-value> 
+		</init-param> <load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> 
+		<servlet-name>Resteasy</servlet-name> <url-pattern>/services/*</url-pattern> 
+		</servlet-mapping> -->
+
+	<!-- Lista de arquivos tratados pelo JSF -->
+	<welcome-file-list>
+		<welcome-file>index.jsf</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+</web-app>

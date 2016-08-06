@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+	<!-- Java Server Faces configuration -->
+	<application>
+
+		<!-- System default language -->
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+		</locale-config>
+
+		<!-- Defining messages file used at the internacionalization -->
+		<message-bundle>i18n.labels_pt_BR</message-bundle>
+		<resource-bundle>
+			<base-name>i18n.labels_pt_BR</base-name>
+			<var>labels</var>
+		</resource-bundle>
+
+		<resource-bundle>
+			<base-name>properties.green</base-name>
+			<var>propertiesGreen</var>
+		</resource-bundle>
+
+	</application>
+
+</faces-config>
