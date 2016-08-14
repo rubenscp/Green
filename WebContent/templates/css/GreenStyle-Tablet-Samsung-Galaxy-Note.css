@@ -1,0 +1,395 @@
+/* -------------------------------------------------------------------
+This CSS is apply to tablet Samsung Galaxy Note in two orientations: 
+1) Landscape - width: 1280px  height: 752px
+2) Portrait  - width: 800px   height: 1232px
+--------------------------------------------------------------------*/
+.ui-widget {
+	font-family: 'Arial', Helvetica, sans-serif !important;
+}
+/* 
+font-family: 'Segoe UI', Arial, sans-serif !important; 
+font-family: 'Comic Sans MS', cursive, sans-serif !important;
+font-family: 'Arial', Helvetica, sans-serif !important;
+font-family: 'Lucida Sans Unicode', Lucida Grande, sans-serif !important;
+font-family: 'Tahoma', Geneva, sans-serif !important;
+font-family: 'Trebuchet MS', Helvetica, sans-serif !important;
+font-family: 'Verdana, Geneva', sans-serif !important;
+*/
+.sitisTitleTop {
+	width: 50% !important;
+	font-size: 1.125em !important;
+	font-weight: bold !important;
+	text-align: left !important;
+}
+
+.sitisRightTop {
+	width: 50% !important;
+	text-align: right !important;
+}
+
+.sitisPersonTop {
+	width: 100% !important;
+	text-align: right !important;
+}
+
+.sitisLogoutTop {
+	width: 100% !important;
+	text-align: right !important;
+}
+
+.sitisFooter {
+	width: 100% !important;
+	font-size: 0.9375m !important;
+	font-weight: bold !important;
+	text-align: center !important;
+}
+
+.sitisFunctionTitlePanel {
+	width: 100% !important;
+	font-size: 1.0625em !important;
+	font-weight: bold !important;
+	text-align: center !important;
+}
+
+.sitisLeftColumnButtonsFormOperations {
+	width: 100%;
+	text-align: left;
+}
+
+.sitisRightColumnButtonsFormOperations {
+	width: 100%;
+	text-align: right;
+}
+
+.sitisCommandButton {
+	font-size: 0.875em !important;
+	text-align: center !important;
+	height: 3.0em !important;
+	font-weight: bold !important;
+}
+
+.sitisSearchButton {
+	font-size: 0.875m !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+	width: 1.75em !important;
+	height: 1.55em !important;
+}
+
+.sitisInputText, .sitisInputTextArea, .sitisInputMask, .sitisInputNumber,
+	.sitisOutputText, .sitisOutputLabel, .sitisSearchField, .sitisDropDown,
+	.sitisTabView, .sitisTabAccordionPanel, .sitisCalendar, .sitisCarousel,
+	.sitisSelectOneButton, .sitisToolTip {
+	font-size: 0.9375em !important;
+}
+
+.sitisDataTable, .sitisDataGrid {
+	font-size: 0.875em !important;
+}
+
+.sitisPanelHeader {
+	font-size: 1.0625em !important;
+}
+
+.sitisLayout {
+	background-color: transparent !important;
+	border-style: none !important;
+}
+
+/* padding >> top > right > bottom > left */
+.sitisPanelButtons {
+	border: none !important;
+	padding: 0em 0em 0em 0em !important;
+}
+
+.sitisPanelGrid {
+	font-size: 0.9375em !important;
+	margin-bottom: 10px !important;
+}
+
+.sitisPanelGridColumns {
+	text-align: center !important;
+}
+
+.sitisStatus {
+	width: 50% !important;
+	height: 50% !important;
+}
+
+.sitisPanelGridInputData {
+	border-style: none !important;
+}
+
+.sitisDataTableChoose {
+	font-size: 0.875em !important;
+}
+
+.sitisDialogColumnLeft, .sitisPanelgridColumnLeft {
+	text-align: right !important;
+	font-weight: bold !important;
+}
+
+.sitisDialogColumnRight, .sitisPanelgridColumnRight {
+	text-align: left !important;
+}
+
+.sitisDialogColumnCenter, .sitisPanelgridColumnCenter {
+	text-align: center !important;
+}
+
+.sitisScheduleDataGrid {
+	width: 90% !important;
+	text-align: center !important;
+}
+
+.sitisSoilColumnMapPanelGrid {
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.sitisSoilColumnLabel {
+	font-size: 0.75em !important;
+	font-weight: bold !important;
+	color: Black !important;
+	text-align: left !important;
+	width: 2.8em !important;
+	height: 2em !important;
+}
+
+.sitisTimeLine {
+	font-size: 0.9375em !important;
+}
+
+.sitisTimeLineSchedulePendingApproval {
+	background: DarkOrange;
+}
+
+.sitisTimeLineScheduleApproved {
+	background: Red;
+}
+
+.sitisTimeLineScheduleRejected {
+	background: Sienna;
+}
+
+/* -----------------------
+	Error and warning messages  
+	------------------------*/
+.errorWarningMessages {
+	font-size: 0.9375em !important;
+	text-align: left !important;
+	font-style: normal !important;
+}
+
+/* -----------------------
+	Menu layout  
+	------------------------*/
+.ui-layout-west {
+	width: 250px !important;
+}
+
+.sitisMenuLayoutUnit {
+	font-size: 1.125em !important;
+}
+
+.sitisMenuTitle {
+	font-size: 1.125em !important;
+	font-weight: normal !important;
+}
+
+.sitisMenuItem {
+	font-size: 1.125em !important;
+	font-weight: normal !important;
+}
+
+/* -----------------------
+Navigation History Menu layout  
+------------------------*/
+.sitisNavigationHistoryMenuItem {
+	font-size: 0.8125em !important;
+}
+
+/* -----------------------
+	Confirm dialog form 
+------------------------*/
+.sitisConfirmDialogMessage {
+	font-size: 1.0625em !important;
+	text-align: center !important;
+}
+
+.sitisConfirmDialogList {
+	font-size: 1.0625em !important;
+}
+
+.sitisConfirmDialogInputText {
+	font-size: 1.0625em !important;
+}
+
+.sitisConfirmDialogMessageLeft {
+	text-align: right !important;
+}
+
+.sitisConfirmDialogMessageRight {
+	text-align: left !important;
+}
+
+.sitisConfirmDialogButton {
+	font-size: 1.0625em !important;
+	text-align: center !important;
+	width: 5em !important;
+}
+
+/* -----------------------
+Primefaces predefined layout 
+------------------------*/
+.ui-selectonemenu-items, .ui-datepicker, .ui-layout-unit-header,
+	.ui-dialog-titlebar, .ui-panel-titlebar {
+	font-size: 0.9375em !important;
+}
+
+.ui-confirm-dialog-message {
+	font-size: 1.0625em !important;
+}
+
+.ui-datatable-empty-message {
+	font-weight: bold !important;
+	color: Orange !important;
+}
+
+/* -----------------------
+Login form   
+------------------------*/
+div.centerContainer {
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 90% !important;
+	position: absolute !important;
+	display: table !important;
+	text-align: center !important;
+}
+
+div.centerContent {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+.sitisLoginMainPanel {
+	border-style: none !important;
+}
+
+.sitisLoginImages {
+	text-align: center !important;
+	width: 55% !important;
+}
+
+.sitisLoginPerson {
+	text-align: right !important;
+	width: 45% !important;
+}
+
+/* ----------------------------
+Experiment Schedule Form Styles    
+-----------------------------*/
+.sitisExperimentScheduleButtonBackward,
+	.sitisExperimentScheduleButtonForward {
+	font-size: 0.8125em;
+	text-align: center !important;
+	width: 1em !important;
+	height: 1em !important;
+	border-style: none !important;
+	vertical-align: middle !important;
+}
+
+/* -----------------------
+	Form layout at the top
+	------------------------*/
+table.top {
+	background-color: transparent;
+	border: none;
+	border-style: none;
+	width: 100%;
+	height: 100%;
+}
+
+td.topTitle {
+	border: none;
+	font-size: 1.125em;
+	font-weight: bold;
+	text-align: left;
+}
+
+td.topLoggedPerson {
+	border: none;
+	font-size: 0.9375em;
+	font-weight: bold;
+	text-align: rigth;
+}
+
+td.topLanguage {
+	background-color: transparent;
+	border: none;
+	text-align: right;
+}
+
+.sitisPersonName {
+	font-size: 0.9375em !important;
+	font-weight: bold;
+	text-align: rigth;
+}
+
+/* -----------------------
+	Form footer layout  
+	------------------------*/
+table.footer {
+	background-color: transparent;
+	border: none;
+	width: 100%;
+	height: 100%;
+}
+
+td.footerTitle {
+	border: none;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* -----------------------
+	Login form layout  
+	------------------------*/
+table.login {
+	background-color: transparent;
+	border: none;
+}
+
+tr.formLogin {
+	border: none;
+	text-align: center;
+}
+
+td.spaceLogin {
+	border: none;
+	text-align: center;
+	height: 5em;
+}
+
+td.formLogin {
+	border: none;
+	text-align: center;
+}
+
+.formLoginPanel {
+	width: 25em !important;
+	margin-bottom: 20px !important;
+	text-align: center !important;
+	font-size: 1.0em !important;
+}
+
+.formLoginField {
+	border: none;
+	font-size: 1.0em;
+	text-align: center;
+	background-color: transparent;
+	height: 1em;
+}
