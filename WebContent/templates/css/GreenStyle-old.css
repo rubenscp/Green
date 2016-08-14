@@ -1,0 +1,285 @@
+/*----------------------------------
+Reference resolution: 1024px x 768px
+
+-----------------------------------*/
+
+/* -----------------------
+All styles of  components
+	background-color: transparent !important;
+------------------------*/
+.greenFunctionTitlePanel {
+	font-size: 0.875em !important;
+	font-weight: bold !important;
+	padding: 0em !important;
+	margin: 0em !important;
+	text-align: center !important;
+	border-style: none !important;
+}
+
+.greenCommandButton {
+	font-size: 0.625em !important;
+}
+
+.greenInputText {
+	font-size: 0.6875em !important;
+}
+
+.greenInputTextArea {
+	font-size: 0.6875em !important;
+}
+
+.greenOutputLabel {
+	font-size: 0.6875em !important;
+}
+
+.greenDataTable {
+	font-size: 0.6875em !important;
+}
+
+.greenLayout {
+	background-color: transparent !important;
+	border-style: none !important;
+}
+
+/* padding >> top > right > bottom > left */
+.greenPanelButtons {
+	border: none !important;
+	padding: 0em 0em 0em 0em !important;
+}
+
+.greenPanelGrid {
+	font-size: 0.6875em !important;
+	margin-bottom: 10px !important;
+}
+
+.greenPanelGridColumns {
+	text-align: center !important;
+}
+
+.greenSearchField {
+	font-size: 0.6875em !important;
+}
+
+.greenDropDown {
+	font-size: 0.6875em !important;
+}
+
+.greenTabView {
+	font-size: 0.6875em !important;
+}
+
+/* -----------------------
+Error and warning messages  
+------------------------*/
+.errorWarningMessages {
+	font-size: 0.75em !important;
+	text-align: left !important;
+	font-style: normal !important;
+}
+
+/* -----------------------
+Menu layout  
+------------------------*/
+.greenMenuTitle {
+	font-size: 0.875em !important;
+	font-weight: normal !important;
+}
+
+.greenMenuItem {
+	font-size: 0.875em !important;
+	font-weight: normal !important;
+}
+
+/* -----------------------
+Confirm dialog form 
+------------------------*/
+.greenConfirmDialog {
+	font-size: 0.875em !important;
+	text-align: center !important;
+}
+
+.greenConfirmDialogButton {
+	font-size: 0.875em !important;
+}
+
+/* -----------------------
+Form layout at the top
+------------------------*/
+table.top {
+	background-color: transparent;
+	border: none;
+	border-style: none;
+	width: 100%;
+	height: 100%;
+}
+
+td.topTitle {
+	border: none;
+	font-size: 0.875em;
+	font-weight: bold;
+	text-align: left;
+}
+
+td.topLoggedPerson {
+	border: none;
+	font-size: 0.6875em;
+	font-weight: bold;
+	text-align: rigth;
+}
+
+td.topLanguage {
+	background-color: transparent;
+	border: none;
+	text-align: right;
+}
+
+.greenPersonName {
+	font-size: 0.75em !important;
+}
+
+/* -----------------------
+Form footer layout  
+------------------------*/
+table.footer {
+	background-color: transparent;
+	border: none;
+	width: 100%;
+	height: 100%;
+}
+
+td.footerTitle {
+	border: none;
+	font-size: 0.75em;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* -----------------------
+Login form layout  
+------------------------*/
+table.login {
+	background-color: transparent;
+	border: none;
+}
+
+tr.formLogin {
+	border: none;
+	text-align: center;
+}
+
+td.spaceLogin {
+	border: none;
+	text-align: center;
+	height: 5em;
+}
+
+td.formLogin {
+	border: none;
+	text-align: center;
+}
+
+.formLoginPanel {
+	width: 25em !important;
+	margin-bottom: 20px !important;
+	text-align: center !important;
+}
+
+.formLoginField {
+	border: none;
+	font-size: 0.775em;
+	text-align: center;
+	background-color: transparent;
+	height: 1em;
+}
+
+/* =================================================================== */
+
+/* -----------------------
+Wide styles
+------------------------*/
+@media only screen and (min-width : 1px) and (max-width : 1024px) {
+	/*	
+	@import "GreenStyleLowResolution.css" 
+	*/
+	.greenFunctionTitlePanel {
+		font-size: 0.75em !important;
+		font-weight: bold !important;
+		padding: 0em !important;
+		margin: 0em !important;
+		text-align: center !important;
+		border-style: none !important;
+	}
+	.greenCommandButton {
+		font-size: 0.5em !important;
+	}
+	.greenInputText {
+		font-size: 0.5625em !important;
+	}
+	.greenInputTextArea {
+		font-size: 0.5625em !important;
+	}
+	.greenOutputLabel {
+		font-size: 0.5625em !important;
+	}
+	.greenDataTable {
+		font-size: 0.5625em !important;
+	}
+	.greenLayout {
+		background-color: transparent !important;
+		border-style: none !important;
+	}
+
+	/* padding >> top > right > bottom > left */
+	.greenPanelButtons {
+		border: none !important;
+		padding: 0em 0em 0em 0em !important;
+	}
+	.greenPanelGrid {
+		font-size: 0.5625em !important;
+		margin-bottom: 10px !important;
+	}
+	.greenPanelGridColumns {
+		text-align: center !important;
+	}
+	.greenSearchField {
+		font-size: 0.5625em !important;
+	}
+	.greenDropDown {
+		font-size: 0.5625em !important;
+	}
+	.greenTabView {
+		font-size: 0.5625em !important;
+	}
+
+	/* -----------------------
+	Error and warning messages  
+	------------------------*/
+	.errorWarningMessages {
+		font-size: 0.625em !important;
+		text-align: left !important;
+		font-style: normal !important;
+	}
+
+	/* -----------------------
+	Menu layout  
+	------------------------*/
+	.greenMenuTitle {
+		font-size: 0.75em !important;
+		font-weight: normal !important;
+	}
+	.greenMenuItem {
+		font-size: 0.75em !important;
+		font-weight: normal !important;
+	}
+
+	/* -----------------------
+	Confirm dialog form 
+	-------------------------*/
+	.greenConfirmDialog {
+		font-size: 0.75em !important;
+		text-align: center !important;
+	}
+	.greenConfirmDialogButton {
+		font-size: 0.75em !important;
+	}
+}
