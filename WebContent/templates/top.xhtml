@@ -6,7 +6,7 @@
 	Description: This code defines top content of the main form  
 	Author: Rubens de Castro Pereira 
 	Version: 0.1
-	Date: 01/09/2015
+	Date: 14/08/2016
  -->
 
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -20,58 +20,83 @@
 
 	<ui:composition>
 
-		<h:outputStylesheet name="/templates/css/GreenStyle-old.css" />
+		<h:outputStylesheet name="/templates/css/GreenStyle.css" />
 
 		<!-- Superior region of the main form -->
-		<p:layoutUnit id="Header_Green" position="north" size="65"
-			resizable="false" closable="false" collapsible="false">
+		<p:layoutUnit id="Header_SITISWeb" position="north" size="60"
+			resizable="false" closable="false" collapsible="false" gutter="0">
 
-			<table width="100%" class="top">
-				<tr>
-					<td width="87%" class="topTitle" align="left"><h:outputText
-							value="#{labels['green.fullName']} - #{labels['green.shortName']}" />
-					</td>
+			<h:form>
 
-					<td width="10%" class="topLoggedPerson"><h:form>
-							<p:commandLink id="personName" action="loggedPerson.xhtml"
-								ajax="false">
-								<h:outputText id="personNameOutputText"
-									value="#{sessionController.compactNamePerson}" styleClass="sitisPersonName" />
-							</p:commandLink>
-						</h:form></td>
+				<h:panelGrid columns="2" style="width:100%"
+					columnClasses="sitisTitleTop,sitisRightTop">
 
-					<td width="3%"><h:form>
-							<p:commandLink id="logout" action="#{loginController.logout}"
-								ajax="false">
-								<img src="#{request.contextPath}/templates/images/logout_01.jpg"
-									alt="#{labels['menu.logged.person.logout']}" height="20"
-									width="20" />
-								<p:confirm header="#{labels['menu.logout.person.header']}"
-									message="#{labels['menu.logout.person.message']}"
-									icon="#{propertiesSitisWeb['icon.button.confirm.alert']}" />
-							</p:commandLink>
+					<!-- Title of system SITIS -->
+					<h:panelGrid columns="1">
+						<h:outputLabel
+							value="#{labels['sitis.web.shortName']} - #{labels['sitis.web.fullName']}" />
+					</h:panelGrid>
 
-							<p:confirmDialog id="logoutConfirmDialog" global="true"
-								showEffect="fade" hideEffect="fade"
-								styleClass="sitisConfirmDialog">
-								<p:commandButton
-									value="#{labels['menu.logout.person.button.yes']}"
-									type="button"
-									styleClass="ui-confirmdialog-yes sitisConfirmDialogButton"
-									icon="#{propertiesSitisWeb['icon.button.confirm.check']}" />
-								<p:commandButton
-									value="#{labels['menu.logout.person.button.no']}" type="button"
-									styleClass="ui-confirmdialog-no sitisConfirmDialogButton"
-									icon="#{propertiesSitisWeb['icon.button.confirm.close']}" />
-							</p:confirmDialog>
+					<h:panelGrid columns="3"
+						columnClasses="sitisPersonTop,sitisLogoutTop">
 
-						</h:form></td>
-				</tr>
-			</table>
+						<!-- Name of the logged person  -->
+						<p:commandLink id="personName" action="loggedPerson.xhtml"
+							ajax="false">
+							<h:outputText id="personNameOutputText"
+								value="#{sessionController.compactNamePerson}"
+								styleClass="sitisPersonName" />
+						</p:commandLink>
+
+						<p:spacer />
+
+						<!-- Logout button -->
+						<p:commandLink id="logout"
+							actionListener="#{sessionController.logout}" ajax="false"
+							rendered="#{sessionController.personLogged}">
+							<img src="#{request.contextPath}/templates/images/logout_01.jpg"
+								alt="#{labels['menu.logged.person.logout']}" height="16"
+								width="16" />
+							<p:confirm message="#{labels['menu.logout.person.message']}"
+								icon="#{configuration['icon.button.confirm.alert']}" />
+						</p:commandLink>
+
+
+					</h:panelGrid>
+
+				</h:panelGrid>
+
+			</h:form>
+
+
+			<!-- Confirm dialog used by logout operation  -->
+			<h:form>
+				<p:confirmDialog id="logoutConfirmDialog"
+					widgetVar="logoutConfirmDialog" global="true" showEffect="fade"
+					hideEffect="fade" closable="false">
+
+					<h:panelGrid columns="2" width="100%"
+						columnClasses="sitisPanelgridColumnCenter,sitisPanelgridColumnCenter">
+						<p:commandButton
+							value="#{labels['menu.logout.person.button.yes']}" type="button"
+							styleClass="ui-confirmdialog-yes sitisConfirmDialogButton"
+							style="width:6em !important"
+							icon="#{configuration['icon.button.confirm.check']}" />
+						<p:commandButton value="#{labels['menu.logout.person.button.no']}"
+							type="button"
+							styleClass="ui-confirmdialog-no sitisConfirmDialogButton"
+							style="width:6em !important"
+							icon="#{configuration['icon.button.confirm.close']}" />
+					</h:panelGrid>
+
+				</p:confirmDialog>
+
+			</h:form>
 
 		</p:layoutUnit>
 
 	</ui:composition>
+
 
 </h:body>
 

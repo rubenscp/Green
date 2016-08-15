@@ -13,60 +13,60 @@ font-family: 'Tahoma', Geneva, sans-serif !important;
 font-family: 'Trebuchet MS', Helvetica, sans-serif !important;
 font-family: 'Verdana, Geneva', sans-serif !important;
 */
-.sitisTitleTop {
+.greenTitleTop {
 	width: 50% !important;
 	font-size: 0.3125em !important;
 	font-weight: bold !important;
 	text-align: left !important;
 }
 
-.sitisRightTop {
+.greenRightTop {
 	width: 50% !important;
 	text-align: right !important;
 }
 
-.sitisPersonTop {
+.greenPersonTop {
 	width: 100% !important;
 	text-align: right !important;
 }
 
-.sitisLogoutTop {
+.greenLogoutTop {
 	width: 100% !important;
 	text-align: right !important;
 }
 
-.sitisFooter {
+.greenFooter {
 	width: 100% !important;
 	font-size: 0.3125em !important;
 	font-weight: bold !important;
 	text-align: center !important;
 }
 
-.sitisFunctionTitlePanel {
+.greenFunctionTitlePanel {
 	width: 100% !important;
 	font-size: 0.5em !important;
 	font-weight: bold !important;
 	text-align: center !important;
 }
 
-.sitisLeftColumnButtonsFormOperations {
+.greenLeftColumnButtonsFormOperations {
 	width: 100%;
 	text-align: left;
 }
 
-.sitisRightColumnButtonsFormOperations {
+.greenRightColumnButtonsFormOperations {
 	width: 100%;
 	text-align: right;
 }
 
-.sitisCommandButton {
+.greenCommandButton {
 	font-size: 0.375m !important;
 	text-align: center !important;
 	height: 2.8em !important;
 	font-weight: bold !important;
 }
 
-.sitisSearchButton {
+.greenSearchButton {
 	font-size: 0.375m !important;
 	text-align: center !important;
 	vertical-align: middle !important;
@@ -74,78 +74,78 @@ font-family: 'Verdana, Geneva', sans-serif !important;
 	height: 1.2em !important;
 }
 
-.sitisInputText, .sitisInputTextArea, .sitisInputMask, .sitisInputNumber,
-	.sitisOutputText, .sitisOutputLabel, .sitisSearchField, .sitisDropDown,
-	.sitisTabView, .sitisTabAccordionPanel, .sitisCalendar, .sitisCarousel,
-	.sitisSelectOneButton, .sitisToolTip {
+.greenInputText, .greenInputTextArea, .greenInputMask, .greenInputNumber,
+	.greenOutputText, .greenOutputLabel, .greenSearchField, .greenDropDown,
+	.greenTabView, .greenTabAccordionPanel, .greenCalendar, .greenCarousel,
+	.greenSelectOneButton, .greenToolTip {
 	font-size: 0.375m !important;
 }
 
-.sitisDataTable, .sitisDataGrid {
+.greenDataTable, .greenDataGrid {
 	font-size: 0.375m !important;
 }
 
-.sitisPanelHeader {
+.greenPanelHeader {
 	font-size: 0.5em !important;
 }
 
-.sitisLayout {
+.greenLayout {
 	background-color: transparent !important;
 	border-style: none !important;
 }
 
 /* padding >> top > right > bottom > left */
-.sitisPanelButtons {
+.greenPanelButtons {
 	border: none !important;
 	padding: 0em 0em 0em 0em !important;
 }
 
-.sitisPanelGrid {
+.greenPanelGrid {
 	font-size: 0.375em !important;
 	margin-bottom: 10px !important;
 }
 
-.sitisPanelGridColumns {
+.greenPanelGridColumns {
 	text-align: center !important;
 }
 
-.sitisStatus {
+.greenStatus {
 	width: 50% !important;
 	height: 50% !important;
 }
 
-.sitisPanelGridInputData {
+.greenPanelGridInputData {
 	border-style: none !important;
 }
 
-.sitisDataTableChoose {
+.greenDataTableChoose {
 	font-size: 0.75em !important;
 }
 
-.sitisDialogColumnLeft, .sitisPanelgridColumnLeft {
+.greenDialogColumnLeft, .greenPanelgridColumnLeft {
 	text-align: right !important;
 	font-weight: bold !important;
 }
 
-.sitisDialogColumnRight, .sitisPanelgridColumnRight {
+.greenDialogColumnRight, .greenPanelgridColumnRight {
 	text-align: left !important;
 }
 
-.sitisDialogColumnCenter, .sitisPanelgridColumnCenter {
+.greenDialogColumnCenter, .greenPanelgridColumnCenter {
 	text-align: center !important;
 }
 
-.sitisScheduleDataGrid {
+.greenScheduleDataGrid {
 	width: 90% !important;
 	text-align: center !important;
 }
 
-.sitisSoilColumnMapPanelGrid {
+.greenSoilColumnMapPanelGrid {
 	padding: 0px !important;
 	margin: 0px !important;
 }
 
-.sitisSoilColumnLabel {
+.greenSoilColumnLabel {
 	font-size: 0.25em !important;
 	font-weight: bold !important;
 	color: Black !important;
@@ -154,19 +154,19 @@ font-family: 'Verdana, Geneva', sans-serif !important;
 	height: 2em !important;
 }
 
-.sitisTimeLine {
+.greenTimeLine {
 	font-size: 0.375m !important;
 }
 
-.sitisTimeLineSchedulePendingApproval {
+.greenTimeLineSchedulePendingApproval {
 	background: DarkOrange;
 }
 
-.sitisTimeLineScheduleApproved {
+.greenTimeLineScheduleApproved {
 	background: Red;
 }
 
-.sitisTimeLineScheduleRejected {
+.greenTimeLineScheduleRejected {
 	background: Sienna;
 }
 
@@ -186,16 +186,16 @@ Menu layout
 	width: 80px !important;
 }
 
-.sitisMenuLayoutUnit {
+.greenMenuLayoutUnit {
 	font-size: 0.5m !important;
 }
 
-.sitisMenuTitle {
+.greenMenuTitle {
 	font-size: 0.25em !important;
 	font-weight: normal !important;
 }
 
-.sitisMenuItem {
+.greenMenuItem {
 	font-size: 0.25em !important;
 	font-weight: normal !important;
 }
@@ -203,35 +203,35 @@ Menu layout
 /* -----------------------
 Navigation History Menu layout  
 ------------------------*/
-.sitisNavigationHistoryMenuItem {
+.greenNavigationHistoryMenuItem {
 	font-size: 0.3125em !important;
 }
 
 /* -----------------------
 	Confirm dialog form 
 -------------------------*/
-.sitisConfirmDialogMessage {
+.greenConfirmDialogMessage {
 	font-size: 0.5em !important;
 	text-align: center !important;
 }
 
-.sitisConfirmDialogList {
+.greenConfirmDialogList {
 	font-size: 0.5em !important;
 }
 
-.sitisConfirmDialogInputText {
+.greenConfirmDialogInputText {
 	font-size: 0.5em !important;
 }
 
-.sitisConfirmDialogMessageLeft {
+.greenConfirmDialogMessageLeft {
 	text-align: right !important;
 }
 
-.sitisConfirmDialogMessageRight {
+.greenConfirmDialogMessageRight {
 	text-align: left !important;
 }
 
-.sitisConfirmDialogButton {
+.greenConfirmDialogButton {
 	font-size: 0.5em !important;
 	text-align: center !important;
 	width: 5em !important;
@@ -272,16 +272,16 @@ div.centerContent {
 	vertical-align: middle !important;
 }
 
-.sitisLoginMainPanel {
+.greenLoginMainPanel {
 	border-style: none !important;
 }
 
-.sitisLoginImages {
+.greenLoginImages {
 	text-align: center !important;
 	width: 55% !important;
 }
 
-.sitisLoginPerson {
+.greenLoginPerson {
 	text-align: right !important;
 	width: 45% !important;
 }
@@ -289,8 +289,8 @@ div.centerContent {
 /* ----------------------------
 Experiment Schedule Form Styles    
 -----------------------------*/
-.sitisExperimentScheduleButtonBackward,
-	.sitisExperimentScheduleButtonForward {
+.greenExperimentScheduleButtonBackward,
+	.greenExperimentScheduleButtonForward {
 	font-size: 0.25em;
 	text-align: center !important;
 	width: 1em !important;
@@ -330,7 +330,7 @@ td.topLanguage {
 	text-align: right;
 }
 
-.sitisPersonName {
+.greenPersonName {
 	font-size: 0.25em !important;
 	font-weight: bold;
 	text-align: rigth;
