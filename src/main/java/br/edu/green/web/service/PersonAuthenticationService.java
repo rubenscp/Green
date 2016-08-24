@@ -2,7 +2,8 @@ package br.edu.green.web.service;
 
 import javax.ejb.Local;
 
-import br.edu.green.web.validate.Result;
+import br.edu.green.web.entity.ProcessingResultEntity;
+import br.edu.green.web.exception.GeneralException;
 
 /**
  * LoginService.java: This class defines methods to authenticate an user to access SITIS Web.
@@ -16,8 +17,7 @@ import br.edu.green.web.validate.Result;
 @Local
 public interface PersonAuthenticationService {
 
-	public Result validate(String corporateAccount, String password, String language);
+	public ProcessingResultEntity validate(String corporateAccount, String password, String language) throws GeneralException;
 
-	public boolean disconnectPerson();
-
+	public void disconnectPerson() throws GeneralException;
 }

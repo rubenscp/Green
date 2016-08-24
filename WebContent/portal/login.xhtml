@@ -1,130 +1,241 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!-- 
+	Name: login.xhtml
+	Description: This code allows that a person does a login at the Green System 
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 23/08/2016
+ -->
+
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<h:head>
-	<title>Green</title>
-	<link type="text/css" rel="stylesheet"
-		href="#{request.contextPath}/templates/css/GreenStyle.css" />
-</h:head>
+<f:view contentType="text/html" encoding="UTF-8"
+	locale="#{sessionController.locale}">
 
-<h:body>
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<link type="text/css" rel="stylesheet"
+				href="#{request.contextPath}/templates/css/SITISWebStyle.css" />
+			<title>#{labels['sitis.web.shortName']}</title>
+		</f:facet>
+	</h:head>
 
-	<h:outputStylesheet name="/templates/css/GreenStyle-old.css" />
+	<h:body>
 
-	<!-- Top of form -->
-	<p:layout id="formGreen" fullPage="true" styleClass="greenLayout">
+		<!-- Calling method before render page -->
+		<f:metadata>
+			<f:event listener="#{sessionController.init()}" type="preRenderView" />
+		</f:metadata>
 
-		<p:layoutUnit id="Header_Green" position="north" size="65"
-			resizable="false" closable="false" collapsible="false">
+		<p:layout fullPage="true" id="divMain" styleClass="sitisLayout">
 
-			<table width="100%" class="top">
-				<tr>
-					<td width="85%" class="topTitle"><h:outputText
-							value="#{labels['green.fullName']} - #{labels['green.shortName']}" />
-					</td>
-					<td width="15%" class="topLanguage"><h:panelGroup>
-							<h:form id="formlanguage">
-								<p:commandLink id="portuguese"
-									action="#{languageController.changeToPortuguese}" ajax="false"
-									disabled="true">
-									<img
-										src="#{request.contextPath}/templates/images/portuguese_language.jpg"
-										alt="português" height="25" width="25" />
-								</p:commandLink>
-								<p:commandLink id="english"
-									action="#{languageController.changeToEnglish}" ajax="false"
-									disabled="true">
-									<img
-										src="#{request.contextPath}/templates/images/english_language.jpg"
-										alt="inglês" height="25" width="25" />
-								</p:commandLink>
-							</h:form>
-						</h:panelGroup></td>
-				</tr>
-			</table>
-		</p:layoutUnit>
+			<f:loadBundle basename="cfg.configuration" var="configuration" />
 
-		<!-- Footer of form -->
-		<p:layoutUnit id="Footer_Green" position="south" size="45"
-			resizable="false" closable="true" collapsible="false">
-			<table width="100%" class="footer">
-				<tr>
-					<td class="footerTitle"><h:outputText
-							value="&copy; 2015 #{labels['company.name']} - #{labels['company.shortName']} | #{labels['green.copyright']} | #{labels['green.version']}" />
-					</td>
-				</tr>
-			</table>
-		</p:layoutUnit>
+			<!-- Top od login form  -->
+			<div id="divTop">
+				<ui:insert name="divTop">
+					<ui:include src="../templates/top.xhtml" />
+				</ui:insert>
+			</div>
 
-		<!-- Center of form -->
-		<p:layoutUnit id="Content_Green" position="center">
+			<div id="divCenter">
 
-			<table align="center" class="login">
+				<!-- Center of main form -->
+				<p:layoutUnit id="Center_SITISWeb" position="center" size="200"
+					resizable="false" closable="false" collapsible="false" gutter="0">
 
-				<tr>
-					<td class="spaceLogin"></td>
-				</tr>
+					<p:focus context="frmLogin" />
 
-				<tr>
-					<td class="formLogin"><h:form>
+					<h:form id="frmLogin" prependId="false">
 
-							<p:panel id="formLogin" header="#{labels['login.title']}"
-								styleClass="formLoginPanel">
+						<div class="centerContainer">
+							<div class="centerContent">
 
-								<p:focus context="formLogin" />
-
-								<table align="center">
+								<table align="center" class="login">
 									<tr>
-										<td><h:panelGrid id="panelLoginFields" columns="1"
-												cellpadding="5">
-												<p:inputText id="loginField"
-													label="#{labels['login.login.label']}"
-													value="#{loginController.login}" required="true"
-													placeholder="#{labels['login.login.contentField']}"
-													maxlength="100" size="40" styleClass="greenInputText"
-													style="width:30em;">
-												</p:inputText>
+										<td class="formLogin"><h:panelGrid columns="1"
+												columnClasses="sitisLoginPainelGrid">
 
-												<p:password id="passwordField"
-													label="#{labels['login.password.label']}"
-													value="#{loginController.password}" required="true"
-													placeholder="#{labels['login.password.contentField']}"
-													maxlength="20" size="20" styleClass="greenInputText"
-													style="width:13em;">
-													<f:validateLength maximum="20" />
-												</p:password>
-											</h:panelGrid> <h:panelGrid id="panelLoginButtons" columns="2"
-												cellpadding="5">
-												<p:commandButton id="loginButton"
-													value="#{labels['login.buttonLogin']}"
-													action="#{loginController.validate}" ajax="false"
-													update="formLogin" styleClass="greenCommandButton"
-													style="width:14.7em;" />
+												<p:panel header="#{labels['form.login.title']}"
+													styleClass="sitisPanelgridColumnCenter"
+													style="width:20em; padding:0em; margin:0em;">
 
-											</h:panelGrid> 
-											
-											<p:messages id="msgs" styleClass="errorWarningMessages" />
 
-										</td>
+													<h:panelGrid columns="1" cellspacing="5"
+														columnClasses="sitisPanelgridColumnCenter" width="100%">
+
+														<p:inputText id="loginField"
+															label="#{labels['form.login.login.label']}"
+															value="#{loginController.login}" required="true"
+															placeholder="#{labels['form.login.login.contentField']}"
+															maxlength="7" size="12" styleClass="sitisInputText"
+															style="width:10em;" tabindex="1">
+															<f:validateLength maximum="7" />
+														</p:inputText>
+
+														<p:password id="passwordField"
+															label="#{labels['form.login.password.label']}"
+															value="#{loginController.password}" required="true"
+															placeholder="#{labels['form.login.password.contentField']}"
+															maxlength="20" size="20" styleClass="sitisInputText"
+															style="width:10em;" tabindex="2">
+															<f:validateLength maximum="20" />
+														</p:password>
+
+														<p:commandButton id="buttonLogin"
+															value="#{labels['form.login.button.login.value']}"
+															action="#{loginController.validate}" ajax="true"
+															update="frmLogin" styleClass="sitisCommandButton"
+															style="width:12.0em !important" onclick="getResolution()"
+															tabindex="3">
+															<p:tooltip id="tipButtonLogin" for="buttonLogin"
+																value="#{labels['form.login.button.login.tip']}"
+																styleClass="sitisToolTip" />
+														</p:commandButton>
+
+														<p:messages id="msgs" closable="false"
+															styleClass="errorWarningMessages" style="width:100%;" />
+
+													</h:panelGrid>
+
+												</p:panel>
+
+											</h:panelGrid></td>
+
 									</tr>
+
 								</table>
 
-							</p:panel>
-						</h:form></td>
-				</tr>
-			</table>
+							</div>
+						</div>
 
-		</p:layoutUnit>
+					</h:form>
 
-	</p:layout>
+				</p:layoutUnit>
 
-</h:body>
+			</div>
+
+			<!-- Bottom of login form  -->
+			<div id="divBottom">
+				<ui:insert name="divBottom">
+					<ui:include src="../templates/bottom.xhtml" />
+				</ui:insert>
+			</div>
+
+		</p:layout>
+
+		<p:ajaxStatus id="statusDialog" onstart="PF('statusDialog').show();"
+			oncomplete="PF('statusDialog').hide();" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<h:graphicImage value="#{configuration['sitisweb.status.icon']}" />
+		</p:dialog>
+
+	</h:body>
+
+</f:view>
 
 </html>
+
+
+
+
+
+<!-- 						<p:panel styleClass="sitisPanelgridColumnCenter" -->
+<!-- 							style="width:99%; text-align: center !important; padding:0em; margin:0em; border-style:none;"> -->
+
+<!-- 							<p:spacer width="10%"></p:spacer> -->
+<!-- 							<h:panelGrid columns="9" width="100%"> -->
+
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+
+
+
+
+
+
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+<!-- 								<p:panel -->
+<!-- 									style="width:100%; padding: 0em; margin: 0em; border-style: none; "> -->
+<!-- 								</p:panel> -->
+
+<!-- 							</h:panelGrid> -->
+<!-- 						</p:panel> -->
+
+<!-- 						<p:spacer width="10%" height="100%" /> -->
+
+<!-- 						<h:panelGrid id="rubens" columns="1" -->
+<!-- 							columnClasses="sitisPanelgridColumnCenter" width="100%" -->
+<!-- 							styleClass="sitisPanelgridColumnCenter" -->
+<!-- 							style="text-align: center !important;"> -->
+
+<!-- 							<p:panel header="#{labels['form.login.title']}" -->
+<!-- 								styleClass="sitisPanelgridColumnCenter" style="width:23%;"> -->
+
+<!-- 								<h:panelGrid columns="1" -->
+<!-- 									columnClasses="sitisPanelgridColumnCenter" width="100%"> -->
+
+<!-- 									<p:inputText id="loginField" -->
+<!-- 										label="#{labels['form.login.login.label']}" -->
+<!-- 										value="#{loginController.login}" required="true" -->
+<!-- 										placeholder="#{labels['form.login.login.contentField']}" -->
+<!-- 										maxlength="7" size="12" styleClass="sitisInputText" -->
+<!-- 										style="width:10em;"> -->
+<!-- 										<f:validateLength maximum="7" /> -->
+<!-- 									</p:inputText> -->
+
+<!-- 									<p:password id="passwordField" -->
+<!-- 										label="#{labels['form.login.password.label']}" -->
+<!-- 										value="#{loginController.password}" required="true" -->
+<!-- 										placeholder="#{labels['form.login.password.contentField']}" -->
+<!-- 										maxlength="20" size="20" styleClass="sitisInputText" -->
+<!-- 										style="width:10em;"> -->
+<!-- 										<f:validateLength maximum="20" /> -->
+<!-- 									</p:password> -->
+
+<!-- 									<p:commandButton id="buttonLogin" -->
+<!-- 										value="#{labels['form.login.button.login.value']}" -->
+<!-- 										action="#{loginController.validate}" ajax="true" -->
+<!-- 										update="frmLogin" styleClass="sitisCommandButton" -->
+<!-- 										style="width:11.0em !important" onclick="getResolution()"> -->
+<!-- 										<p:tooltip id="tipButtonLogin" for="buttonLogin" -->
+<!-- 											value="#{labels['form.login.button.login.tip']}" -->
+<!-- 											styleClass="sitisToolTip" /> -->
+<!-- 									</p:commandButton> -->
+
+<!-- 									<p:messages id="msgs" closable="true" -->
+<!-- 										styleClass="errorWarningMessages" style="width: 20em;" /> -->
+
+<!-- 								</h:panelGrid> -->
+
+<!-- 							</p:panel> -->
+
+<!-- 						</h:panelGrid> -->

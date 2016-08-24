@@ -12,10 +12,9 @@ import javax.servlet.http.HttpSession;
 import br.edu.green.web.entity.PersonEntity;
 import br.edu.green.web.service.PersonService;
 import br.edu.green.web.util.FacesUtil;
-import br.edu.green.web.util.SitisWebLog;
 import br.edu.green.web.util.Util;
 
-@ManagedBean(name = "themeController")
+@ManagedBean(name = "themeControllerOld")
 @SessionScoped
 public class ThemeController implements Serializable {
 
@@ -23,15 +22,7 @@ public class ThemeController implements Serializable {
 
 	public static final String DEFAULT_THEME = "redmond";
 
-	public static final String[] POSSIBLE_THEMES = { "afterdark", "afternoon",
-			"afterwork", "aristo", "black-tie", "blitzer", "bluesky",
-			"casablanca", "cruze", "cupertino", "dark-hive", "dot-luv",
-			"eggplant", "excite-bike", "flick", "glass-x", "home",
-			"hot-sneaks", "humanity", "le-frog", "midnight", "mint-choc",
-			"overcast", "pepper-grinder", "redmond", "rocket", "sam",
-			"smoothness", "south-street", "start", "sunny", "swanky-purse",
-			"trontastic", "twitter bootstrap", "ui-darkness", "ui-lightness",
-			"vader" };
+	public static final String[] POSSIBLE_THEMES = { "afterdark", "afternoon", "afterwork", "aristo", "black-tie", "blitzer", "bluesky", "casablanca", "cruze", "cupertino", "dark-hive", "dot-luv", "eggplant", "excite-bike", "flick", "glass-x", "home", "hot-sneaks", "humanity", "le-frog", "midnight", "mint-choc", "overcast", "pepper-grinder", "redmond", "rocket", "sam", "smoothness", "south-street", "start", "sunny", "swanky-purse", "trontastic", "twitter bootstrap", "ui-darkness", "ui-lightness", "vader" };
 
 	private String theme;
 	private PersonEntity personEntity;
@@ -63,43 +54,42 @@ public class ThemeController implements Serializable {
 		if (this.theme.isEmpty()) {
 			this.theme = ThemeController.DEFAULT_THEME;
 			this.personEntity.setTheme(this.theme);
-			this.personService.save(personEntity);
+			// this.personService.save(personEntity);
 		}
 		return this.theme;
 	}
 
 	public void setTheme(String theme) {
 		this.theme = theme;
-		SitisWebLog.getInstanceof().info("ThemeController - setTheme");
+		// SitisWebLog.getInstanceof().info("ThemeController - setTheme");
 
 		// getting person object, if he�s logged
 		this.personEntity = this.restorePersonOfSession();
 		if (personEntity != null) {
 			this.personEntity.setTheme(this.theme);
-			this.personService.save(personEntity);
+			// this.personService.save(personEntity);
 		}
 	}
 
 	public void updateTheme(AjaxBehaviorEvent event) {
-		SitisWebLog.getInstanceof().info("ThemeController - updateTheme");
+		// SitisWebLog.getInstanceof().info("ThemeController - updateTheme");
 
 		// getting person object, if he�s logged
 		this.personEntity = this.restorePersonOfSession();
 		if (personEntity != null) {
 			this.personEntity.setTheme(this.theme);
-			this.personService.save(personEntity);
-			SitisWebLog.getInstanceof().info(
-					"ThemeController - updateTheme save ");
+			// this.personService.save(personEntity);
+			// SitisWebLog.getInstanceof().info("ThemeController - updateTheme save ");
 		}
 	}
 
 	private PersonEntity restorePersonOfSession() {
-		SitisWebLog.getInstanceof().info("ThemeController - restorePerson");
+		// SitisWebLog.getInstanceof().info("ThemeController - restorePerson");
 
 		// restoring objects of the session context
-		HttpSession httpSession = FacesUtil.getSession();
-		return (PersonEntity) httpSession.getAttribute(Util
-				.className(PersonEntity.class.getName()));
+		// HttpSession httpSession = FacesUtil.getSession();
+		// return (PersonEntity) httpSession.getAttribute(Util.className(PersonEntity.class.getName()));
+		return null;
 	}
 
 }
