@@ -16,8 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * This class defines the Person entity which contains all attributes about the
- * system user.
+ * This class defines the Person entity which contains all attributes about the system user.
  * 
  * @author Rubens de Castro Pereira
  * @version 0.1
@@ -76,6 +75,10 @@ public class PersonEntity implements Serializable {
 	@Column(name = "theme")
 	@Size(max = 30)
 	private String theme;
+
+	@Column(name = "green_person_profile_initials")
+	@Size(max = 5)
+	private String greenPersonProfileInitials;
 
 	public PersonEntity() {
 		super();
@@ -175,13 +178,7 @@ public class PersonEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PersonEntity: { " + " id: " + this.id + ", login: "
-				+ this.login + ", name: " + this.name + ", password: "
-				+ this.password + ", workplaceName: " + this.workplaceName
-				+ ", workplaceInitials: " + this.workplaceInitials
-				+ ", email: " + this.email + ", lastUpdateDate: "
-				+ this.lastUpdateDate + ", language: " + this.language
-				+ ", theme: " + this.theme + " }";
+		return "PersonEntity: { " + " id: " + this.id + ", login: " + this.login + ", name: " + this.name + ", password: " + this.password + ", workplaceName: " + this.workplaceName + ", workplaceInitials: " + this.workplaceInitials + ", email: " + this.email + ", lastUpdateDate: " + this.lastUpdateDate + ", language: " + this.language + ", theme: " + this.theme + " }";
 	}
 
 	@Override
@@ -199,8 +196,7 @@ public class PersonEntity implements Serializable {
 			return false;
 		}
 		PersonEntity other = (PersonEntity) object;
-		if ((this.id == null && other.id != null)
-				|| (this.id != null && !this.id.equals(other.id))) {
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
 			return false;
 		}
 		return true;

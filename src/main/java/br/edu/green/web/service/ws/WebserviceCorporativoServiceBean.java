@@ -17,9 +17,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import br.edu.green.web.entity.PersonEntity;
-import br.edu.green.web.exception.AuthenticatePersonException;
 import br.edu.green.web.service.PersonService;
-import br.edu.green.web.util.SitisWebLog;
 import br.edu.green.web.webservice.domain.AccessTokenResponse;
 import br.edu.green.web.webservice.domain.EntityWrapperSingle;
 import br.edu.green.web.webservice.domain.JsonAuthenticatedPerson;
@@ -41,7 +39,7 @@ public class WebserviceCorporativoServiceBean implements WebServiceCorporativeSe
 	// form objects to use web services Embrapa security
 	private Form formProduction;
 	private Form formHomologation;
-	
+
 	// defining the work objects
 	private SitisWebLog log;
 
@@ -50,7 +48,7 @@ public class WebserviceCorporativoServiceBean implements WebServiceCorporativeSe
 		// creating work objects
 		this.log = SitisWebLog.getInstanceof();
 		this.log.info("WebserviceCorporativoServiceBean - construtor executado com sucesso");
-		
+
 		// initializing form params on the DTI production environment
 		this.formProduction = new Form();
 		this.formProduction.param("grant_type", "client_credentials");
@@ -73,8 +71,8 @@ public class WebserviceCorporativoServiceBean implements WebServiceCorporativeSe
 		Response response = null;
 
 		try {
-			
-			// obtaining access token of web service corporative security 
+
+			// obtaining access token of web service corporative security
 			ResteasyWebTarget webTarget = resteasyClient.target(ACCESS_TOKEN_URL);
 			AccessTokenResponse accessTokenResponse = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.form(this.formHomologation), AccessTokenResponse.class);
 
@@ -83,46 +81,47 @@ public class WebserviceCorporativoServiceBean implements WebServiceCorporativeSe
 
 			this.log.info("login: " + login);
 			this.log.info("password: " + password);
-			this.log.info("credentials: " + credentials);		
+			this.log.info("credentials: " + credentials);
 			this.log.info("accessTokenResponse: " + accessTokenResponse.getAccessToken());
-			
-			// creating encrypted credentials 
+
+			// creating encrypted credentials
 			Encrypt encrypt = new Encrypt();
 			String encryptedCredentials = encrypt.encrypt(credentials);
 
-			this.log.info("encryptedCredentials: " + encryptedCredentials);					
-			
-			// preparing URL to authenticate person  
+			this.log.info("encryptedCredentials: " + encryptedCredentials);
+
+			// preparing URL to authenticate person
 			String url = this.AUTHENTICATE_PERSON_LDAP + "key=" + encryptedCredentials;
 
-			// calling web service to authenticate person  
+			// calling web service to authenticate person
 			response = resteasyClient.target(url).request(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, "Bearer " + accessTokenResponse.getAccessToken()).get();
 
-			// verifying web service response 
+			// verifying web service response
 			if (response.getStatus() != Response.Status.OK.getStatusCode()) {
 				throw new AuthenticatePersonException(response.getStatus());
 			} else {
 
 				// obtaining data of authenticate person
-				EntityWrapperSingle<JsonAuthenticatedPerson> personJson = response.readEntity(new GenericType<EntityWrapperSingle<JsonAuthenticatedPerson>>() {});
-					
-				// creating instance of person entity 
+				EntityWrapperSingle<JsonAuthenticatedPerson> personJson = response.readEntity(new GenericType<EntityWrapperSingle<JsonAuthenticatedPerson>>() {
+				});
+
+				// creating instance of person entity
 				personEntity = new PersonEntity();
-				
-				// loading attributes of person entity 
+
+				// loading attributes of person entity
 				personEntity.setLogin(personJson.getAuthenticatePerson().getLogin());
 				personEntity.setName(personJson.getAuthenticatePerson().getName());
 				personEntity.setPassword(password);
 				personEntity.setWorkplaceName(personJson.getAuthenticatePerson().getWorkplaceName());
 				personEntity.setWorkplaceInitials(personJson.getAuthenticatePerson().getWorkplaceInitials());
-				personEntity.setEmail(personJson.getAuthenticatePerson().getEmail());					
-				
+				personEntity.setEmail(personJson.getAuthenticatePerson().getEmail());
+
 			}
 		} catch (Exception e) {
 			throw new AuthenticatePersonException(e);
 
 		} finally {
-		
+
 			if (resteasyClient != null) {
 				if (!resteasyClient.isClosed()) {
 					resteasyClient.close();

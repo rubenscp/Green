@@ -132,7 +132,8 @@ public class PersonAuthenticationServiceBean extends GeneralService implements P
 			this.userTransaction.begin();
 
 			// calling web service to validate person at the SCS
-			processingResult = this.webServiceCorporativeService.authenticatePerson(login, password);
+			// processingResult = this.webServiceCorporativeService.authenticatePerson(login, password);
+			processingResult = null;
 
 			if (!processingResult.getCode().equals(Code.LOGIN_INFORMATION_SUCCESS)) {
 				// failure at validate person

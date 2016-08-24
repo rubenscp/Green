@@ -4,7 +4,16 @@
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
-   <property key="Logical" value="Modelo de Dados" />
+   <property key="Logical" value="Green" />
+   <property key="Connection Type" value="PostgreSQL" />
+   <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/green" />
+   <property key="UID" value="rubens" />
+   <property key="PWD" value="rubens" />
+   <property key="ca.sqlpower.architect.etl.kettle.database" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.port" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.hostname" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.login" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
   <data-source id="DS2">
    <property key="Connection Type" value="PostgreSQL" />
@@ -18,7 +27,7 @@
    <property key="ca.sqlpower.architect.etl.kettle.repos.login" value="" />
    <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
-  <data-source id="DS4">
+  <data-source id="DS0">
    <property key="Connection Type" value="PostgreSQL" />
    <property key="Logical" value="Green" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/green" />
@@ -38,7 +47,7 @@
    <relationships>
    </relationships>
   </database>
-  <database id="DB2" populated="true" UUID="c01c4a4b-24bb-4f8c-8d42-b1fe9aa8137b" dbcs-ref="DS4" name="Green" physicalName="Green" >
+  <database id="DB2" populated="true" UUID="c01c4a4b-24bb-4f8c-8d42-b1fe9aa8137b" dbcs-ref="DS0" name="Green" physicalName="Green" >
    <catalog id="CAT3" populated="false" UUID="7835c16f-46b6-44cc-b99a-7da9b9bb4996" name="green" nativeTerm="database" physicalName="green" >
    </catalog>
    <relationships>
@@ -76,117 +85,120 @@
     <column id="COL14" populated="true" UUID="2df8e3ef-05fc-4217-88c2-7af2c7760a14" autoIncrement="false" autoIncrementSequenceName="person_theme_seq" defaultValue="" name="theme" nullable="1" physicalName="theme" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Tema escolhido pela pessoa a ser utilizado na interface gráfica do SITIS.</remarks>
     </column>
+    <column id="COL15" populated="true" UUID="49346764-ac9a-402c-8b86-e62bd72dc136" autoIncrement="false" autoIncrementSequenceName="person_green_person_profile_initials_seq" defaultValue="" name="green_person_profile_initials" nullable="0" physicalName="green_person_profile_initials" precision="5" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks>Perfil de pessoa que utiliza o Sistema Green.</remarks>
+    </column>
     </folder>
     <folder id="FOLTAB53" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
     <folder id="FOLTAB52" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB54" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX15" populated="true" UUID="d5b1160a-6db2-4799-a3bf-f7fcc9cef55c" clustered="false" name="person_pk" physicalName="person_pk" primaryKeyIndex="true" unique="true" >
-     <index-column id="IDC16" populated="true" UUID="a655cde9-be28-4005-afc8-5100ce91556c" ascendingOrDescending="UNSPECIFIED" column-ref="COL6" name="id" physicalName="id" />
+    <index id="IDX16" populated="true" UUID="d5b1160a-6db2-4799-a3bf-f7fcc9cef55c" clustered="false" name="person_pk" physicalName="person_pk" primaryKeyIndex="true" unique="true" >
+     <index-column id="IDC17" populated="true" UUID="a655cde9-be28-4005-afc8-5100ce91556c" ascendingOrDescending="UNSPECIFIED" column-ref="COL6" name="id" physicalName="id" />
     </index>
    </folder>
   </table>
-  <table id="TAB17" populated="true" UUID="d8812993-83f0-4789-9f35-a9516b10ced7" name="experiment" objectType="TABLE" physicalName="experiment" >
+  <table id="TAB18" populated="true" UUID="d8812993-83f0-4789-9f35-a9516b10ced7" name="experiment" objectType="TABLE" physicalName="experiment" >
    <remarks></remarks>
-   <folder id="FOLTAB171" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL18" populated="true" UUID="8740befe-38cc-4dcc-ac78-27d64a31f348" autoIncrement="false" autoIncrementSequenceName="experiment_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+   <folder id="FOLTAB181" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL19" populated="true" UUID="8740befe-38cc-4dcc-ac78-27d64a31f348" autoIncrement="false" autoIncrementSequenceName="experiment_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks>Identificador do experimento sendo um número sequencial.</remarks>
     </column>
-    <column id="COL19" populated="true" UUID="b5e53d23-cfda-47f7-bd7b-018d0adceb45" autoIncrement="false" autoIncrementSequenceName="experiment_person_id_seq" defaultValue="" name="person_id" nullable="0" physicalName="person_id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+    <column id="COL20" populated="true" UUID="b5e53d23-cfda-47f7-bd7b-018d0adceb45" autoIncrement="false" autoIncrementSequenceName="experiment_person_id_seq" defaultValue="" name="person_id" nullable="0" physicalName="person_id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks>Identificação da pessoa proprietária do experimento.</remarks>
     </column>
-    <column id="COL20" populated="true" UUID="c374cfae-dac5-4a31-a3bb-85315b76f0ca" autoIncrement="false" autoIncrementSequenceName="experiment_title_seq" defaultValue="" name="title" nullable="0" physicalName="title" precision="128" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL21" populated="true" UUID="c374cfae-dac5-4a31-a3bb-85315b76f0ca" autoIncrement="false" autoIncrementSequenceName="experiment_title_seq" defaultValue="" name="title" nullable="0" physicalName="title" precision="128" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Titulo do experimento.</remarks>
     </column>
-    <column id="COL21" populated="true" UUID="1356a4d3-f63e-416c-ba9a-153420afbee6" autoIncrement="false" autoIncrementSequenceName="experiment_short_title_seq" defaultValue="" name="short_title" nullable="0" physicalName="short_title" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL22" populated="true" UUID="1356a4d3-f63e-416c-ba9a-153420afbee6" autoIncrement="false" autoIncrementSequenceName="experiment_short_title_seq" defaultValue="" name="short_title" nullable="0" physicalName="short_title" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Titulo curto a ser utilizado como nome da pasta onde serão armazenados as imagens.</remarks>
     </column>
-    <column id="COL22" populated="true" UUID="faadc84b-9c98-47d1-9a94-1ff31ac657bd" autoIncrement="false" autoIncrementSequenceName="experiment_creation_date_seq" defaultValue="" name="creation_date" nullable="0" physicalName="creation_date" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL23" populated="true" UUID="faadc84b-9c98-47d1-9a94-1ff31ac657bd" autoIncrement="false" autoIncrementSequenceName="experiment_creation_date_seq" defaultValue="" name="creation_date" nullable="0" physicalName="creation_date" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks>Data de criação do experimento.</remarks>
     </column>
     </folder>
-    <folder id="FOLTAB173" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB183" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB172" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB182" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB174" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX23" populated="true" UUID="723982df-55ad-4af1-8344-a8f7155a27e2" clustered="false" name="experiment_pk" physicalName="experiment_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC24" populated="true" UUID="942486c1-e768-4351-b63d-0ed0b58ff937" ascendingOrDescending="UNSPECIFIED" column-ref="COL18" name="id" physicalName="id" />
+    <folder id="FOLTAB184" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX24" populated="true" UUID="723982df-55ad-4af1-8344-a8f7155a27e2" clustered="false" name="experiment_pk" physicalName="experiment_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC25" populated="true" UUID="942486c1-e768-4351-b63d-0ed0b58ff937" ascendingOrDescending="UNSPECIFIED" column-ref="COL19" name="id" physicalName="id" />
     </index>
    </folder>
   </table>
-  <table id="TAB25" populated="true" UUID="d9735620-cb75-4b79-bd4c-dea8899b2086" name="experiment_image" objectType="TABLE" physicalName="experiment_image" >
+  <table id="TAB26" populated="true" UUID="d9735620-cb75-4b79-bd4c-dea8899b2086" name="experiment_image" objectType="TABLE" physicalName="experiment_image" >
    <remarks></remarks>
-   <folder id="FOLTAB251" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL26" populated="true" UUID="088a9a54-0f68-4ce5-8fe6-a8b380dbba9e" autoIncrement="false" autoIncrementSequenceName="experiment_image_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+   <folder id="FOLTAB261" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL27" populated="true" UUID="088a9a54-0f68-4ce5-8fe6-a8b380dbba9e" autoIncrement="false" autoIncrementSequenceName="experiment_image_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks>Id da imagem associada ao experimento.</remarks>
     </column>
-    <column id="COL27" populated="true" UUID="30bb1904-40b1-45dc-9c1a-57270202c744" autoIncrement="false" autoIncrementSequenceName="experiment_image_experiment_id_seq" defaultValue="" name="experiment_id" nullable="0" physicalName="experiment_id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+    <column id="COL28" populated="true" UUID="30bb1904-40b1-45dc-9c1a-57270202c744" autoIncrement="false" autoIncrementSequenceName="experiment_image_experiment_id_seq" defaultValue="" name="experiment_id" nullable="0" physicalName="experiment_id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks>Identificação do experimento.</remarks>
     </column>
-    <column id="COL28" populated="true" UUID="161baf6b-c4a2-4f69-b2bb-de676438cebc" autoIncrement="false" autoIncrementSequenceName="experiment_image_import_name_seq" defaultValue="" name="import_name" nullable="0" physicalName="import_name" precision="256" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL29" populated="true" UUID="161baf6b-c4a2-4f69-b2bb-de676438cebc" autoIncrement="false" autoIncrementSequenceName="experiment_image_import_name_seq" defaultValue="" name="import_name" nullable="0" physicalName="import_name" precision="256" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Nome externo da imagem na etapa de importação para o sistema.</remarks>
     </column>
-    <column id="COL29" populated="true" UUID="ed488f5c-2207-49c0-b51a-69c4843fa76f" autoIncrement="false" autoIncrementSequenceName="experiment_image_internal_name_seq" defaultValue="" name="internal_name" nullable="0" physicalName="internal_name" precision="256" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL30" populated="true" UUID="ed488f5c-2207-49c0-b51a-69c4843fa76f" autoIncrement="false" autoIncrementSequenceName="experiment_image_internal_name_seq" defaultValue="" name="internal_name" nullable="0" physicalName="internal_name" precision="256" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Nome da imagem utilizada para armazenar no servidor web onde reside o sistema.</remarks>
     </column>
-    <column id="COL30" populated="true" UUID="7381fe2a-2a89-4c39-883d-ce0f061191aa" autoIncrement="false" autoIncrementSequenceName="experiment_image_import_date_seq" defaultValue="" name="import_date" nullable="0" physicalName="import_date" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL31" populated="true" UUID="7381fe2a-2a89-4c39-883d-ce0f061191aa" autoIncrement="false" autoIncrementSequenceName="experiment_image_import_date_seq" defaultValue="" name="import_date" nullable="0" physicalName="import_date" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks>Data de importação da imagem.</remarks>
     </column>
     </folder>
-    <folder id="FOLTAB253" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB263" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB252" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB262" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB254" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX31" populated="true" UUID="a0cac771-abb0-40dc-936b-c22c1352d8ab" clustered="false" name="experiment_image_pk" physicalName="experiment_image_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC32" populated="true" UUID="b4e8c78d-a63d-4c4b-8129-9078d73574fe" ascendingOrDescending="UNSPECIFIED" column-ref="COL26" name="id" physicalName="id" />
+    <folder id="FOLTAB264" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX32" populated="true" UUID="a0cac771-abb0-40dc-936b-c22c1352d8ab" clustered="false" name="experiment_image_pk" physicalName="experiment_image_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC33" populated="true" UUID="b4e8c78d-a63d-4c4b-8129-9078d73574fe" ascendingOrDescending="UNSPECIFIED" column-ref="COL27" name="id" physicalName="id" />
     </index>
    </folder>
   </table>
-  <table id="TAB33" populated="true" UUID="d78ab8ed-8ac4-4181-ad8f-db6a25628f79" name="operation" objectType="TABLE" physicalName="operation" >
+  <table id="TAB34" populated="true" UUID="d78ab8ed-8ac4-4181-ad8f-db6a25628f79" name="operation" objectType="TABLE" physicalName="operation" >
    <remarks></remarks>
-   <folder id="FOLTAB331" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL34" populated="true" UUID="4beb6622-0a18-42d7-8e8f-839be1afa979" autoIncrement="true" autoIncrementSequenceName="operation_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+   <folder id="FOLTAB341" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL35" populated="true" UUID="4beb6622-0a18-42d7-8e8f-839be1afa979" autoIncrement="true" autoIncrementSequenceName="operation_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks>Id da operação de processamento da imagem.</remarks>
     </column>
-    <column id="COL35" populated="true" UUID="61e5f48a-dedf-4bdd-9b03-ad4f0a11e182" autoIncrement="false" autoIncrementSequenceName="operation_name_seq" defaultValue="" name="name" nullable="0" physicalName="name" precision="100" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL36" populated="true" UUID="61e5f48a-dedf-4bdd-9b03-ad4f0a11e182" autoIncrement="false" autoIncrementSequenceName="operation_name_seq" defaultValue="" name="name" nullable="0" physicalName="name" precision="100" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Nome da operação.</remarks>
     </column>
-    <column id="COL36" populated="true" UUID="61dc07b2-a57d-472a-a9b3-cf116ac8242e" autoIncrement="false" autoIncrementSequenceName="operation_description_seq" defaultValue="" name="description" nullable="1" physicalName="description" precision="500" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL37" populated="true" UUID="61dc07b2-a57d-472a-a9b3-cf116ac8242e" autoIncrement="false" autoIncrementSequenceName="operation_description_seq" defaultValue="" name="description" nullable="1" physicalName="description" precision="500" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Descrição da oepração.</remarks>
     </column>
     </folder>
-    <folder id="FOLTAB333" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB343" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB332" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB342" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB334" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX37" populated="true" UUID="2104c8a0-9203-4810-a75c-e6ef9a2e347d" clustered="false" name="operation_pk" physicalName="operation_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC38" populated="true" UUID="be28e856-36e2-4628-be61-bb4a18de95fa" ascendingOrDescending="UNSPECIFIED" column-ref="COL34" name="id" physicalName="id" />
+    <folder id="FOLTAB344" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX38" populated="true" UUID="2104c8a0-9203-4810-a75c-e6ef9a2e347d" clustered="false" name="operation_pk" physicalName="operation_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC39" populated="true" UUID="be28e856-36e2-4628-be61-bb4a18de95fa" ascendingOrDescending="UNSPECIFIED" column-ref="COL35" name="id" physicalName="id" />
     </index>
    </folder>
   </table>
   <relationships>
-   <relationship id="REL39" populated="true" UUID="534c6a72-a25a-4ff1-bb70-56e7e8461c23" deferrability="7" deleteRule="3" fk-table-ref="TAB17" fkCardinality="7" identifying="false" name="person_experiment_fk" physicalName="person_experiment_fk" pk-table-ref="TAB5" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP40" populated="true" UUID="3c7d56b9-0033-433d-b381-70fafbe5ef9b" fk-column-ref="COL19" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL6" />
+   <relationship id="REL40" populated="true" UUID="534c6a72-a25a-4ff1-bb70-56e7e8461c23" deferrability="7" deleteRule="3" fk-table-ref="TAB18" fkCardinality="7" identifying="false" name="person_experiment_fk" physicalName="person_experiment_fk" pk-table-ref="TAB5" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP41" populated="true" UUID="3c7d56b9-0033-433d-b381-70fafbe5ef9b" fk-column-ref="COL20" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL6" />
    </relationship>
-   <relationship id="REL41" populated="true" UUID="e8c3354f-97db-472a-a963-7ebf654f9e8f" deferrability="7" deleteRule="3" fk-table-ref="TAB25" fkCardinality="7" identifying="false" name="experiment_experiment_image_fk" physicalName="experiment_experiment_image_fk" pk-table-ref="TAB17" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP42" populated="true" UUID="18b6a891-96ab-4b7b-a826-80877989a90c" fk-column-ref="COL27" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL18" />
+   <relationship id="REL42" populated="true" UUID="e8c3354f-97db-472a-a963-7ebf654f9e8f" deferrability="7" deleteRule="3" fk-table-ref="TAB26" fkCardinality="7" identifying="false" name="experiment_experiment_image_fk" physicalName="experiment_experiment_image_fk" pk-table-ref="TAB18" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP43" populated="true" UUID="18b6a891-96ab-4b7b-a826-80877989a90c" fk-column-ref="COL28" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL19" />
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB5" x="152" y="134" bgColor="0xf0f0f0" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB17" x="577" y="133" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB25" x="865" y="129" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB33" x="577" y="486" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-link relationship-ref="REL39" pkConnection="0.6258064516129033" fkConnection="0.3058823529411765" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL41" pkConnection="0.47474747474747475" fkConnection="0.5211267605633803" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-pane table-ref="TAB18" x="577" y="133" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB26" x="865" y="129" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB34" x="580" y="441" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-link relationship-ref="REL40" pkConnection="0.6258064516129033" fkConnection="0.3058823529411765" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL42" pkConnection="0.47474747474747475" fkConnection="0.5211267605633803" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">
