@@ -24,7 +24,7 @@
 		<f:facet name="first">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<link type="text/css" rel="stylesheet"
-				href="#{request.contextPath}/templates/css/SITISWebStyle.css" />
+				href="#{request.contextPath}/templates/css/GreenStyle.css" />
 			<title>#{labels['green.web.shortName']}</title>
 		</f:facet>
 	</h:head>
@@ -36,7 +36,7 @@
 			<f:event listener="#{sessionController.init()}" type="preRenderView" />
 		</f:metadata>
 
-		<p:layout fullPage="true" id="divMain" styleClass="sitisLayout">
+		<p:layout fullPage="true" id="divMain" styleClass="greenLayout">
 
 			<f:loadBundle basename="cfg.configuration" var="configuration" />
 
@@ -50,7 +50,7 @@
 			<div id="divCenter">
 
 				<!-- Center of main form -->
-				<p:layoutUnit id="Center_SITISWeb" position="center" size="200"
+				<p:layoutUnit id="Center_Green" position="center" size="200"
 					resizable="false" closable="false" collapsible="false" gutter="0">
 
 					<p:focus context="frmLogin" />
@@ -63,21 +63,21 @@
 								<table align="center" class="login">
 									<tr>
 										<td class="formLogin"><h:panelGrid columns="1"
-												columnClasses="sitisLoginPainelGrid">
+												columnClasses="greenLoginPainelGrid">
 
 												<p:panel header="#{labels['form.login.title']}"
-													styleClass="sitisPanelgridColumnCenter"
+													styleClass="greenPanelgridColumnCenter"
 													style="width:20em; padding:0em; margin:0em;">
 
 
 													<h:panelGrid columns="1" cellspacing="5"
-														columnClasses="sitisPanelgridColumnCenter" width="100%">
+														columnClasses="greenPanelgridColumnCenter" width="100%">
 
 														<p:inputText id="loginField"
 															label="#{labels['form.login.login.label']}"
 															value="#{loginController.login}" required="true"
 															placeholder="#{labels['form.login.login.contentField']}"
-															maxlength="7" size="12" styleClass="sitisInputText"
+															maxlength="7" size="12" styleClass="greenInputText"
 															style="width:10em;" tabindex="1">
 															<f:validateLength maximum="7" />
 														</p:inputText>
@@ -86,20 +86,20 @@
 															label="#{labels['form.login.password.label']}"
 															value="#{loginController.password}" required="true"
 															placeholder="#{labels['form.login.password.contentField']}"
-															maxlength="20" size="20" styleClass="sitisInputText"
+															maxlength="20" size="20" styleClass="greenInputText"
 															style="width:10em;" tabindex="2">
 															<f:validateLength maximum="20" />
 														</p:password>
 
 														<p:commandButton id="buttonLogin"
 															value="#{labels['form.login.button.login.value']}"
-															action="#{loginController.validate}" ajax="true"
-															update="frmLogin" styleClass="sitisCommandButton"
+															action="#{loginController.validate()}" ajax="true"
+															update="frmLogin" styleClass="greenCommandButton"
 															style="width:12.0em !important" onclick="getResolution()"
 															tabindex="3">
 															<p:tooltip id="tipButtonLogin" for="buttonLogin"
 																value="#{labels['form.login.button.login.tip']}"
-																styleClass="sitisToolTip" />
+																styleClass="greenToolTip" />
 														</p:commandButton>
 
 														<p:messages id="msgs" closable="false"
@@ -150,7 +150,7 @@
 
 
 
-<!-- 						<p:panel styleClass="sitisPanelgridColumnCenter" -->
+<!-- 						<p:panel styleClass="greenPanelgridColumnCenter" -->
 <!-- 							style="width:99%; text-align: center !important; padding:0em; margin:0em; border-style:none;"> -->
 
 <!-- 							<p:spacer width="10%"></p:spacer> -->
@@ -193,21 +193,21 @@
 <!-- 						<p:spacer width="10%" height="100%" /> -->
 
 <!-- 						<h:panelGrid id="rubens" columns="1" -->
-<!-- 							columnClasses="sitisPanelgridColumnCenter" width="100%" -->
-<!-- 							styleClass="sitisPanelgridColumnCenter" -->
+<!-- 							columnClasses="greenPanelgridColumnCenter" width="100%" -->
+<!-- 							styleClass="greenPanelgridColumnCenter" -->
 <!-- 							style="text-align: center !important;"> -->
 
 <!-- 							<p:panel header="#{labels['form.login.title']}" -->
-<!-- 								styleClass="sitisPanelgridColumnCenter" style="width:23%;"> -->
+<!-- 								styleClass="greenPanelgridColumnCenter" style="width:23%;"> -->
 
 <!-- 								<h:panelGrid columns="1" -->
-<!-- 									columnClasses="sitisPanelgridColumnCenter" width="100%"> -->
+<!-- 									columnClasses="greenPanelgridColumnCenter" width="100%"> -->
 
 <!-- 									<p:inputText id="loginField" -->
 <!-- 										label="#{labels['form.login.login.label']}" -->
 <!-- 										value="#{loginController.login}" required="true" -->
 <!-- 										placeholder="#{labels['form.login.login.contentField']}" -->
-<!-- 										maxlength="7" size="12" styleClass="sitisInputText" -->
+<!-- 										maxlength="7" size="12" styleClass="greenInputText" -->
 <!-- 										style="width:10em;"> -->
 <!-- 										<f:validateLength maximum="7" /> -->
 <!-- 									</p:inputText> -->
@@ -216,7 +216,7 @@
 <!-- 										label="#{labels['form.login.password.label']}" -->
 <!-- 										value="#{loginController.password}" required="true" -->
 <!-- 										placeholder="#{labels['form.login.password.contentField']}" -->
-<!-- 										maxlength="20" size="20" styleClass="sitisInputText" -->
+<!-- 										maxlength="20" size="20" styleClass="greenInputText" -->
 <!-- 										style="width:10em;"> -->
 <!-- 										<f:validateLength maximum="20" /> -->
 <!-- 									</p:password> -->
@@ -224,11 +224,11 @@
 <!-- 									<p:commandButton id="buttonLogin" -->
 <!-- 										value="#{labels['form.login.button.login.value']}" -->
 <!-- 										action="#{loginController.validate}" ajax="true" -->
-<!-- 										update="frmLogin" styleClass="sitisCommandButton" -->
+<!-- 										update="frmLogin" styleClass="greenCommandButton" -->
 <!-- 										style="width:11.0em !important" onclick="getResolution()"> -->
 <!-- 										<p:tooltip id="tipButtonLogin" for="buttonLogin" -->
 <!-- 											value="#{labels['form.login.button.login.tip']}" -->
-<!-- 											styleClass="sitisToolTip" /> -->
+<!-- 											styleClass="greenToolTip" /> -->
 <!-- 									</p:commandButton> -->
 
 <!-- 									<p:messages id="msgs" closable="true" -->

@@ -12,7 +12,6 @@ import br.edu.green.web.entity.PersonEntity;
 import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
 import br.edu.green.web.exception.GeneralException;
-import br.edu.green.web.service.ws.WebServiceCorporativeService;
 import br.edu.green.web.util.FacesUtil;
 import br.edu.green.web.util.Util;
 
@@ -38,9 +37,6 @@ public class PersonAuthenticationServiceBean extends GeneralService implements P
 
 	@EJB
 	private PersonService personService;
-
-	@EJB
-	private WebServiceCorporativeService webServiceCorporativeService;
 
 	/**
 	 * Default class constructor.
@@ -88,17 +84,17 @@ public class PersonAuthenticationServiceBean extends GeneralService implements P
 			return processingResult;
 		}
 
-		try {
-			// checking data of the person at Embrapa Security and returns if success. Otherwise, the system must validate the person at the local data base.
-			processingResult = this.validatePersonAtWebServiceEmbrapaSecurity(login, password, language);
-			if (processingResult.getCode().equals(Code.LOGIN_INFORMATION_SUCCESS)) {
-				return processingResult;
-			}
-		} catch (GeneralException ge) {
-			// nothing to do because if occurs an exception or any error, a new authentication will be done at the local data base
-		} catch (Exception e) {
-			// nothing to do because if occurs an exception or any error, a new authentication will be done at the local data base
-		}
+		// try {
+		// // checking data of the person at Embrapa Security and returns if success. Otherwise, the system must validate the person at the local data base.
+		// processingResult = this.validatePersonAtWebServiceEmbrapaSecurity(login, password, language);
+		// if (processingResult.getCode().equals(Code.LOGIN_INFORMATION_SUCCESS)) {
+		// return processingResult;
+		// }
+		// } catch (GeneralException ge) {
+		// // nothing to do because if occurs an exception or any error, a new authentication will be done at the local data base
+		// } catch (Exception e) {
+		// // nothing to do because if occurs an exception or any error, a new authentication will be done at the local data base
+		// }
 
 		// checking data of the person at local data base and returning the processing result
 		return this.validatePersonAtLocalDataBase(login, password, language);
@@ -118,90 +114,92 @@ public class PersonAuthenticationServiceBean extends GeneralService implements P
 	 * @throws GeneralException
 	 *             The general exception object
 	 */
-	private ProcessingResultEntity validatePersonAtWebServiceEmbrapaSecurity(String login, String password, String language) throws GeneralException {
-		try {
-
-			// defining local variables
-			PersonEntity personEntity;
-			ProcessingResultEntity processingResult = new ProcessingResultEntity();
-
-			// getting user transaction object
-			this.userTransaction = this.ejbContext.getUserTransaction();
-
-			// starting bean transaction
-			this.userTransaction.begin();
-
-			// calling web service to validate person at the SCS
-			// processingResult = this.webServiceCorporativeService.authenticatePerson(login, password);
-			processingResult = null;
-
-			if (!processingResult.getCode().equals(Code.LOGIN_INFORMATION_SUCCESS)) {
-				// failure at validate person
-				return processingResult;
-			}
-
-			// finding person at the local data base using his/her login
-			// personEntity = this.personService.findByLogin(this.webServiceCorporativeService.getPersonEntity().getLogin());
-			// if (personEntity == null) {
-			// // finding person at the local data base using his/her registration
-			personEntity = this.personService.findByRegistration(this.webServiceCorporativeService.getPersonEntity().getRegistration());
-			// }
-
-			if (personEntity == null) {
-				// creating new instance of data person entity
-				personEntity = new PersonEntity();
-
-				// configuring attributes of the new person entity
-				personEntity.setSitisPersonProfileInitials(SitisPersonProfileEnum.USUARIO.getProfile());
-			}
-
-			// preparing attributes of person entity to save at local data base
-			// SITIS
-			personEntity.setLogin(this.webServiceCorporativeService.getPersonEntity().getLogin());
-			personEntity.setName(this.webServiceCorporativeService.getPersonEntity().getName());
-			personEntity.setRegistration(this.webServiceCorporativeService.getPersonEntity().getRegistration());
-
-			// encrypting password before update local data base SITIS
-			personEntity.setPassword(Util.generateMD5(password));
-
-			personEntity.setWorkplaceId(this.webServiceCorporativeService.getPersonEntity().getWorkplaceId());
-			personEntity.setWorkplaceName(this.webServiceCorporativeService.getPersonEntity().getWorkplaceName());
-			personEntity.setWorkplaceInitials(this.webServiceCorporativeService.getPersonEntity().getWorkplaceInitials());
-			personEntity.setEmail(this.webServiceCorporativeService.getPersonEntity().getEmail());
-			personEntity.setGeneralSituationIndicator(this.webServiceCorporativeService.getPersonEntity().getGeneralSituationIndicator());
-			personEntity.setInternalExternalPerson(this.webServiceCorporativeService.getPersonEntity().getInternalExternalPerson());
-			personEntity.setLastUpdateDate(new Date());
-			personEntity.setLocalRemoteLastLogin(LoginTypeEnum.REMOTE.getLoginType());
-			if (personEntity.getLanguage() == null && language != null) {
-				personEntity.setLanguage(language);
-			}
-
-			// creating or updating person object at the local data base
-			this.personService.save(personEntity);
-
-			// storing the logged person object in the session object
-			FacesUtil.storeObjectInSession(personEntity);
-
-			// returning login with success
-			return processingResult;
-
-		} catch (GeneralException ge) {
-			throw ge;
-
-		} catch (Exception e) {
-			throw this.handleException(e.getCause().getCause().getCause(), this.getClass().getSimpleName(), "validatePersonAtWebServiceEmbrapaSecurity", Code.EJB_EXCEPTION, this.getClass().getSimpleName());
-
-		} finally {
-			try {
-				// committing bean transaction
-				this.userTransaction.commit();
-			} catch (Exception e) {
-				// configuring and throwing details of the actual exception
-				throw this.handleException(e, this.getClass().getSimpleName(), "validatePersonAtWebServiceEmbrapaSecurity", Code.EJB_EXCEPTION, this.getClass().getSimpleName());
-			}
-
-		}
-	}
+	// private ProcessingResultEntity validatePersonAtWebServiceEmbrapaSecurity(String login, String password, String language) throws GeneralException {
+	// try {
+	//
+	// // defining local variables
+	// PersonEntity personEntity;
+	// ProcessingResultEntity processingResult = new ProcessingResultEntity();
+	//
+	// // getting user transaction object
+	// this.userTransaction = this.ejbContext.getUserTransaction();
+	//
+	// // starting bean transaction
+	// this.userTransaction.begin();
+	//
+	// // calling web service to validate person at the SCS
+	// // processingResult = this.webServiceCorporativeService.authenticatePerson(login, password);
+	// processingResult = null;
+	//
+	// if (!processingResult.getCode().equals(Code.LOGIN_INFORMATION_SUCCESS)) {
+	// // failure at validate person
+	// return processingResult;
+	// }
+	//
+	// // finding person at the local data base using his/her login
+	// // personEntity = this.personService.findByLogin(this.webServiceCorporativeService.getPersonEntity().getLogin());
+	// // if (personEntity == null) {
+	// // // finding person at the local data base using his/her registration
+	// personEntity = this.personService.findByRegistration(this.webServiceCorporativeService.getPersonEntity().getRegistration());
+	// // }
+	//
+	// if (personEntity == null) {
+	// // creating new instance of data person entity
+	// personEntity = new PersonEntity();
+	//
+	// // configuring attributes of the new person entity
+	// personEntity.setSitisPersonProfileInitials(SitisPersonProfileEnum.USUARIO.getProfile());
+	// }
+	//
+	// // preparing attributes of person entity to save at local data base
+	// // SITIS
+	// personEntity.setLogin(this.webServiceCorporativeService.getPersonEntity().getLogin());
+	// personEntity.setName(this.webServiceCorporativeService.getPersonEntity().getName());
+	// personEntity.setRegistration(this.webServiceCorporativeService.getPersonEntity().getRegistration());
+	//
+	// // encrypting password before update local data base SITIS
+	// personEntity.setPassword(Util.generateMD5(password));
+	//
+	// personEntity.setWorkplaceId(this.webServiceCorporativeService.getPersonEntity().getWorkplaceId());
+	// personEntity.setWorkplaceName(this.webServiceCorporativeService.getPersonEntity().getWorkplaceName());
+	// personEntity.setWorkplaceInitials(this.webServiceCorporativeService.getPersonEntity().getWorkplaceInitials());
+	// personEntity.setEmail(this.webServiceCorporativeService.getPersonEntity().getEmail());
+	// personEntity.setGeneralSituationIndicator(this.webServiceCorporativeService.getPersonEntity().getGeneralSituationIndicator());
+	// personEntity.setInternalExternalPerson(this.webServiceCorporativeService.getPersonEntity().getInternalExternalPerson());
+	// personEntity.setLastUpdateDate(new Date());
+	// personEntity.setLocalRemoteLastLogin(LoginTypeEnum.REMOTE.getLoginType());
+	// if (personEntity.getLanguage() == null && language != null) {
+	// personEntity.setLanguage(language);
+	// }
+	//
+	// // creating or updating person object at the local data base
+	// this.personService.save(personEntity);
+	//
+	// // storing the logged person object in the session object
+	// FacesUtil.storeObjectInSession(personEntity);
+	//
+	// // returning login with success
+	// return processingResult;
+	//
+	// } catch (GeneralException ge) {
+	// throw ge;
+	//
+	// } catch (Exception e) {
+	// throw this.handleException(e.getCause().getCause().getCause(), this.getClass().getSimpleName(), "validatePersonAtWebServiceEmbrapaSecurity",
+	// Code.EJB_EXCEPTION, this.getClass().getSimpleName());
+	//
+	// } finally {
+	// try {
+	// // committing bean transaction
+	// this.userTransaction.commit();
+	// } catch (Exception e) {
+	// // configuring and throwing details of the actual exception
+	// throw this.handleException(e, this.getClass().getSimpleName(), "validatePersonAtWebServiceEmbrapaSecurity", Code.EJB_EXCEPTION,
+	// this.getClass().getSimpleName());
+	// }
+	//
+	// }
+	// }
 
 	/**
 	 * Validates the person data using the SITIS local database.
@@ -246,7 +244,6 @@ public class PersonAuthenticationServiceBean extends GeneralService implements P
 
 			// updating data person
 			personEntity.setLastUpdateDate(new Date());
-			personEntity.setLocalRemoteLastLogin(LoginTypeEnum.LOCAL.getLoginType());
 			if (!language.isEmpty()) {
 				personEntity.setLanguage(language);
 			}

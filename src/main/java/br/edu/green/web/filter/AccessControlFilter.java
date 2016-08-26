@@ -41,25 +41,25 @@ public class AccessControlFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		try {
-			
+
 			HttpServletRequest requestHTTP = (HttpServletRequest) request;
 			HttpServletResponse responseHTTP = (HttpServletResponse) response;
 			HttpSession session = requestHTTP.getSession(false);
 			String address = requestHTTP.getRequestURI();
-			String loginPage = "/green/login.xhtml";
+			String loginPage = "/portal/login.xhtml";
 
 			if ((session != null && session.getAttribute(Util.className(PersonEntity.class.getName())) != null) || address.indexOf(loginPage) >= 0 || address.indexOf("/public/") >= 0 || address.contains("javax.faces.resource")) {
 
 				// logged person or public URL
 				chain.doFilter(request, response);
-				
+
 			} else {
 
 				// calling login page
 				responseHTTP.sendRedirect(requestHTTP.getContextPath() + loginPage);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("AccessControlFilter - method doFilter - exception: " + e.toString());
 		}
 	}
 

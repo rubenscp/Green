@@ -11,21 +11,21 @@
 <f:view contentType="text/html" encoding="UTF-8"
 	locale="#{languageController.locale}">
 
-	<f:loadBundle basename="properties.SITISWeb" var="propertiesSitisWeb" />
+	<f:loadBundle basename="properties.Green" var="propertiesGreen" />
 
 	<h:head>
 		<f:facet name="first">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<link type="text/css" rel="stylesheet"
-				href="#{request.contextPath}/templates/css/SITISWebStyle.css" />
-			<title>#{labels['sitis.web.shortName']}</title>
+				href="#{request.contextPath}/templates/css/GreenStyle.css" />
+			<title>#{labels['green.web.shortName']}</title>
 
 		</f:facet>
 	</h:head>
 
 	<h:body>
 
-		<p:layout fullPage="true" id="divMain" styleClass="sitisLayout">
+		<p:layout fullPage="true" id="divMain" styleClass="greenLayout">
 
 			<div id="divTop">
 				<ui:insert name="divTop">

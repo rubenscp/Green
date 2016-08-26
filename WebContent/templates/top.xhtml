@@ -23,29 +23,29 @@
 		<h:outputStylesheet name="/templates/css/GreenStyle.css" />
 
 		<!-- Superior region of the main form -->
-		<p:layoutUnit id="Header_SITISWeb" position="north" size="60"
+		<p:layoutUnit id="Header_Green" position="north" size="60"
 			resizable="false" closable="false" collapsible="false" gutter="0">
 
 			<h:form>
 
 				<h:panelGrid columns="2" style="width:100%"
-					columnClasses="sitisTitleTop,sitisRightTop">
+					columnClasses="greenTitleTop,greenRightTop">
 
-					<!-- Title of system SITIS -->
+					<!-- Title of system Green -->
 					<h:panelGrid columns="1">
 						<h:outputLabel
-							value="#{labels['sitis.web.shortName']} - #{labels['sitis.web.fullName']}" />
+							value="#{labels['green.web.shortName']} - #{labels['green.web.fullName']}" />
 					</h:panelGrid>
 
 					<h:panelGrid columns="3"
-						columnClasses="sitisPersonTop,sitisLogoutTop">
+						columnClasses="greenPersonTop,greenLogoutTop">
 
 						<!-- Name of the logged person  -->
 						<p:commandLink id="personName" action="loggedPerson.xhtml"
 							ajax="false">
 							<h:outputText id="personNameOutputText"
 								value="#{sessionController.compactNamePerson}"
-								styleClass="sitisPersonName" />
+								styleClass="greenPersonName" />
 						</p:commandLink>
 
 						<p:spacer />
@@ -76,15 +76,15 @@
 					hideEffect="fade" closable="false">
 
 					<h:panelGrid columns="2" width="100%"
-						columnClasses="sitisPanelgridColumnCenter,sitisPanelgridColumnCenter">
+						columnClasses="greenPanelgridColumnCenter,greenPanelgridColumnCenter">
 						<p:commandButton
 							value="#{labels['menu.logout.person.button.yes']}" type="button"
-							styleClass="ui-confirmdialog-yes sitisConfirmDialogButton"
+							styleClass="ui-confirmdialog-yes greenConfirmDialogButton"
 							style="width:6em !important"
 							icon="#{configuration['icon.button.confirm.check']}" />
 						<p:commandButton value="#{labels['menu.logout.person.button.no']}"
 							type="button"
-							styleClass="ui-confirmdialog-no sitisConfirmDialogButton"
+							styleClass="ui-confirmdialog-no greenConfirmDialogButton"
 							style="width:6em !important"
 							icon="#{configuration['icon.button.confirm.close']}" />
 					</h:panelGrid>

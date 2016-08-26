@@ -86,7 +86,7 @@ public class GeneralController implements Serializable {
 			this.log = new LogService(this);
 
 		} catch (GeneralException ge) {
-			// handling general exception of SITIS Web.
+			// handling general exception of Green
 			this.handleGeneralException(ge);
 
 			// throwing general exception
@@ -145,10 +145,10 @@ public class GeneralController implements Serializable {
 	}
 
 	/**
-	 * Handle general exception of the SITIS Web writing log and preparing the JCF components to show the messages in the web pages.
+	 * Handle general exception of the Green writing log and preparing the JCF components to show the messages in the web pages.
 	 * 
 	 * @param ge
-	 *            The general exception of the SITIS Web
+	 *            The general exception of the Green
 	 */
 	protected void handleGeneralException(GeneralException ge) {
 		try {
@@ -181,7 +181,7 @@ public class GeneralController implements Serializable {
 	 * Handle exception of the system writing log and preparing the JCF components to show the messages in the web pages.
 	 * 
 	 * @param e
-	 *            The exception of the SITIS Web
+	 *            The exception of the Green
 	 */
 	protected void handleException(Exception e) {
 		try {
@@ -385,7 +385,7 @@ public class GeneralController implements Serializable {
 			FacesUtil.getRequestContext().execute("PF('" + dialogFormName + "').hide();");
 
 		} catch (GeneralException ge) {
-			// handling general exception of SITIS Web
+			// handling general exception of Green
 			this.handleGeneralException(ge);
 		}
 	}

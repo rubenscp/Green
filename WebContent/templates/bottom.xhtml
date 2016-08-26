@@ -8,8 +8,8 @@
 	Version: 0.1
 	Date: 01/09/2015
  -->
- 
- <html xmlns="http://www.w3.org/1999/xhtml"
+
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -22,20 +22,21 @@
 
 		<h:outputStylesheet name="/templates/css/GreenStyle-old.css" />
 
-		<!-- Footer region of the main form -->	 
-		<p:layoutUnit id="Bottom_Green"  position="south" size="45" resizable="false" closable="false" collapsible="true">			
+		<!-- Footer region of the main form -->
+		<p:layoutUnit id="Bottom_Green" position="south" size="45"
+			resizable="false" closable="false" collapsible="true">
 			<table width="100%" class="footer">
 				<tr>
-					<td class="footerTitle">
-						<h:outputText
-							value="&copy; 2015 #{labels['company.name']} - ;;;;;; #{labels['green.shortName']} | #{labels['green.copyright']} | #{labels['green.version']}"/>					
+					<td class="footerTitle"><h:outputText
+							value="&copy; 2015 #{labels['company.name']} - #{labels['company.shortName']} &diams; #{labels['green.web.copyright']} &diams; #{labels['green.web.version']}" />
+
 					</td>
-				</tr>  
-			</table>		
+				</tr>
+			</table>
 		</p:layoutUnit>
- 
- 	</ui:composition>
- 
+
+	</ui:composition>
+
 </h:body>
 
 </html>

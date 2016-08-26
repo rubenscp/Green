@@ -11,7 +11,7 @@ import br.edu.green.web.service.GeneralService;
 
 /**
  * <p>
- * <b> This class implements the services used to manipulate the SITIS Web database.</b>
+ * <b> This class implements the services used to manipulate the Green database.</b>
  * </p>
  * 
  * @author Rubens de Castro Pereira
@@ -26,7 +26,7 @@ public class EntityManagerWrapperServiceBean extends GeneralService implements E
 	private static final long serialVersionUID = 3013890146343111825L;
 
 	// defining persistence object
-	@PersistenceContext(unitName = "sitisweb-pu")
+	@PersistenceContext(unitName = "green-pu")
 	private EntityManager em;
 
 	/**
@@ -43,7 +43,7 @@ public class EntityManagerWrapperServiceBean extends GeneralService implements E
 	}
 
 	/**
-	 * Creates a new line in the table of the SITIS Web data base.
+	 * Creates a new line in the table of the Green data base.
 	 * 
 	 * @param t
 	 *            The generic object

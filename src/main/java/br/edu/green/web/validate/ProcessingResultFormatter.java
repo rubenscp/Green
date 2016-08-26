@@ -34,7 +34,7 @@ public class ProcessingResultFormatter {
 	 * This public method implements a singleton design pattern
 	 * 
 	 * @param
-	 * @return the MessageSITIS instance
+	 * @return the MessageGreen instance
 	 */
 	public static ProcessingResultFormatter getInstanceof() throws GeneralException {
 
