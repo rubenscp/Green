@@ -17,7 +17,7 @@ import br.edu.green.web.exception.GeneralException;
 @Local
 public interface PersonAuthenticationService {
 
-	public ProcessingResultEntity validate(String corporateAccount, String password, String language) throws GeneralException;
+	public ProcessingResultEntity validate(String login, String password, String language) throws GeneralException;
 
 	public void disconnectPerson() throws GeneralException;
 }

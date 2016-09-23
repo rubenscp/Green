@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
  * 
  * @author Rubens de Castro Pereira
  * @version 0.1
- * @since 18/08/2015
+ * @since 28/08/2016
  * 
  */
 
@@ -36,10 +36,15 @@ public class PersonEntity implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@Column(name = "login")
+	@Column(name = "user_name")
 	@NotNull
-	@Size(max = 32)
-	private String login;
+	@Size(max = 30)
+	private String userName;
+
+	@Column(name = "email")
+	@NotNull
+	@Size(max = 100)
+	private String email;
 
 	@Column(name = "name")
 	@NotNull
@@ -48,7 +53,7 @@ public class PersonEntity implements Serializable {
 
 	@Column(name = "password")
 	@NotNull
-	@Size(max = 20)
+	@Size(max = 64)
 	private String password;
 
 	@Column(name = "workplace_name")
@@ -58,15 +63,6 @@ public class PersonEntity implements Serializable {
 	@Column(name = "workplace_initials")
 	@Size(max = 32)
 	private String workplaceInitials;
-
-	@Column(name = "email")
-	@Size(max = 500)
-	private String email;
-
-	@Column(name = "last_update_date")
-	@Temporal(TemporalType.TIMESTAMP)
-	@NotNull
-	private Date lastUpdateDate;
 
 	@Column(name = "language")
 	@Size(max = 10)
@@ -80,105 +76,196 @@ public class PersonEntity implements Serializable {
 	@Size(max = 5)
 	private String greenPersonProfileInitials;
 
+	@Column(name = "last_update_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
+	private Date lastUpdateDate;
+
 	public PersonEntity() {
 		super();
 
 		// initializing entity class attributes
 		this.id = new Long(0);
-		this.login = "";
+		this.userName = "";
+		this.email = "";
 		this.name = "";
 		this.password = "";
 		this.workplaceName = "";
 		this.workplaceInitials = "";
-		this.email = "";
-		this.lastUpdateDate = new Date();
 		this.language = "pt";
 		this.theme = "";
+		this.greenPersonProfileInitials = "USR";
+		this.lastUpdateDate = new Date();
 	}
 
+	/**
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * @param id
+	 *            the id to set
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	/**
+	 * @param userName
+	 *            the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getWorkplaceName() {
-		return workplaceName;
-	}
-
-	public void setWorkplaceName(String workplaceName) {
-		this.workplaceName = workplaceName;
-	}
-
-	public String getWorkplaceInitials() {
-		return workplaceInitials;
-	}
-
-	public void setWorkplaceInitials(String workplaceInitials) {
-		this.workplaceInitials = workplaceInitials;
-	}
-
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email
+	 *            the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public Date getLastUpdateDate() {
-		return lastUpdateDate;
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 
-	public void setLastUpdateDate(Date lastUpdateDate) {
-		this.lastUpdateDate = lastUpdateDate;
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the workplaceName
+	 */
+	public String getWorkplaceName() {
+		return workplaceName;
+	}
+
+	/**
+	 * @param workplaceName
+	 *            the workplaceName to set
+	 */
+	public void setWorkplaceName(String workplaceName) {
+		this.workplaceName = workplaceName;
+	}
+
+	/**
+	 * @return the workplaceInitials
+	 */
+	public String getWorkplaceInitials() {
+		return workplaceInitials;
+	}
+
+	/**
+	 * @param workplaceInitials
+	 *            the workplaceInitials to set
+	 */
+	public void setWorkplaceInitials(String workplaceInitials) {
+		this.workplaceInitials = workplaceInitials;
+	}
+
+	/**
+	 * @return the language
+	 */
 	public String getLanguage() {
 		return language;
 	}
 
+	/**
+	 * @param language
+	 *            the language to set
+	 */
 	public void setLanguage(String language) {
 		this.language = language;
 	}
 
+	/**
+	 * @return the theme
+	 */
 	public String getTheme() {
 		return theme;
 	}
 
+	/**
+	 * @param theme
+	 *            the theme to set
+	 */
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
 
+	/**
+	 * @return the greenPersonProfileInitials
+	 */
+	public String getGreenPersonProfileInitials() {
+		return greenPersonProfileInitials;
+	}
+
+	/**
+	 * @param greenPersonProfileInitials
+	 *            the greenPersonProfileInitials to set
+	 */
+	public void setGreenPersonProfileInitials(String greenPersonProfileInitials) {
+		this.greenPersonProfileInitials = greenPersonProfileInitials;
+	}
+
+	/**
+	 * @return the lastUpdateDate
+	 */
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	/**
+	 * @param lastUpdateDate
+	 *            the lastUpdateDate to set
+	 */
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
+
 	@Override
 	public String toString() {
-		return "PersonEntity: { " + " id: " + this.id + ", login: " + this.login + ", name: " + this.name + ", password: " + this.password + ", workplaceName: " + this.workplaceName + ", workplaceInitials: " + this.workplaceInitials + ", email: " + this.email + ", lastUpdateDate: " + this.lastUpdateDate + ", language: " + this.language + ", theme: " + this.theme + " }";
+		return "PersonEntity: { " + " id: " + this.id + ", userName: " + this.userName + ", email: " + this.email + ", name: " + this.name + ", password: " + this.password + ", workplaceName: " + this.workplaceName + ", workplaceInitials: " + this.workplaceInitials + ", language: " + this.language + ", theme: " + this.theme + ", greenPersonProfileInitials: " + this.greenPersonProfileInitials + ", lastUpdateDate: " + this.lastUpdateDate + " }";
 	}
 
 	@Override
@@ -201,5 +288,4 @@ public class PersonEntity implements Serializable {
 		}
 		return true;
 	}
-
 }

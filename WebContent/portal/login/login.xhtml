@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: login.xhtml
+	Description: This code allows that a person does a login at the Green System 
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 23/08/2016
+ -->
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<f:view contentType="text/html" encoding="UTF-8"
+	locale="#{sessionController.locale}">
+
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<link type="text/css" rel="stylesheet"
+				href="../../templates/css/GreenStyle.css" />
+			<title>#{labels['green.web.shortName']}</title>
+		</f:facet>
+	</h:head>
+	<!-- 				href="#{request.contextPath}/templates/css/GreenStyle.css" /> -->
+
+	<h:body>
+
+		<!-- Calling method before render page -->
+		<f:metadata>
+			<f:event listener="#{sessionController.init()}" type="preRenderView" />
+		</f:metadata>
+
+		<p:layout fullPage="true" id="divMain" styleClass="greenLayout">
+
+			<f:loadBundle basename="cfg.configuration" var="configuration" />
+
+			<!-- Top od login form  -->
+			<div id="divTop">
+				<ui:insert name="divTop">
+					<ui:include src="/templates/top.xhtml" />
+				</ui:insert>
+			</div>
+
+			<div id="divCenter">
+
+				<!-- Center of main form -->
+				<p:layoutUnit id="Center_Green" position="center" size="200"
+					resizable="false" closable="false" collapsible="false" gutter="0">
+
+					<p:focus context="frmLogin" />
+
+					<h:form id="frmLogin" prependId="false">
+
+						<div class="centerContainer">
+							<div class="centerContent">
+
+								<table align="center" class="login">
+									<tr>
+										<td class="formLogin"><h:panelGrid columns="1"
+												columnClasses="greenLoginPainelGrid" width="100%">
+
+												<p:panel>
+
+													<h:panelGrid columns="1" cellspacing="5" cellpadding="0"
+														width="100%" columnClasses="greenPanelgridColumnRight">
+
+														<p:outputLabel value="#{labels['form.login.login.label']}"
+															styleClass="greenOutputLabel" style="font-weight: bold;" />
+														<p:inputText label="#{labels['form.login.login.label']}"
+															value="#{loginController.userNameOrEMail}"
+															required="true" maxlength="100" size="100"
+															styleClass="greenInputText" style="width:20em;"
+															tabindex="1">
+															<f:validateLength maximum="50" />
+														</p:inputText>
+
+														<p:outputLabel
+															value="#{labels['form.login.password.label']}"
+															styleClass="greenOutputLabel" style="font-weight: bold;" />
+														<p:password label="#{labels['form.login.password.label']}"
+															value="#{loginController.password}" required="true"
+															maxlength="64" size="64" styleClass="greenInputText"
+															style="width:20em;" tabindex="2">
+															<f:validateLength maximum="20" />
+														</p:password>
+														<p:spacer />
+
+														<p:commandButton id="buttonLogin"
+															value="#{labels['form.login.button.login.value']}"
+															action="#{loginController.validate()}" ajax="true"
+															update="frmLogin" styleClass="greenCommandButton"
+															style="width:23em !important" tabindex="3">
+															<p:tooltip id="tipButtonLogin" for="buttonLogin"
+																value="#{labels['form.login.button.login.tip']}"
+																styleClass="greenToolTip" />
+														</p:commandButton>
+
+													</h:panelGrid>
+
+												</p:panel>
+
+											</h:panelGrid> <h:panelGrid columns="1"
+												styleClass="greenPanelgridColumnCenter" width="100%">
+												<p:messages id="msgs" closable="true"
+													styleClass="errorWarningMessages" style="width:25em;" />
+											</h:panelGrid></td>
+
+									</tr>
+
+								</table>
+
+							</div>
+						</div>
+
+					</h:form>
+
+				</p:layoutUnit>
+
+			</div>
+
+			<!-- Bottom of login form  -->
+			<div id="divBottom">
+				<ui:insert name="divBottom">
+					<ui:include src="/templates/bottom.xhtml" />
+				</ui:insert>
+			</div>
+
+		</p:layout>
+
+		<p:ajaxStatus id="statusDialog" onstart="PF('statusDialog').show();"
+			oncomplete="PF('statusDialog').hide();" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<h:graphicImage value="#{configuration['green.status.icon']}" />
+		</p:dialog>
+
+	</h:body>
+
+</f:view>
+
+</html>

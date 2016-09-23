@@ -36,18 +36,48 @@ public class AccessControlFilter implements Filter {
 	}
 
 	/**
+	 * @see Filter#destroy()
+	 */
+	public void destroy() {
+	}
+
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
+
+	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		try {
 
+			// getting http objects
 			HttpServletRequest requestHTTP = (HttpServletRequest) request;
 			HttpServletResponse responseHTTP = (HttpServletResponse) response;
 			HttpSession session = requestHTTP.getSession(false);
 			String address = requestHTTP.getRequestURI();
-			String loginPage = "/portal/login.xhtml";
 
+			// System.out.println("--------------------------------------------------------------------------------");
+			// if (requestHTTP != null) {
+			// System.out.println("Classe: AccessControlFilter " + " metodo: doFilter" + " requestHTTP: " + requestHTTP.toString());
+			// }
+			// if (responseHTTP != null) {
+			// System.out.println("Classe: AccessControlFilter " + " metodo: doFilter" + " responseHTTP: " + responseHTTP.toString());
+			// }
+			// if (session != null) {
+			// System.out.println("Classe: AccessControlFilter " + " metodo: doFilter" + " session: " + session.toString());
+			// }
+			// if (address != null) {
+			// System.out.println("Classe: AccessControlFilter " + " metodo: doFilter" + " address: " + address);
+			// }
+
+			// configuring the name of login page
+			String loginPage = "/portal/login/login.xhtml";
+
+			// checking validate of session
 			if ((session != null && session.getAttribute(Util.className(PersonEntity.class.getName())) != null) || address.indexOf(loginPage) >= 0 || address.indexOf("/public/") >= 0 || address.contains("javax.faces.resource")) {
 
 				// logged person or public URL
@@ -61,18 +91,6 @@ public class AccessControlFilter implements Filter {
 		} catch (Exception e) {
 			System.out.println("AccessControlFilter - method doFilter - exception: " + e.toString());
 		}
-	}
-
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig filterConfig) throws ServletException {
 	}
 
 }

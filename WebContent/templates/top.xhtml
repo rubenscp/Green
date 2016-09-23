@@ -20,18 +20,21 @@
 
 	<ui:composition>
 
-		<h:outputStylesheet name="/templates/css/GreenStyle.css" />
+		<!-- 		<h:outputStylesheet name="#{configuration['green.css']}" /> -->
 
 		<!-- Superior region of the main form -->
 		<p:layoutUnit id="Header_Green" position="north" size="60"
 			resizable="false" closable="false" collapsible="false" gutter="0">
 
-			<h:form>
+			<!-- Title of system Green -->
+			<!-- Name of the logged person  -->
+			<!-- Logout button -->
+
+			<h:form id="frmTop" prependId="false">
 
 				<h:panelGrid columns="2" style="width:100%"
 					columnClasses="greenTitleTop,greenRightTop">
 
-					<!-- Title of system Green -->
 					<h:panelGrid columns="1">
 						<h:outputLabel
 							value="#{labels['green.web.shortName']} - #{labels['green.web.fullName']}" />
@@ -40,7 +43,6 @@
 					<h:panelGrid columns="3"
 						columnClasses="greenPersonTop,greenLogoutTop">
 
-						<!-- Name of the logged person  -->
 						<p:commandLink id="personName" action="loggedPerson.xhtml"
 							ajax="false">
 							<h:outputText id="personNameOutputText"
@@ -50,7 +52,6 @@
 
 						<p:spacer />
 
-						<!-- Logout button -->
 						<p:commandLink id="logout"
 							actionListener="#{sessionController.logout}" ajax="false"
 							rendered="#{sessionController.personLogged}">

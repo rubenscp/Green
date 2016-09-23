@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: activitiesGreenProject.xhtml
+	Description: Shows the activities of Green Project, especially the concluded and current activities.    
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 11/09/2015
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="#{configuration['green.path.portal.main']}">
+
+		<ui:define name="center">
+
+			<h:form id="frmActivitiesSitisWebProject" prependId="false">
+
+				<!-- Function Title in the panel -->
+				<h:panelGrid columns="2"
+					columnClasses="greenFunctionTitlePanel,greenFunctionTitlePanel">
+					<h:outputLabel
+						value="#{labels['form.activities.green.web.project.title']}" />
+					<h:outputLabel value="" />
+
+					<p:spacer height="15" />
+					<h:outputLabel value="" />
+
+				</h:panelGrid>
+
+
+				<!-- 				Component to show the current situations of the Green Project -->
+				<!-- 				<p:carousel numVisible="1" autoPlayInterval="10000" effect="fade" -->
+				<!-- 					circular="true"> -->
+				<p:accordionPanel styleClass="greenTabAccordionPanel">
+					<p:tab
+						title="#{labels['form.activities.green.web.project.iteration.in.development']}"
+						rendered="true">
+
+						<p:panelGrid columnClasses="greenPanelGridColumns"
+							style="width:100%;">
+							<p:row style="font-weight: bold">
+								<p:column style="text-align:center !important;" width="5%">#{labels['form.activities.green.web.project.iteration']}</p:column>
+								<p:column width="75%">#{labels['form.activities.green.web.project.functionalRequirement']}</p:column>
+								<p:column style="text-align: center !important;" width="20%">#{labels['form.activities.green.web.project.status']}</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align:center !important;" rowspan="4"
+									width="5%">1</p:column>
+								<p:column style="text-align: left !important;" width="75%">Autenticar usuário</p:column>
+								<p:column style="text-align: center !important;" width="20%">Homologação</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter experimentos</p:column>
+								<p:column style="text-align: center !important;" width="20%">Homologação</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:tab>
+
+					<p:tab
+						title="#{labels['form.activities.green.web.project.iteration.in.homologation']}"
+						rendered="false">
+
+						<p:panelGrid columnClasses="greenPanelGridColumns"
+							style="width:100%;">
+							<p:row style="font-weight: bold">
+								<p:column style="text-align:center !important;" width="5%">#{labels['form.activities.green.web.project.iteration']}</p:column>
+								<p:column width="75%">#{labels['form.activities.green.web.project.functionalRequirement']}</p:column>
+								<p:column style="text-align: center !important;" width="20%">#{labels['form.activities.green.web.project.status']}</p:column>
+							</p:row>
+						</p:panelGrid>
+
+					</p:tab>
+
+					<p:tab
+						title="#{labels['form.activities.green.web.project.iteration.homologated']}"
+						rendered="false">
+
+						<p:panelGrid columnClasses="greenPanelGridColumns"
+							style="width:100%;">
+							<p:row style="font-weight: bold">
+								<p:column style="text-align:center !important;" width="5%">#{labels['form.activities.green.web.project.iteration']}</p:column>
+								<p:column width="75%">#{labels['form.activities.green.web.project.functionalRequirement']}</p:column>
+								<p:column style="text-align: center !important;" width="20%">#{labels['form.activities.green.web.project.status']}</p:column>
+							</p:row>
+						</p:panelGrid>
+
+					</p:tab>
+
+					<p:tab
+						title="#{labels['form.activities.green.web.project.iteration.implanted']}"
+						rendered="false">
+
+						<p:panelGrid columnClasses="greenPanelGridColumns"
+							style="width:100%;">
+							<p:row style="font-weight: bold">
+								<p:column style="text-align:center !important;" width="5%">#{labels['form.activities.green.web.project.iteration']}</p:column>
+								<p:column width="75%">#{labels['form.activities.green.web.project.functionalRequirement']}</p:column>
+								<p:column style="text-align: center !important;" width="20%">#{labels['form.activities.green.web.project.status']}</p:column>
+							</p:row>
+						</p:panelGrid>
+
+					</p:tab>
+
+					<p:tab
+						title="#{labels['form.activities.green.web.project.iteration.not.started']}"
+						rendered="false">
+
+						<p:panelGrid columnClasses="greenPanelGridColumns"
+							style="width:100%;">
+							<p:row style="font-weight: bold">
+								<p:column style="text-align:center !important;" width="5%">#{labels['form.activities.green.web.project.iteration']}</p:column>
+								<p:column width="75%">#{labels['form.activities.green.web.project.functionalRequirement']}</p:column>
+								<p:column style="text-align: center !important;" width="20%">#{labels['form.activities.green.web.project.status']}</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align:center !important;" rowspan="5"
+									width="5%">2</p:column>
+								<p:column style="text-align: left !important;" width="75%">Mapear croqui do experimento</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter planos de irrigação do experimento</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter planos de monitoramento das variáveis do experimento</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Gerenciar status do experimento</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Enviar planos de tratamentos hídricos e de monitoramentos para as colunas de solo e módulos climáticos automaticamente</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column style="text-align:center !important;" rowspan="5"
+									width="5%">3</p:column>
+								<p:column style="text-align: left !important;" width="75%">Irrigar coluna de solo do experimento até capacidade de campo</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Atualizar massa de referência das colunas de solo do experimento</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Receber dados das irrigações e monitoramentos das colunas de solo e módulos climáticos automaticamente</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Exportar dados do experimento</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Sincronizar dados do experimento entre SITIS e SIEXP</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column style="text-align:center !important;" rowspan="3"
+									width="5%">4</p:column>
+								<p:column style="text-align: left !important;" width="75%">Monitorar colunas de solo e módulos climáticos do experimento em tempo real</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Interromper e reiniciar a supervisão de colunas de solo e/ou módulos climáticos</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Executar irrigação em uma coluna de solo do experimento</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column style="text-align:center !important;" rowspan="8"
+									width="5%">5</p:column>
+								<p:column style="text-align: left !important;" width="75%">Manter colunas de solo</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter casas de vegetação</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter curvas de calibração para variáveis monitoradas</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter módulos climáticos</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter usuários</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter perfis de usuários</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter configurações gerais</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Manter notificações do sistema</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column style="text-align:center !important;" rowspan="3"
+									width="5%">6</p:column>
+								<p:column style="text-align: left !important;" width="75%">Registrar histórico das alterações dos dados do experimento automaticamente</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">IExecutar diagnóstico na plataforma SITIS</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: left !important;" width="75%">Gerar relatórios</p:column>
+								<p:column style="text-align: center !important;" width="20%">Identificado</p:column>
+							</p:row>
+
+						</p:panelGrid>
+
+					</p:tab>
+
+				</p:accordionPanel>
+
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>

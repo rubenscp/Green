@@ -1,31 +1,48 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!-- 
+	Name: main.xhtml
+	Description: This code shows the main form of the Green. It defines the layout and divisions of the main form.   
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 16/10/2015
+ -->
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <f:view contentType="text/html" encoding="UTF-8"
-	locale="#{languageController.locale}">
+	locale="#{sessionController.locale}">
 
-	<f:loadBundle basename="properties.Green" var="propertiesGreen" />
 
 	<h:head>
 		<f:facet name="first">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<link type="text/css" rel="stylesheet"
-				href="#{request.contextPath}/templates/css/GreenStyle.css" />
+				href="#{configuration['green.css']}" />
 			<title>#{labels['green.web.shortName']}</title>
-
 		</f:facet>
 	</h:head>
+	<!-- 			<link type="text/css" rel="stylesheet" -->
+	<!-- 				href="#{request.contextPath}/templates/css/GreenStyle.css" /> -->
+
 
 	<h:body>
 
+		<!-- Calling method before render page -->
+		<f:metadata>
+			<f:event listener="#{sessionController.init()}" type="preRenderView" />
+			<f:event listener="#{menuController.init()}" type="preRenderView" />
+		</f:metadata>
+
 		<p:layout fullPage="true" id="divMain" styleClass="greenLayout">
+
+			<f:loadBundle basename="cfg.configuration" var="configuration" />
 
 			<div id="divTop">
 				<ui:insert name="divTop">
@@ -52,6 +69,13 @@
 			</div>
 
 		</p:layout>
+
+		<!-- 		<p:ajaxStatus id="statusDialog" onstart="PF('statusDialog').show();" -->
+		<!-- 			oncomplete="PF('statusDialog').hide();" /> -->
+		<!-- 		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" -->
+		<!-- 			closable="false" resizable="false" showHeader="false"> -->
+		<!-- 			<h:graphicImage value="#{configuration['green.status.icon']}" /> -->
+		<!-- 		</p:dialog> -->
 
 	</h:body>
 

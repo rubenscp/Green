@@ -20,15 +20,15 @@
 
 	<ui:composition>
 
-		<h:outputStylesheet name="/templates/css/GreenStyle-old.css" />
+		<!-- 		<h:outputStylesheet name="#{configuration['green.css']}" /> -->
 
 		<!-- Footer region of the main form -->
 		<p:layoutUnit id="Bottom_Green" position="south" size="45"
-			resizable="false" closable="false" collapsible="true">
+			resizable="false" closable="false" collapsible="true" gutter="0">
 			<table width="100%" class="footer">
 				<tr>
 					<td class="footerTitle"><h:outputText
-							value="&copy; 2015 #{labels['company.name']} - #{labels['company.shortName']} &diams; #{labels['green.web.copyright']} &diams; #{labels['green.web.version']}" />
+							value="&copy; #{labels['green.web.construction.year']} #{labels['company.name']} &diams;  #{labels['company.shortName']} &diams; #{labels['green.web.copyright']} &diams; #{labels['green.web.version']}" />
 
 					</td>
 				</tr>

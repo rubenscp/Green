@@ -31,7 +31,7 @@ import br.edu.green.web.validate.ProcessingResultsList;
  * @since 02/12/2015 (creation date)
  */
 
-public class GeneralController implements Serializable {  
+public class GeneralController implements Serializable {
 
 	// defining serial version
 	private static final long serialVersionUID = 5875577253232336147L;
@@ -54,7 +54,7 @@ public class GeneralController implements Serializable {
 	// protected ProcessingResultFormatter processingResultFormatter;
 	protected LabelService labels;
 	protected LogService log;
-	String login;
+	String email;
 	String namePerson;
 
 	private Severity severity;
@@ -154,7 +154,7 @@ public class GeneralController implements Serializable {
 		try {
 			// recovering data login person
 			this.recoveryDataLoggedPerson();
-			ge.setLogin(this.login);
+			ge.setLogin(this.email);
 			ge.setPersonName(this.namePerson);
 
 			// logging processing result
@@ -193,7 +193,7 @@ public class GeneralController implements Serializable {
 
 			// logging processing result
 			if (this.log != null) {
-				this.log.error(e.toString() + " - " + this.login + " " + this.namePerson);
+				this.log.error(e.toString() + " - " + this.email + " " + this.namePerson);
 			}
 
 			// loading processing result with suitable messages of exception
@@ -217,7 +217,7 @@ public class GeneralController implements Serializable {
 	private void recoveryDataLoggedPerson() {
 
 		// initializing variables
-		this.login = "Not logged";
+		this.email = "Not logged";
 		this.namePerson = "";
 
 		try {
@@ -226,7 +226,7 @@ public class GeneralController implements Serializable {
 			httpSession = FacesUtil.getSession();
 			PersonEntity personEntity = (PersonEntity) httpSession.getAttribute(Util.className(PersonEntity.class.getName()));
 			if (personEntity != null) {
-				this.login = personEntity.getLogin();
+				this.email = personEntity.getEmail();
 				this.namePerson = personEntity.getName();
 			}
 

@@ -32,19 +32,18 @@ import br.edu.green.web.util.Util;
 public class LoginController extends GeneralController implements Serializable {
 
 	// defining serial version
-	private static final long serialVersionUID = 8180609930379821697L;
-
-	// defining constants
-	// private static final String MAIN_PAGE = "main";
-	// private static final String LOGIN_PAGE = "login";
-	// private static final String ACTIVITIES_SITIS_WEB_PROECT_PAGE = "activitiesSitisWebProject";
+	private static final long serialVersionUID = -1524602280064205321L;
 
 	// defining the class attributes
-	private String login;
+	private String userNameOrEMail;
 	private String password;
 
 	@EJB
 	private PersonAuthenticationService personAuthenticationService;
+
+	// ***************************************************************
+	// Initializers Methods
+	// ***************************************************************
 
 	/**
 	 * Default constructor.
@@ -57,7 +56,7 @@ public class LoginController extends GeneralController implements Serializable {
 	 * Prepares the environment of the controller class.
 	 */
 	@PostConstruct
-	public void loadForm() {
+	public void initForm() {
 		try {
 			// initializing services
 			this.initializeServices();
@@ -69,6 +68,48 @@ public class LoginController extends GeneralController implements Serializable {
 			// handling general exception of SITIS Web
 			this.handleGeneralException(ge);
 		}
+	}
+
+	// ***************************************************************
+	// Getters and Setters Methods
+	// ***************************************************************
+
+	/**
+	 * Returns the user name or email of the logged person.
+	 * 
+	 * @return String - The user name or email of the logged person.
+	 */
+	public String getUserNameOrEMail() {
+		return userNameOrEMail;
+	}
+
+	/**
+	 * Sets the user name or email of the logged person.
+	 * 
+	 * @param userNameOrEMail
+	 *            The user name or email of the logged person.
+	 */
+	public void setUserNameOrEMail(String userNameOrEMail) {
+		this.userNameOrEMail = userNameOrEMail;
+	}
+
+	/**
+	 * Accesses the attribute named 'password' and returns its value.
+	 * 
+	 * @return String - The password of the logged person.
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * Sets the value of attribute named 'password'.
+	 * 
+	 * @param password
+	 *            The password of logged person.
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -118,7 +159,7 @@ public class LoginController extends GeneralController implements Serializable {
 		// checking corporate account and password
 		try {
 			// running login of the person
-			ProcessingResultEntity processingResult = this.personAuthenticationService.validate(login, password, currentLanguage);
+			ProcessingResultEntity processingResult = this.personAuthenticationService.validate(userNameOrEMail, password, currentLanguage);
 
 			// analyzing processing result
 			if (processingResult.getCode().equals(Code.LOGIN_INFORMATION_SUCCESS)) {
@@ -172,41 +213,4 @@ public class LoginController extends GeneralController implements Serializable {
 		}
 	}
 
-	/**
-	 * Accesses the attribute named 'login' and returns its value.
-	 * 
-	 * @return String - The value of login.
-	 */
-	public String getLogin() {
-		return login;
-	}
-
-	/**
-	 * Sets the value of attribute named 'login'.
-	 * 
-	 * @param login
-	 *            The name of person login.
-	 */
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	/**
-	 * Accesses the attribute named 'password' and returns its value.
-	 * 
-	 * @return String - The password of the logged person.
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * Sets the value of attribute named 'password'.
-	 * 
-	 * @param password
-	 *            The password of logged person.
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }

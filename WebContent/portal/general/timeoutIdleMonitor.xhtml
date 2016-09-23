@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: timeoutIdleMonitor.xhtml
+	Description: Controls the timeout of idle monitor 
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 06/09/2016
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:body>
+
+	<ui:composition>
+
+		<h:form id="frmIdleMonitorTimeout" prependId="false">
+
+			<!-- Controlling the timeout of the idle monitor   -->
+			<p:idleMonitor id="idleMonitor" widgetVar="idleMonitor"
+				timeout="#{configuration['green.timeout.idle.monitor']}">
+				<p:ajax event="idle" listener="#{sessionController.onIdleMonitor()}"
+					update="dlgConfirmIdleMonitorTimeout">
+				</p:ajax>
+			</p:idleMonitor>
+
+			<!-- Dialog form to confirm the finish of the session -->
+			<p:dialog id="dlgConfirmIdleMonitorTimeout"
+				header="#{labels['form.timeout.idle.monitor.function.title']}"
+				widgetVar="wdlgConfirmIdleMonitorTimeout" closable="false"
+				closeOnEscape="false" dynamic="true" resizable="false"
+				position="center">
+
+				<h:panelGrid columns="1" cellpadding="0" cellspacing="0"
+					columnClasses="greenPanelgridColumnCenter" width="100%">
+					<p:outputLabel
+						value="#{labels['form.timeout.idle.monitor.message']}"
+						styleClass="greenConfirmDialogMessage" style="font-weight: bold;" />
+					<p:spacer />
+
+					<pe:timer id="tmrDialogIdleMonitor"
+						timeout="#{configuration['green.timeout.timer.to.close.application']}"
+						singleRun="false" listener="#{sessionController.logout()}"
+						format="mm:ss" />
+
+					<p:spacer />
+
+					<h:panelGrid columns="2"
+						columnClasses="greenPanelgridColumnLeft, greenPanelgridColumnRight"
+						width="100%">
+						<p:commandButton
+							value="#{labels['form.timeout.idle.monitor.button.logout']}"
+							actionListener="#{sessionController.logout()}"
+							styleClass="greenConfirmDialogButton"
+							style="width: 9em !important;">
+						</p:commandButton>
+						<p:commandButton
+							value="#{labels['form.timeout.idle.monitor.button.continue']}"
+							onclick="PF('tmrDialogIdleMonitor').stop()"
+							actionListener="#{sessionController.closeDialogForm('wdlgConfirmIdleMonitorTimeout')}"
+							styleClass="greenConfirmDialogButton"
+							style="width: 9em !important;">
+						</p:commandButton>
+					</h:panelGrid>
+
+				</h:panelGrid>
+
+			</p:dialog>
+
+		</h:form>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

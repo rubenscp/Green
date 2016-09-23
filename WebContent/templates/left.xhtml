@@ -20,22 +20,23 @@
 
 	<ui:composition>
 
-		<h:outputStylesheet name="/templates/css/GreenStyle-old.css" />
+		<!-- 		<h:outputStylesheet name="#{configuration['green.css']}" /> -->
 
-		<!-- Left region of the main form used to operations menu -->	 
-		<p:layoutUnit id="Left_Green" position="west" size="210" resizable="false" closable="false" collapsible="true">
-		
+		<!-- Left region of the main form used to operations menu -->
+		<p:layoutUnit id="Left_Green" position="west" size="210"
+			resizable="false" closable="false" collapsible="true" gutter="0">
+
 			<h:form>
 
-				<!-- Building the menu dynamically as the user's profile --> 	
-				<p:panelMenu model="#{menuController.model}" toggleable="true"/>	
-				
+				<!-- Building the menu dynamically as the user's profile -->
+				<p:panelMenu model="#{menuController.model}" toggleable="true" />
+
 			</h:form>
 
-		</p:layoutUnit>	
-	
- 	</ui:composition>
- 
+		</p:layoutUnit>
+
+	</ui:composition>
+
 </h:body>
 
 </html>

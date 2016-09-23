@@ -21,7 +21,7 @@ import org.primefaces.model.menu.DynamicMenuModel;
 public class NavigationHistoryEntity {
 
 	// defining constants
-	private static final String MENU_ITEM_STYLE = "sitisNavigationHistoryMenuItem";
+	private static final String MENU_ITEM_STYLE = "greenNavigationHistoryMenuItem";
 	public static final boolean INITIALIZE_MENU = true;
 	public static final boolean NOT_INITIALIZE_MENU = false;
 	public static final boolean DISABLE_ITEM_MENU = false;
@@ -83,7 +83,7 @@ public class NavigationHistoryEntity {
 		this.counterID = 0;
 
 		// adding the first menu item
-		this.addNavigationHistoryItem("SITIS", "activitiesSitisWebProject.xhtml", false);
+		this.addNavigationHistoryItem("GREEN", "activitiesGreenProject.xhtml", false);
 	}
 
 	/**

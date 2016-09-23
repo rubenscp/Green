@@ -53,7 +53,7 @@ public class PersonServiceBean extends GeneralService implements PersonService {
 	 * @throws GeneralException
 	 *             The general exception object
 	 */
-	@Override
+	// @Override
 	public PersonEntity save(PersonEntity person) throws GeneralException {
 		try {
 			if (person.getId() == 0) {
@@ -94,27 +94,21 @@ public class PersonServiceBean extends GeneralService implements PersonService {
 	// }
 
 	/**
-	 * Finds a person by its login.
+	 * Finds a person by its email.
 	 * 
-	 * @param login
+	 * @param userName
 	 *            The login of the person.
 	 * @return PersonEntity - The person.
 	 * @throws GeneralException
 	 *             The general exception object
 	 */
-	// @Override
-	// public PersonEntity findByLogin(String login) throws GeneralException {
-	// String sql = "select p from PersonEntity p where p.login = :login";
-	// return this.findOneObject(sql, "login", login);
-	// }
-
 	@Override
 	@SuppressWarnings("unchecked")
-	public PersonEntity findByRegistration(long registration) throws GeneralException {
+	public PersonEntity findByUserName(String userName) throws GeneralException {
 		try {
-			String sql = "select p from PersonEntity p where p.registration = :registration";
+			String sql = "select p from PersonEntity p where p.userName = :user_name";
 			Query query = this.emws.createQuery(sql);
-			query.setParameter("registration", registration);
+			query.setParameter("user_name", userName);
 			query.setHint("org.hibernate.cacheable", Boolean.TRUE);
 			List<PersonEntity> persons = query.getResultList();
 			if (persons.size() > 0) {
@@ -124,9 +118,58 @@ public class PersonServiceBean extends GeneralService implements PersonService {
 			}
 		} catch (Exception e) {
 			// configuring and throwing details of the actual exception
-			throw this.handleException(e, this.getClass().getSimpleName(), "findByRegistration", Code.DAO_EXCEPTION_FIND, this.getClass().getSimpleName());
+			throw this.handleException(e, this.getClass().getSimpleName(), "findByUSerName", Code.DAO_EXCEPTION_FIND, this.getClass().getSimpleName());
 		}
 	}
+
+	/**
+	 * Finds a person by its email.
+	 * 
+	 * @param email
+	 *            The login of the person.
+	 * @return PersonEntity - The person.
+	 * @throws GeneralException
+	 *             The general exception object
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public PersonEntity findByEmail(String email) throws GeneralException {
+		try {
+			String sql = "select p from PersonEntity p where p.email = :email";
+			Query query = this.emws.createQuery(sql);
+			query.setParameter("email", email);
+			query.setHint("org.hibernate.cacheable", Boolean.TRUE);
+			List<PersonEntity> persons = query.getResultList();
+			if (persons.size() > 0) {
+				return persons.get(0);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			// configuring and throwing details of the actual exception
+			throw this.handleException(e, this.getClass().getSimpleName(), "findByEmail", Code.DAO_EXCEPTION_FIND, this.getClass().getSimpleName());
+		}
+	}
+
+	// @Override
+	// @SuppressWarnings("unchecked")
+	// public PersonEntity findByRegistration(long registration) throws GeneralException {
+	// try {
+	// String sql = "select p from PersonEntity p where p.registration = :registration";
+	// Query query = this.emws.createQuery(sql);
+	// query.setParameter("registration", registration);
+	// query.setHint("org.hibernate.cacheable", Boolean.TRUE);
+	// List<PersonEntity> persons = query.getResultList();
+	// if (persons.size() > 0) {
+	// return persons.get(0);
+	// } else {
+	// return null;
+	// }
+	// } catch (Exception e) {
+	// // configuring and throwing details of the actual exception
+	// throw this.handleException(e, this.getClass().getSimpleName(), "findByRegistration", Code.DAO_EXCEPTION_FIND, this.getClass().getSimpleName());
+	// }
+	// }
 
 	/**
 	 * Finds all persons according a order criteria.

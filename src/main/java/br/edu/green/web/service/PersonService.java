@@ -26,9 +26,11 @@ public interface PersonService {
 
 	// public PersonEntity findById(long id) throws GeneralException;
 
-	// public PersonEntity findByLogin(String login) throws GeneralException;
+	public PersonEntity findByUserName(String userName) throws GeneralException;
 
-	public PersonEntity findByRegistration(long registration) throws GeneralException;
+	public PersonEntity findByEmail(String email) throws GeneralException;
+
+	// public PersonEntity findByRegistration(long registration) throws GeneralException;
 
 	public List<PersonEntity> findAll(String orderBy) throws GeneralException;
 

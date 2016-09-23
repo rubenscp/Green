@@ -20,18 +20,21 @@
 
 	<ui:composition>
 
-		<h:outputStylesheet name="/templates/css/GreenStyle.css" />
+		<!-- 		<h:outputStylesheet name="#{configuration['green.css']}" /> -->
 
 		<!-- Center of main form -->
 		<p:layoutUnit id="Center_Green" position="center" size="200"
-			resizable="false" closable="false" collapsible="false">
+			resizable="true" closable="false" collapsible="true" gutter="0">
 
-			<p:panel styleClass="greenFunctionTitlePanel">
-				<h:outputLabel for="functionTitle" />
-				<h:outputLabel id="functionTitle" value="" />
-			</p:panel>
+			<p:breadCrumb model="#{sessionController.navigationHistoryMenu}" />
 
 			<ui:insert name="center" />
+
+			<!-- Controlling the timeout of session  -->
+			<ui:insert name="timeoutIdleMonitor">
+				<ui:include src="/portal/general/timeoutIdleMonitor.xhtml" />
+			</ui:insert>
+
 
 		</p:layoutUnit>
 

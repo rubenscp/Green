@@ -417,4 +417,14 @@ public class SessionController extends GeneralController implements Serializable
 			this.handleGeneralException(ge);
 		}
 	}
+
+	public void onIdleMonitor() {
+		try {
+			// showing dialog form to confirm the delete operation
+			FacesUtil.getRequestContext().execute("PF('wdlgConfirmIdleMonitorTimeout').show();");
+
+		} catch (GeneralException ge) {
+			// nothing to do
+		}
+	}
 }
