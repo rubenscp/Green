@@ -4,8 +4,8 @@
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
-   <property key="Logical" value="Green" />
    <property key="Connection Type" value="PostgreSQL" />
+   <property key="Logical" value="Modelo de Dados" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/green" />
    <property key="UID" value="rubens" />
    <property key="PWD" value="rubens" />
@@ -16,8 +16,8 @@
    <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
   <data-source id="DS0">
-   <property key="Logical" value="Green" />
    <property key="Connection Type" value="PostgreSQL" />
+   <property key="Logical" value="Modelo de Dados" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/green" />
    <property key="UID" value="rubens" />
    <property key="PWD" value="rubens" />
@@ -28,8 +28,8 @@
    <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
   <data-source id="DS0">
-   <property key="Logical" value="Green" />
    <property key="Connection Type" value="PostgreSQL" />
+   <property key="Logical" value="Modelo de Dados" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/green" />
    <property key="UID" value="rubens" />
    <property key="PWD" value="rubens" />
@@ -41,13 +41,13 @@
   </data-source>
  </project-data-sources>
  <source-databases>
-  <database id="DB0" populated="true" UUID="ca1506fe-073b-4f8a-81a9-cd256f72e55b" dbcs-ref="DS0" name="Green" physicalName="Green DB" >
+  <database id="DB0" populated="true" UUID="ca1506fe-073b-4f8a-81a9-cd256f72e55b" dbcs-ref="DS0" name="Modelo de Dados" physicalName="Green DB" >
    <catalog id="CAT1" populated="false" UUID="4565314e-b4e7-40a1-83ba-c49eaf727f18" name="green" nativeTerm="database" physicalName="green" >
    </catalog>
    <relationships>
    </relationships>
   </database>
-  <database id="DB2" populated="true" UUID="c01c4a4b-24bb-4f8c-8d42-b1fe9aa8137b" dbcs-ref="DS0" name="Green" physicalName="Green" >
+  <database id="DB2" populated="true" UUID="c01c4a4b-24bb-4f8c-8d42-b1fe9aa8137b" dbcs-ref="DS0" name="Modelo de Dados" physicalName="Green" >
    <catalog id="CAT3" populated="false" UUID="7835c16f-46b6-44cc-b99a-7da9b9bb4996" name="green" nativeTerm="database" physicalName="green" >
    </catalog>
    <relationships>
@@ -108,7 +108,7 @@
     <column id="COL20" populated="true" UUID="8740befe-38cc-4dcc-ac78-27d64a31f348" autoIncrement="false" autoIncrementSequenceName="experiment_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks>Identificador do experimento sendo um número sequencial.</remarks>
     </column>
-    <column id="COL21" populated="true" UUID="b5e53d23-cfda-47f7-bd7b-018d0adceb45" autoIncrement="false" autoIncrementSequenceName="experiment_person_id_seq" defaultValue="" name="person_id" nullable="0" physicalName="person_id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+    <column id="COL21" populated="true" UUID="b5e53d23-cfda-47f7-bd7b-018d0adceb45" autoIncrement="false" autoIncrementSequenceName="experiment_owner_person_id_seq" defaultValue="" name="owner_person_id" nullable="0" physicalName="owner_person_id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks>Identificação da pessoa proprietária do experimento.</remarks>
     </column>
     <column id="COL22" populated="true" UUID="c374cfae-dac5-4a31-a3bb-85315b76f0ca" autoIncrement="false" autoIncrementSequenceName="experiment_title_seq" defaultValue="" name="title" nullable="0" physicalName="title" precision="128" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -192,7 +192,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">

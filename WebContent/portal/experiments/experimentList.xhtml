@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: experimentList.xhtml
+	Description: This code contains the list of SITIS experiment   
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 16/10/2015
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:body>
+
+	<ui:composition>
+
+		<p:panel id="pnlExperimentList"
+			rendered="#{experimentController.pnlExperimentListRendered}"
+			style="border-style: none;">
+
+			<!-- Buttons of form operations in top -->
+			<h:panelGrid columns="2" rendered="false">
+				<p:inputText id="searchField"
+					label="#{labels['form.experiment.list.searchFieldContent']}"
+					required="false"
+					placeholder="#{labels['form.experiment.list.searchFieldContent']}"
+					maxlength="40" size="40" styleClass="sitisSearchField"
+					disabled="true" />
+
+				<p:commandButton id="buttonSearch"
+					value="#{labels['form.experiment.list.button.search.value']}"
+					action="experimentList.xhtml" ajax="true"
+					styleClass="sitisCommandButton" disabled="true">
+					<p:tooltip id="tipButtonSearch" for="buttonSearch"
+						value="#{labels['form.experiment.list.button.search.tip']}"
+						styleClass="sitisToolTip" />
+				</p:commandButton>
+			</h:panelGrid>
+
+			<!-- 				selection="#{experimentController.experimentEntity}" -->
+
+			<!-- Table with list of experiments  -->
+			<p:dataTable id="tblExperiments" var="experiment"
+				value="#{experimentController.experiments}" paginator="true"
+				rows="10" rowsPerPageTemplate="5,10,20,30" rowKey="#{experiment.id}"
+				styleClass="sitisDataTable"
+				emptyMessage="#{experimentController.emptyDatatableMessage}">
+
+				<p:column
+					headerText="#{labels['form.experiment.list.publicIdentifier']}"
+					width="12%" style="text-align:center;"
+					sortBy="#{experiment.publicIdentifier}">
+					<h:outputText value="#{experiment.publicIdentifier}" />
+				</p:column>
+
+				<p:column
+					headerText="#{labels['form.experiment.list.experimentTitle']}"
+					width="38%" style="text-align:left;" sortBy="#{experiment.title}">
+					<h:outputText value="#{experiment.title}" />
+				</p:column>
+
+				<p:column
+					headerText="#{labels['form.experiment.list.experimentResponsible']}"
+					width="16%" style="text-align:center;"
+					sortBy="#{experiment.experimentResponsible.name}">
+					<h:outputText value="#{experiment.experimentResponsible.name}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{labels['form.experiment.list.status']}"
+					width="15%" style="text-align:center;"
+					sortBy="#{experiment.sitisStatus}">
+					<h:outputText value="#{experiment.sitisStatusName}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{labels['form.experiment.list.actions']}"
+					width="18%" style="text-align:center;">
+
+					<p:commandLink
+						actionListener="#{experimentController.prepareUpdateExperiment(experiment)}"
+						onclick="PF('wtipImgEdit').hide()"
+						update="msgs pnlExperimentList pnlExperiment">
+						<p:graphicImage id="imgEdit"
+							value="../../templates/images/actions/edit.png"
+							styleClass="sitisActionImage" rendered="#{experiment.editAction}">
+							<p:tooltip id="tipImgEdit" widgetVar="wtipImgEdit" for="imgEdit"
+								trackMouse="true"
+								value="#{labels['form.action.image.edit.tip']}"
+								styleClass="sitisToolTip" />
+						</p:graphicImage>
+					</p:commandLink>
+
+					<p:spacer width="5" />
+
+					<p:commandLink
+						actionListener="#{experimentController.prepareDeleteExperiment(experiment)}"
+						onclick="PF('wtipImgDelete').hide()"
+						update="msgs pnlExperimentList pnlExperiment dlgConfirmDeleteExperiment">
+						<p:graphicImage id="imgDelete"
+							value="../../templates/images/actions/delete.png"
+							styleClass="sitisActionImage"
+							rendered="#{experiment.deleteAction}">
+							<p:tooltip id="tipImgDelete" widgetVar="wtipImgDelete"
+								for="imgDelete" trackMouse="true"
+								value="#{labels['form.action.image.delete.tip']}"
+								styleClass="sitisToolTip" />
+						</p:graphicImage>
+					</p:commandLink>
+
+					<p:spacer width="5" />
+
+					<p:commandLink
+						actionListener="#{experimentController.prepareViewExperiment(experiment)}"
+						onclick="PF('wtipImgView').hide()" update="frmExperimentManager">
+						<p:graphicImage id="imgView"
+							value="../../templates/images/actions/view.png"
+							styleClass="sitisActionImage" rendered="#{experiment.viewAction}">
+							<p:tooltip id="tipImgView" widgetVar="wtipImgView" for="imgView"
+								trackMouse="true"
+								value="#{labels['form.action.image.view.tip']}"
+								styleClass="sitisToolTip" />
+						</p:graphicImage>
+					</p:commandLink>
+
+				</p:column>
+
+			</p:dataTable>
+
+			<h:panelGrid columns="1">
+				<p:commandButton id="buttonImportExperimentButton"
+					value="#{labels['form.experiment.list.button.importExperiment.value']}"
+					action="#{experimentController.importExperiment}" ajax="true"
+					styleClass="sitisCommandButton"
+					rendered="#{experimentController.buttonNewExperimentRender}"
+					onclick="PF('wtipButtonImportExperimentButton').hide()">
+					<p:tooltip id="tipButtonImportExperimentButton"
+						widgetVar="wtipButtonImportExperimentButton"
+						for="buttonImportExperimentButton"
+						value="#{labels['form.experiment.list.button.importExperiment.tip']}"
+						styleClass="sitisToolTip" />
+				</p:commandButton>
+			</h:panelGrid>
+
+		</p:panel>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

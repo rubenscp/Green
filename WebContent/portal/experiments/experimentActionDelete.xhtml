@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: experimentDeleteAction.xhtml
+	Description: This code contains the identification of experiment  
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 16/10/2015
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition>
+
+		<!-- Dialog form to confirm the exclusion of the experiment -->
+		<p:dialog id="dlgConfirmDeleteExperiment"
+			header="#{labels['form.dialog.delete.experiment.function.title']}"
+			widgetVar="wdlgConfirmDeleteExperiment" closable="false"
+			closeOnEscape="true" dynamic="true" resizable="false" width="30%"
+			position="center">
+
+			<h:panelGrid columns="1" cellpadding="5" cellspacing="5">
+
+				<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+					<p:outputLabel
+						value="#{labels['form.dialog.delete.experiment.identifier.and.title']}"
+						styleClass="sitisConfirmDialogMessage" style="font-weight: bold;" />
+					<p:outputLabel
+						value="#{experimentController.experimentSelected.publicIdentifierAndShortTitle}"
+						styleClass="sitisConfirmDialogMessage" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+					<p:outputLabel
+						value="#{labels['form.dialog.delete.experiment.attention']}"
+						styleClass="sitisConfirmDialogMessage" style="font-weight: bold;" />
+				</h:panelGrid>
+
+				<p:dataList value="#{experimentController.experimentContent}"
+					var="experimentContent" type="unordered"
+					styleClass="sitisConfirmDialogList" style="border-style: none;">
+						#{experimentContent} 
+					</p:dataList>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="1" columnClasses="sitisPanelgridColumnCenter"
+				width="100%">
+				<p:outputLabel
+					value="#{labels['form.dialog.delete.experiment.message.confirm']}"
+					styleClass="sitisConfirmDialogMessage" style="font-weight: bold;" />
+
+				<h:panelGrid columns="2"
+					columnClasses="sitisPanelgridColumnLeft, sitisPanelgridColumnRight"
+					width="100%">
+					<p:commandButton id="buttonYes"
+						value="#{labels['form.dialog.delete.experiment.button.yes.value']}"
+						actionListener="#{experimentController.executeDelete('wdlgConfirmDeleteExperiment')}"
+						styleClass="sitisConfirmDialogButton"
+						update="msgs frmExperimentManager">
+					</p:commandButton>
+					<p:commandButton id="buttonNo"
+						value="#{labels['form.dialog.delete.experiment.button.no.value']}"
+						actionListener="#{experimentController.closeDialogForm('wdlgConfirmDeleteExperiment')}"
+						styleClass="sitisConfirmDialogButton" update="msgs">
+					</p:commandButton>
+				</h:panelGrid>
+
+			</h:panelGrid>
+
+		</p:dialog>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: experimentManager.xhtml
+	Description: This code manages the operations related to SITIS experiments   
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 07/07/2016
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:body>
+
+	<ui:composition
+		template="#{configuration['sitisweb.path.portal.main']}">
+
+		<ui:define name="center">
+
+			<h:form id="frmExperimentManager" prependId="false">
+
+				<!-- Function Title in the panel -->
+				<h:panelGrid columns="1" columnClasses="sitisFunctionTitlePanel"
+					width="100%">
+					<h:outputLabel value="#{experimentController.functionTitle}" />
+				</h:panelGrid>
+
+				<p:messages id="msgs" styleClass="errorWarningMessages" />
+
+				<ui:insert name="experimentList">
+					<ui:include src="experimentList.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="experiment">
+					<ui:include src="experiment.xhtml" />
+				</ui:insert>
+
+				<ui:insert>
+					<ui:include src="experimentActionDelete.xhtml" />
+				</ui:insert>
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

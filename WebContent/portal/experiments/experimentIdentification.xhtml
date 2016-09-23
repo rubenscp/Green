@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: experimentIdentitication.xhtml
+	Description: This code contains the identification of experiment  
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 16/10/2015
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition>
+
+		<h:panelGrid columns="1" style="width:100%;" cellspacing="0"
+			cellpadding="0">
+
+			<p:panel
+				header="#{labels['form.experiment.identification.title.panel.experiment']}"
+				style="width: 100%;">
+
+				<h:panelGrid columns="2" cellpadding="1" cellspacing="5"
+					columnClasses="sitisPanelgridColumnLeft,sitisPanelgridColumnRight">
+
+					<!-- Public identification of the experiment -->
+					<h:outputLabel for="publicIdentification"
+						value="#{labels['form.experiment.identification.publicIdentification']}"
+						styleClass="sitisOutputLabel" />
+
+					<h:panelGrid columns="4" cellpadding="1">
+						<p:outputLabel id="publicIdentification"
+							value="#{experimentController.experimentSelected.publicIdentifier}"
+							styleClass="sitisOutputLabel" />
+
+						<p:spacer width="40" />
+
+						<!-- SITIS Status of the experiment -->
+						<h:outputLabel for="statusSITISName"
+							value="#{labels['form.experiment.identification.statusSITIS']}"
+							styleClass="sitisOutputLabel"
+							style="font-weight: bold !important;" />
+						<h:outputLabel id="statusSITISName"
+							value="#{experimentController.experimentSelected.sitisStatusName}"
+							styleClass="sitisOutputLabel" />
+					</h:panelGrid>
+
+					<!-- Title of the experiment -->
+					<h:outputLabel for="title"
+						value="#{labels['form.experiment.identification.title']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="title"
+						value="#{experimentController.experimentSelected.title}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- Informal title of the experiment -->
+					<h:outputLabel for="informalTitle"
+						value="#{labels['form.experiment.identification.informalTitle']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="informalTitle"
+						value="#{experimentController.experimentSelected.informalTitle}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- Research project used in the experiment -->
+					<h:outputLabel for="researchProjectName"
+						value="#{labels['form.experiment.identification.researchProject']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="researchProjectName"
+						value="#{experimentController.experimentSelected.researchProject}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- Action plan used in the experiment -->
+					<h:outputLabel for="actionPlanName"
+						value="#{labels['form.experiment.identification.actionPlan']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="actionPlanName"
+						value="#{experimentController.experimentSelected.actionPlan}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- Activity used in the experiment -->
+					<h:outputLabel for="activityName"
+						value="#{labels['form.experiment.identification.activity']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="activityName"
+						value="#{experimentController.experimentSelected.activity}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- Creation date of the experiment in the SIEXP -->
+					<h:outputLabel for="creationDate"
+						value="#{labels['form.experiment.identification.creationDate']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="creationDate"
+						value="#{experimentController.experimentSelected.creationDate}"
+						styleClass="sitisOutputLabel">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputLabel>
+
+					<!-- Update date of the experiment -->
+					<h:outputLabel for="updateDate"
+						value="#{labels['form.experiment.identification.updateDate']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="updateDate"
+						value="#{experimentController.experimentSelected.updateDate}"
+						styleClass="sitisOutputLabel">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputLabel>
+
+					<!-- SIEXP Status of the experiment -->
+					<h:outputLabel for="statusSIEXPName"
+						value="#{labels['form.experiment.identification.statusSIEXP']}"
+						styleClass="sitisOutputLabel"
+						style="font-weight: bold !important;" />
+					<h:outputLabel id="statusSIEXPName"
+						value="#{experimentController.experimentSelected.siexpStatusName}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- Creation date of the experiment in the SITIS -->
+					<h:outputLabel for="importDate"
+						value="#{labels['form.experiment.identification.importDate']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="importDate"
+						value="#{experimentController.experimentSelected.importDate}"
+						styleClass="sitisOutputLabel">
+						<f:convertDateTime type="both"
+							pattern="#{configuration['sitisweb.pattern.date.time']}" />
+					</h:outputLabel>
+
+				</h:panelGrid>
+
+			</p:panel>
+
+			<p:spacer style="width: 0.1em" />
+
+			<p:panel
+				header="#{labels['form.experiment.identification.title.panel.deployment']}"
+				style="width: 100%;">
+
+				<h:panelGrid columns="2" cellpadding="1" cellspacing="5"
+					columnClasses="sitisPanelgridColumnLeft,sitisPanelgridColumnRight">
+
+					<!-- Expected installation time period of the experiment -->
+					<h:outputLabel for="expectedInstallationPeriod"
+						value="#{labels['form.experiment.identification.expectedInstallationPeriod']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="expectedInstallationPeriod"
+						value="#{experimentController.experimentSelected.expectedInstallationPeriod}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- The responsible institution by the deployment of the experiment -->
+					<h:outputLabel for="deploymentResponsibleInstitution"
+						value="#{labels['form.experiment.identification.deploymentResponsibleInstitution']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="deploymentResponsibleInstitution"
+						value="#{experimentController.experimentSelected.deploymentResponsibleInstitution}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- The executor institution by the deployment of the experiment -->
+					<h:outputLabel for="deploymentExecutorInstitution"
+						value="#{labels['form.experiment.identification.deploymentExecutorInstitution']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="deploymentExecutorInstitution"
+						value="#{experimentController.experimentSelected.deploymentExecutionInstitution}"
+						styleClass="sitisOutputLabel" />
+
+					<!-- Description of the implantation of the experiment -->
+					<h:outputLabel for="deploymentDescription"
+						value="#{labels['form.experiment.identification.deploymentDescription']}"
+						styleClass="sitisOutputLabel" />
+					<h:outputLabel id="deploymentDescription"
+						value="#{experimentController.experimentSelected.deploymentDescription}"
+						styleClass="sitisOutputLabel" />
+
+				</h:panelGrid>
+
+			</p:panel>
+
+		</h:panelGrid>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

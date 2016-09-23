@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: experiment.xhtml
+	Description: This code contains the main form of one experiment   
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 16/10/2015
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:body>
+
+	<ui:composition>
+
+		<p:panel id="pnlExperiment"
+			rendered="#{experimentController.pnlExperimentRendered}"
+			style="border-style: none;">
+
+			<p:tabView scrollable="true">
+
+				<p:tab title="#{labels['form.experiment.tab.1.identification']}"
+					titleStyleClass="sitisTabView">
+					<ui:insert name="experimentIdentification">
+						<ui:include
+							src="../../portal/experiments/experimentIdentification.xhtml" />
+					</ui:insert>
+				</p:tab>
+
+				<p:tab title="#{experimentController.teamMembersTitle}"
+					titleStyleClass="sitisTabView">
+					<ui:insert name="experimentTeam">
+						<ui:include src="../../portal/experiments/experimentTeam.xhtml" />
+					</ui:insert>
+				</p:tab>
+
+				<p:tab title="#{experimentController.variablesTitle}"
+					titleStyleClass="sitisTabView">
+					<ui:insert name="experimentVariable">
+						<ui:include
+							src="../../portal/experiments/experimentVariable.xhtml" />
+					</ui:insert>
+				</p:tab>
+
+				<p:tab title="#{experimentController.treatmentsTitle}"
+					titleStyleClass="sitisTabView">
+					<ui:insert name="experimentTreatment">
+						<ui:include
+							src="../../portal/experiments/experimentTreatment.xhtml" />
+					</ui:insert>
+				</p:tab>
+
+				<p:tab title="#{experimentController.rafflesTitle}"
+					titleStyleClass="sitisTabView">
+					<ui:insert name="experimentRaffle">
+						<ui:include src="../../portal/experiments/experimentRaffle.xhtml" />
+					</ui:insert>
+				</p:tab>
+
+				<p:tab title="#{labels['form.experiment.tab.6.sketch']}"
+					titleStyleClass="sitisTabView" disabled="true">Croqui a ser construído </p:tab>
+				<p:tab title="#{labels['form.experiment.tab.7.irrigation.plan']}"
+					titleStyleClass="sitisTabView" disabled="true">Plano de Irrigação a ser construído </p:tab>
+				<p:tab title="#{labels['form.experiment.tab.8.monitoring.plan']}"
+					titleStyleClass="sitisTabView" disabled="true">Plano de Monitoramento a ser construído</p:tab>
+				<p:tab title="#{labels['form.experiment.tab.9.status']}"
+					titleStyleClass="sitisTabView" disabled="true">Status do experimento a ser construído</p:tab>
+			</p:tabView>
+
+			<h:panelGrid columns="1">
+				<p:commandButton id="buttonReturn"
+					value="#{labels['form.experiment.button.return.value']}"
+					action="#{experimentController.returnExperimentList()}" ajax="true"
+					styleClass="sitisCommandButton"
+					rendered="#{experimentController.buttonReturnRendered}"
+					onclick="PF('wtipButtonReturn').hide()"
+					update="frmExperimentManager">
+					<p:tooltip id="tipButtonReturn" widgetVar="wtipButtonReturn"
+						for="buttonReturn"
+						value="#{labels['form.experiment.button.return.tip']}"
+						styleClass="sitisToolTip" />
+				</p:commandButton>
+			</h:panelGrid>
+
+		</p:panel>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

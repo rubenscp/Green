@@ -67,6 +67,13 @@ public class ExperimentEntity implements Serializable {
 	private boolean viewAction;
 
 	/**
+	 * 
+	 */
+	public ExperimentEntity() {
+		this(new Long(0), new PersonEntity(), null, null, new Date());
+	}
+
+	/**
 	 * @param id
 	 * @param ownerPerson
 	 * @param title
@@ -76,17 +83,13 @@ public class ExperimentEntity implements Serializable {
 	 * @param deleteAction
 	 * @param viewAction
 	 */
-	public ExperimentEntity(Long id, PersonEntity ownerPerson, String title, String shortTitle, Date creationDate, boolean editAction, boolean deleteAction,
-			boolean viewAction) {
+	public ExperimentEntity(Long id, PersonEntity ownerPerson, String title, String shortTitle, Date creationDate) {
 		super();
 		this.id = id;
 		this.ownerPerson = ownerPerson;
 		this.title = title;
 		this.shortTitle = shortTitle;
 		this.creationDate = creationDate;
-		this.editAction = editAction;
-		this.deleteAction = deleteAction;
-		this.viewAction = viewAction;
 	}
 
 	/**
