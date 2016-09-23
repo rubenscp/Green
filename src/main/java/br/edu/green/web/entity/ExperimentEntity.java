@@ -40,8 +40,8 @@ public class ExperimentEntity implements Serializable {
 	private Long id;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "person_id")
-	private PersonEntity person;
+	@JoinColumn(name = "owner_person_id")
+	private PersonEntity ownerPerson;
 
 	@Column(name = "title")
 	@Size(max = 128)
@@ -65,6 +65,29 @@ public class ExperimentEntity implements Serializable {
 
 	@Transient
 	private boolean viewAction;
+
+	/**
+	 * @param id
+	 * @param ownerPerson
+	 * @param title
+	 * @param shortTitle
+	 * @param creationDate
+	 * @param editAction
+	 * @param deleteAction
+	 * @param viewAction
+	 */
+	public ExperimentEntity(Long id, PersonEntity ownerPerson, String title, String shortTitle, Date creationDate, boolean editAction, boolean deleteAction,
+			boolean viewAction) {
+		super();
+		this.id = id;
+		this.ownerPerson = ownerPerson;
+		this.title = title;
+		this.shortTitle = shortTitle;
+		this.creationDate = creationDate;
+		this.editAction = editAction;
+		this.deleteAction = deleteAction;
+		this.viewAction = viewAction;
+	}
 
 	/**
 	 * Returns the identification of experiment.
@@ -105,18 +128,18 @@ public class ExperimentEntity implements Serializable {
 	}
 
 	/**
-	 * @return the person
+	 * @return the ownerPerson
 	 */
-	public PersonEntity getPerson() {
-		return person;
+	public PersonEntity getOwnerPerson() {
+		return ownerPerson;
 	}
 
 	/**
-	 * @param person
-	 *            the person to set
+	 * @param ownerPerson
+	 *            the ownerPerson to set
 	 */
-	public void setPerson(PersonEntity person) {
-		this.person = person;
+	public void setOwnerPerson(PersonEntity ownerPerson) {
+		this.ownerPerson = ownerPerson;
 	}
 
 	/**
