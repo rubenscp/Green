@@ -3,10 +3,10 @@
 
 <!-- 
 	Name: experimentList.xhtml
-	Description: This code contains the list of SITIS experiment   
+	Description: This code contains the list of GREEN experiment   
 	Author: Rubens de Castro Pereira 
 	Version: 0.1
-	Date: 16/10/2015
+	Date: 23/09/2016
  -->
 
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -22,62 +22,33 @@
 	<ui:composition>
 
 		<p:panel id="pnlExperimentList"
-			rendered="#{experimentController.pnlExperimentListRendered}"
+			rendered="#{experimentController.pnlExperimentListRender}"
 			style="border-style: none;">
-
-			<!-- Buttons of form operations in top -->
-			<h:panelGrid columns="2" rendered="false">
-				<p:inputText id="searchField"
-					label="#{labels['form.experiment.list.searchFieldContent']}"
-					required="false"
-					placeholder="#{labels['form.experiment.list.searchFieldContent']}"
-					maxlength="40" size="40" styleClass="sitisSearchField"
-					disabled="true" />
-
-				<p:commandButton id="buttonSearch"
-					value="#{labels['form.experiment.list.button.search.value']}"
-					action="experimentList.xhtml" ajax="true"
-					styleClass="sitisCommandButton" disabled="true">
-					<p:tooltip id="tipButtonSearch" for="buttonSearch"
-						value="#{labels['form.experiment.list.button.search.tip']}"
-						styleClass="sitisToolTip" />
-				</p:commandButton>
-			</h:panelGrid>
-
-			<!-- 				selection="#{experimentController.experimentEntity}" -->
 
 			<!-- Table with list of experiments  -->
 			<p:dataTable id="tblExperiments" var="experiment"
 				value="#{experimentController.experiments}" paginator="true"
 				rows="10" rowsPerPageTemplate="5,10,20,30" rowKey="#{experiment.id}"
-				styleClass="sitisDataTable"
+				styleClass="greenDataTable"
 				emptyMessage="#{experimentController.emptyDatatableMessage}">
 
 				<p:column
 					headerText="#{labels['form.experiment.list.publicIdentifier']}"
-					width="12%" style="text-align:center;"
+					width="11%" style="text-align:center;"
 					sortBy="#{experiment.publicIdentifier}">
 					<h:outputText value="#{experiment.publicIdentifier}" />
 				</p:column>
 
 				<p:column
 					headerText="#{labels['form.experiment.list.experimentTitle']}"
-					width="38%" style="text-align:left;" sortBy="#{experiment.title}">
+					width="50%" style="text-align:left;" sortBy="#{experiment.title}">
 					<h:outputText value="#{experiment.title}" />
 				</p:column>
 
-				<p:column
-					headerText="#{labels['form.experiment.list.experimentResponsible']}"
-					width="16%" style="text-align:center;"
-					sortBy="#{experiment.experimentResponsible.name}">
-					<h:outputText value="#{experiment.experimentResponsible.name}">
-					</h:outputText>
-				</p:column>
-
-				<p:column headerText="#{labels['form.experiment.list.status']}"
-					width="15%" style="text-align:center;"
-					sortBy="#{experiment.sitisStatus}">
-					<h:outputText value="#{experiment.sitisStatusName}">
+				<p:column headerText="#{labels['form.experiment.list.ownerPerson']}"
+					width="21%" style="text-align:center;"
+					sortBy="#{experiment.ownerPerson.name}">
+					<h:outputText value="#{experiment.ownerPerson.name}">
 					</h:outputText>
 				</p:column>
 
@@ -87,31 +58,32 @@
 					<p:commandLink
 						actionListener="#{experimentController.prepareUpdateExperiment(experiment)}"
 						onclick="PF('wtipImgEdit').hide()"
-						update="msgs pnlExperimentList pnlExperiment">
+						update="msgs pnlExperimentList pnlExperimentNewEdit">
 						<p:graphicImage id="imgEdit"
 							value="../../templates/images/actions/edit.png"
-							styleClass="sitisActionImage" rendered="#{experiment.editAction}">
+							styleClass="greenActionImage" rendered="#{experiment.editAction}">
 							<p:tooltip id="tipImgEdit" widgetVar="wtipImgEdit" for="imgEdit"
 								trackMouse="true"
 								value="#{labels['form.action.image.edit.tip']}"
-								styleClass="sitisToolTip" />
+								styleClass="greenToolTip" />
 						</p:graphicImage>
 					</p:commandLink>
 
 					<p:spacer width="5" />
 
+					<!-- 						update="msgs pnlExperimentList pnlExperiment dlgConfirmDeleteExperiment"> -->
 					<p:commandLink
 						actionListener="#{experimentController.prepareDeleteExperiment(experiment)}"
 						onclick="PF('wtipImgDelete').hide()"
-						update="msgs pnlExperimentList pnlExperiment dlgConfirmDeleteExperiment">
+						update="msgs pnlExperimentList">
 						<p:graphicImage id="imgDelete"
 							value="../../templates/images/actions/delete.png"
-							styleClass="sitisActionImage"
+							styleClass="greenActionImage"
 							rendered="#{experiment.deleteAction}">
 							<p:tooltip id="tipImgDelete" widgetVar="wtipImgDelete"
 								for="imgDelete" trackMouse="true"
 								value="#{labels['form.action.image.delete.tip']}"
-								styleClass="sitisToolTip" />
+								styleClass="greenToolTip" />
 						</p:graphicImage>
 					</p:commandLink>
 
@@ -122,32 +94,17 @@
 						onclick="PF('wtipImgView').hide()" update="frmExperimentManager">
 						<p:graphicImage id="imgView"
 							value="../../templates/images/actions/view.png"
-							styleClass="sitisActionImage" rendered="#{experiment.viewAction}">
+							styleClass="greenActionImage" rendered="#{experiment.viewAction}">
 							<p:tooltip id="tipImgView" widgetVar="wtipImgView" for="imgView"
 								trackMouse="true"
 								value="#{labels['form.action.image.view.tip']}"
-								styleClass="sitisToolTip" />
+								styleClass="greenToolTip" />
 						</p:graphicImage>
 					</p:commandLink>
 
 				</p:column>
 
 			</p:dataTable>
-
-			<h:panelGrid columns="1">
-				<p:commandButton id="buttonImportExperimentButton"
-					value="#{labels['form.experiment.list.button.importExperiment.value']}"
-					action="#{experimentController.importExperiment}" ajax="true"
-					styleClass="sitisCommandButton"
-					rendered="#{experimentController.buttonNewExperimentRender}"
-					onclick="PF('wtipButtonImportExperimentButton').hide()">
-					<p:tooltip id="tipButtonImportExperimentButton"
-						widgetVar="wtipButtonImportExperimentButton"
-						for="buttonImportExperimentButton"
-						value="#{labels['form.experiment.list.button.importExperiment.tip']}"
-						styleClass="sitisToolTip" />
-				</p:commandButton>
-			</h:panelGrid>
 
 		</p:panel>
 

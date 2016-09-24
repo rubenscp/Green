@@ -13,6 +13,7 @@ import br.edu.green.web.entity.ExperimentEntity;
 import br.edu.green.web.entity.PersonEntity;
 import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
+import br.edu.green.web.entity.enumerate.ActionEnum;
 import br.edu.green.web.exception.GeneralException;
 import br.edu.green.web.validate.ProcessingResultsList;
 
@@ -32,6 +33,8 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 
 	// defining serial version
 	private static final long serialVersionUID = -6623054735226159563L;
+
+	// defining constants
 	public static final String ASCENDING = "asc";
 	public static final String DESCENDING = "desc";
 	public static final String PUBLIC_IDENTIFIER = "p.publicIdentifier";
@@ -39,6 +42,9 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 	// EJB objects
 	@EJB
 	EntityManagerWrapperService emws;
+
+	// classes attributes
+	private ActionEnum action;
 
 	/**
 	 * Default constructor
@@ -54,6 +60,88 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 	}
 
 	/**
+	 * Saves (insert or update) an experiment at the data base. This method implements all business rules related to experiment.
+	 * 
+	 * @param experiment
+	 *            The experiment schedule object to be save
+	 * @return ProcessingResultMap - The processing result map
+	 * @throws GeneralException
+	 *             The generic exception of SITIS
+	 */
+	public ProcessingResultsList save(ExperimentEntity experiment) throws GeneralException {
+		// clear the processing result map
+		super.processingResultMap.clear();
+
+		// consisting experiment schedule
+		// if (!this.consistSave(experiment)) {
+		// // returning operation performed with error
+		// return this.processingResultMap;
+		// }
+
+		// defining action
+		this.action = (experiment.getId() == 0 ? ActionEnum.NEW : ActionEnum.UPDATE);
+
+		try {
+			// getting user transaction object
+			this.userTransaction = this.ejbContext.getUserTransaction();
+
+			// starting bean transaction
+			this.userTransaction.begin();
+
+			// saving experiment schedule
+			experiment = this.saveExperiment(experiment);
+
+			// defining proper message related to result with success
+			if (action.equals(ActionEnum.NEW)) {
+				super.processingResultMap.add(new ProcessingResultEntity(Code.EXPERIMENT_INFORMATION_SUCCESS_NEW_EXPERIMENT, applicationMessage.getMessage(Code.EXPERIMENT_INFORMATION_SUCCESS_NEW_EXPERIMENT.name())));
+			} else {
+				super.processingResultMap.add(new ProcessingResultEntity(Code.EXPERIMENT_INFORMATION_SUCCESS_UPDATE_EXPERIMENT, applicationMessage.getMessage(Code.EXPERIMENT_INFORMATION_SUCCESS_UPDATE_EXPERIMENT.name())));
+			}
+
+			// returning operation performed with success
+			return this.processingResultMap;
+
+		} catch (Exception e) {
+			throw this.handleException(e.getCause().getCause().getCause(), this.getClass().getSimpleName(), "save", Code.EJB_EXCEPTION, this.getClass().getSimpleName());
+
+		} finally {
+			try {
+				// committing bean transaction
+				if (this.userTransaction != null) {
+					this.userTransaction.commit();
+				}
+			} catch (Exception e) {
+				// configuring and throwing details of the actual exception
+				throw this.handleException(e, this.getClass().getSimpleName(), "save", Code.EJB_EXCEPTION, this.getClass().getSimpleName());
+			}
+		}
+	}
+
+	/**
+	 * Saves the data of the experiment. This action can be an operation of creating or updating.
+	 * 
+	 * @param experiment
+	 *            The experiment.
+	 * @return ExperimentEntity The experiment.
+	 * @throws GeneralException
+	 *             The general exception object
+	 */
+	private ExperimentEntity saveExperiment(ExperimentEntity experiment) throws GeneralException {
+		try {
+			if (experiment.getId() == 0) {
+				this.emws.create(experiment);
+				return experiment;
+			} else {
+				return this.emws.update(experiment);
+			}
+
+		} catch (Exception e) {
+			// configuring and throwing details of the actual exception
+			throw this.handleException(e, this.getClass().getSimpleName(), "saveExperiment", ((experiment.getId() == 0) ? Code.DAO_EXCEPTION_CREATE : Code.DAO_EXCEPTION_UPDATE), this.getClass().getSimpleName());
+		}
+	}
+
+	/**
 	 * Creates a new Green experiment.
 	 * 
 	 * @param experiment
@@ -62,16 +150,16 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 	 * @throws GeneralException
 	 *             The general exception object
 	 */
-	@Override
-	public ExperimentEntity create(ExperimentEntity experiment) throws GeneralException {
-		try {
-			// returning the experiment entity instance
-			return this.emws.create(experiment);
-		} catch (Exception e) {
-			// configuring and throwing details of the actual exception
-			throw this.handleException(e, this.getClass().getSimpleName(), "create", Code.DAO_EXCEPTION_CREATE, this.getClass().getSimpleName());
-		}
-	}
+	// @Override
+	// public ExperimentEntity create(ExperimentEntity experiment) throws GeneralException {
+	// try {
+	// // returning the experiment entity instance
+	// return this.emws.create(experiment);
+	// } catch (Exception e) {
+	// // configuring and throwing details of the actual exception
+	// throw this.handleException(e, this.getClass().getSimpleName(), "create", Code.DAO_EXCEPTION_CREATE, this.getClass().getSimpleName());
+	// }
+	// }
 
 	/**
 	 * Updates a Green experiment.
@@ -82,15 +170,15 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 	 * @throws GeneralException
 	 *             The general exception object
 	 */
-	@Override
-	public ExperimentEntity update(ExperimentEntity experiment) throws GeneralException {
-		try {
-			return this.emws.update(experiment);
-		} catch (Exception e) {
-			// configuring and throwing details of the actual exception
-			throw this.handleException(e, this.getClass().getSimpleName(), "update", Code.DAO_EXCEPTION_UPDATE, this.getClass().getSimpleName());
-		}
-	}
+	// @Override
+	// public ExperimentEntity update(ExperimentEntity experiment) throws GeneralException {
+	// try {
+	// return this.emws.update(experiment);
+	// } catch (Exception e) {
+	// // configuring and throwing details of the actual exception
+	// throw this.handleException(e, this.getClass().getSimpleName(), "update", Code.DAO_EXCEPTION_UPDATE, this.getClass().getSimpleName());
+	// }
+	// }
 
 	/**
 	 * Deletes an experiment schedule at the data base checking all dependencies.
@@ -177,7 +265,7 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 	@Override
 	public List<ExperimentEntity> findAll(String firstFieldOrder, String firstFieldDirection) throws GeneralException {
 		try {
-			String sql = "select p from ExperimentEntity p ";
+			String sql = "select p from ExperimentEntity p";
 			if (firstFieldOrder != null) {
 				sql += " order by " + firstFieldOrder;
 			}

@@ -6,7 +6,7 @@
 	Description: This code contains the main form of one experiment   
 	Author: Rubens de Castro Pereira 
 	Version: 0.1
-	Date: 16/10/2015
+	Date: 23/09/2016
  -->
 
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -22,7 +22,7 @@
 	<ui:composition>
 
 		<p:panel id="pnlExperiment"
-			rendered="#{experimentController.pnlExperimentRendered}"
+			rendered="#{experimentController.pnlExperimentViewRender}"
 			style="border-style: none;">
 
 			<p:tabView scrollable="true">
@@ -35,44 +35,6 @@
 					</ui:insert>
 				</p:tab>
 
-				<p:tab title="#{experimentController.teamMembersTitle}"
-					titleStyleClass="sitisTabView">
-					<ui:insert name="experimentTeam">
-						<ui:include src="../../portal/experiments/experimentTeam.xhtml" />
-					</ui:insert>
-				</p:tab>
-
-				<p:tab title="#{experimentController.variablesTitle}"
-					titleStyleClass="sitisTabView">
-					<ui:insert name="experimentVariable">
-						<ui:include
-							src="../../portal/experiments/experimentVariable.xhtml" />
-					</ui:insert>
-				</p:tab>
-
-				<p:tab title="#{experimentController.treatmentsTitle}"
-					titleStyleClass="sitisTabView">
-					<ui:insert name="experimentTreatment">
-						<ui:include
-							src="../../portal/experiments/experimentTreatment.xhtml" />
-					</ui:insert>
-				</p:tab>
-
-				<p:tab title="#{experimentController.rafflesTitle}"
-					titleStyleClass="sitisTabView">
-					<ui:insert name="experimentRaffle">
-						<ui:include src="../../portal/experiments/experimentRaffle.xhtml" />
-					</ui:insert>
-				</p:tab>
-
-				<p:tab title="#{labels['form.experiment.tab.6.sketch']}"
-					titleStyleClass="sitisTabView" disabled="true">Croqui a ser construído </p:tab>
-				<p:tab title="#{labels['form.experiment.tab.7.irrigation.plan']}"
-					titleStyleClass="sitisTabView" disabled="true">Plano de Irrigação a ser construído </p:tab>
-				<p:tab title="#{labels['form.experiment.tab.8.monitoring.plan']}"
-					titleStyleClass="sitisTabView" disabled="true">Plano de Monitoramento a ser construído</p:tab>
-				<p:tab title="#{labels['form.experiment.tab.9.status']}"
-					titleStyleClass="sitisTabView" disabled="true">Status do experimento a ser construído</p:tab>
 			</p:tabView>
 
 			<h:panelGrid columns="1">
@@ -80,7 +42,7 @@
 					value="#{labels['form.experiment.button.return.value']}"
 					action="#{experimentController.returnExperimentList()}" ajax="true"
 					styleClass="sitisCommandButton"
-					rendered="#{experimentController.buttonReturnRendered}"
+					rendered="#{experimentController.buttonReturnRender}"
 					onclick="PF('wtipButtonReturn').hide()"
 					update="frmExperimentManager">
 					<p:tooltip id="tipButtonReturn" widgetVar="wtipButtonReturn"

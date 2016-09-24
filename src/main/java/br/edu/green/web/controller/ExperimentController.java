@@ -1,8 +1,8 @@
 package br.edu.green.web.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,13 +12,13 @@ import javax.faces.bean.ViewScoped;
 
 import br.edu.green.web.entity.ExperimentEntity;
 import br.edu.green.web.entity.PersonEntity;
-import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
 import br.edu.green.web.entity.enumerate.ActionEnum;
 import br.edu.green.web.entity.enumerate.FilterEnum;
 import br.edu.green.web.exception.GeneralException;
 import br.edu.green.web.service.ExperimentService;
 import br.edu.green.web.service.ExperimentServiceBean;
+import br.edu.green.web.service.PersonService;
 import br.edu.green.web.util.FacesUtil;
 
 /**
@@ -41,6 +41,9 @@ public class ExperimentController extends GeneralController implements Serializa
 	@EJB
 	private ExperimentService experimentService;
 
+	@EJB
+	private PersonService personService;
+
 	// defining class attributes
 	private List<ExperimentEntity> experiments = new ArrayList<ExperimentEntity>();
 	private ExperimentEntity experimentSelected;
@@ -56,14 +59,20 @@ public class ExperimentController extends GeneralController implements Serializa
 	private ActionEnum action;
 
 	// variables that controls the rendering
-	private boolean msgsRender;
+	// private boolean msgsRender;
 
-	private boolean pnlExperimentListRendered;
-	private boolean pnlExperimentRendered;
+	private boolean pnlExperimentListRender;
+	private boolean pnlExperimentNewEditRender;
+	private boolean pnlExperimentViewRender;
 
 	private boolean buttonNewExperimentRender;
-	private boolean buttonDeleteRendered;
-	private boolean buttonReturnRendered;
+	private boolean buttonDeleteRender;
+	private boolean buttonReturnRender;
+
+	private boolean dataChanged;
+
+	// private boolean buttonSaveRender;
+	// private boolean buttonCancelRender;
 
 	// ***************************************************************
 	// Initializers Methods
@@ -117,7 +126,7 @@ public class ExperimentController extends GeneralController implements Serializa
 				// preparing to create a new experiment schedule
 				if (actionParameter.equals(ActionEnum.NEW.getActionIntoString())) {
 					this.action = ActionEnum.NEW;
-					// this.prepareImportExperiment();
+					this.prepareNewExperiment();
 					return;
 				} else {
 					// preparing list of experiments schedules
@@ -163,14 +172,15 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.emptyDatatableMessage = "";
 
 		// configuring indicator of rendering of the messages components
-		this.msgsRender = GeneralController.RENDERED;
+		// this.msgsRender = GeneralController.RENDERED;
 
 		// loading list of experiments
 		this.loadExperiments();
 
 		// configuring visibility of the panels
-		this.pnlExperimentListRendered = GeneralController.RENDERED;
-		this.pnlExperimentRendered = !GeneralController.RENDERED;
+		this.pnlExperimentListRender = GeneralController.RENDERED;
+		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
+		this.pnlExperimentViewRender = !GeneralController.RENDERED;
 		this.buttonNewExperimentRender = GeneralController.RENDERED;
 	}
 
@@ -178,13 +188,40 @@ public class ExperimentController extends GeneralController implements Serializa
 	 * Configuring environment to create a new experiment schedule
 	 */
 	public void prepareNewExperiment() {
+		// configuring the action
+		this.action = ActionEnum.NEW;
+
+		// creating new instance of experiment
+		this.experimentSelected = new ExperimentEntity();
+
+		// configuring function title
+		this.configureFunctionTitle();
+
+		// configuring visibility of the panels
+		this.pnlExperimentListRender = !GeneralController.RENDERED;
+		this.pnlExperimentNewEditRender = GeneralController.RENDERED;
+		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+		this.buttonNewExperimentRender = !GeneralController.RENDERED;
 	}
 
 	/**
 	 * Configuring environment to update a experiment schedule
 	 */
 	public void prepareUpdateExperiment(ExperimentEntity experiment) {
+		// configuring the action
+		this.action = ActionEnum.UPDATE;
+
+		// updating the experiment selected
 		this.experimentSelected = experiment;
+
+		// configuring function title
+		this.configureFunctionTitle();
+
+		// configuring visibility of the panels
+		this.pnlExperimentListRender = !GeneralController.RENDERED;
+		this.pnlExperimentNewEditRender = GeneralController.RENDERED;
+		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+		this.buttonNewExperimentRender = !GeneralController.RENDERED;
 	}
 
 	/**
@@ -225,9 +262,10 @@ public class ExperimentController extends GeneralController implements Serializa
 		// this.prepareExperimentTabs();
 
 		// configuring visibility of the panels and buttons
-		this.pnlExperimentListRendered = !GeneralController.RENDERED;
-		this.pnlExperimentRendered = GeneralController.RENDERED;
-		this.buttonReturnRendered = GeneralController.RENDERED;
+		this.pnlExperimentListRender = !GeneralController.RENDERED;
+		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
+		this.pnlExperimentViewRender = GeneralController.RENDERED;
+		this.buttonReturnRender = GeneralController.RENDERED;
 	}
 
 	/**
@@ -239,6 +277,7 @@ public class ExperimentController extends GeneralController implements Serializa
 				this.filter = FilterEnum.ALL;
 			}
 
+			this.filter = FilterEnum.ALL;
 			if (this.filter.equals(FilterEnum.MY)) {
 				// loading list of the GREEN experiments that belong to logged person
 				this.experiments = this.experimentService.findExperimentsByOwner(this.loggedPerson, ExperimentServiceBean.PUBLIC_IDENTIFIER, ExperimentServiceBean.DESCENDING);
@@ -333,12 +372,20 @@ public class ExperimentController extends GeneralController implements Serializa
 				}
 				break;
 
+			case NEW:
+				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.new.experiment").trim();
+				break;
+
+			case UPDATE:
+				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.update.experiment").trim() + ": " + this.experimentSelected.getShortTitle();
+				break;
+
 			case VIEW:
 				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.view.experiment").trim() + ": " + this.experimentSelected.getShortTitle();
 				break;
 
 			default:
-				this.functionTitle = "ATENÇÃO: ERRO NO T�?TULO";
+				this.functionTitle = "ATENCAO: ERRO NO TITULO DA FUNCAO";
 				break;
 		}
 	}
@@ -424,22 +471,29 @@ public class ExperimentController extends GeneralController implements Serializa
 	 * 
 	 * @return the msgsRender
 	 */
-	public boolean isMsgsRender() {
-		return msgsRender;
+	// public boolean isMsgsRender() {
+	// return msgsRender;
+	// }
+
+	/**
+	 * @return the pnlExperimentListRender
+	 */
+	public boolean isPnlExperimentListRender() {
+		return pnlExperimentListRender;
 	}
 
 	/**
-	 * @return the pnlExperimentListRendered
+	 * @return the pnlExperimentNewEditRender
 	 */
-	public boolean isPnlExperimentListRendered() {
-		return pnlExperimentListRendered;
+	public boolean isPnlExperimentNewEditRender() {
+		return pnlExperimentNewEditRender;
 	}
 
 	/**
-	 * @return the pnlExperimentRendered
+	 * @return the pnlExperimentViewRender
 	 */
-	public boolean isPnlExperimentRendered() {
-		return pnlExperimentRendered;
+	public boolean isPnlExperimentViewRender() {
+		return pnlExperimentViewRender;
 	}
 
 	/**
@@ -450,22 +504,98 @@ public class ExperimentController extends GeneralController implements Serializa
 	}
 
 	/**
-	 * @return the buttonDeleteRendered
+	 * @return the buttonDeleteRender
 	 */
-	public boolean isButtonDeleteRendered() {
-		return buttonDeleteRendered;
+	public boolean isButtonDeleteRender() {
+		return buttonDeleteRender;
 	}
 
 	/**
-	 * @return the buttonReturnRendered
+	 * @return the buttonReturnRender
 	 */
-	public boolean isButtonReturnRendered() {
-		return buttonReturnRendered;
+	public boolean isButtonReturnRender() {
+		return buttonReturnRender;
 	}
 
 	// ***************************************************************
 	// Operations of the controller
 	// ***************************************************************
+	/**
+	 * Save the experiment.
+	 */
+	public void executeSave() {
+		try {
+			// consisting fields of the form
+			if (this.consist()) {
+				// configuring attributes of experiment
+				PersonEntity ownerPerson = this.personService.findByUserName(this.loggedPerson.getUserName());
+				this.experimentSelected.setOwnerPerson(ownerPerson);
+
+				// configuring the last update date
+				this.experimentSelected.setLastUpdateDate(new Date());
+
+				// saving experiment
+				this.processingResultsList = this.experimentService.save(this.experimentSelected);
+
+				// checking the processing result
+				if (!this.processingResultsList.isErrorOrWarningOrException()) {
+					// configuring filter to "my" experiments
+					this.filter = FilterEnum.MY;
+
+					// configuring action to show list of the experiments
+					this.action = ActionEnum.SHOW_LIST;
+
+					// configuring function title
+					this.configureFunctionTitle();
+
+					// loading list of experiments
+					this.loadExperiments();
+
+					// prepares the return to experiment list
+					this.prepareReturnExperimentList();
+				}
+			}
+
+			// preparing the processing result
+			this.preparePresentationProcessingResults();
+
+		} catch (GeneralException ge) {
+			// handling general exception of SITIS Web
+			this.handleGeneralException(ge);
+		}
+	}
+
+	private boolean consist() {
+		// clearing the processing result list
+		this.processingResultsList.clear();
+
+		// checking if the map of soil columns was built
+		// if (!this.mapSchedulesSoilColumnBuilt) {
+		// // configuring error related to no soil columns recorded
+		// this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_SCHEDULE_ERROR_NO_SOIL_COLUMNS,
+		// this.applicationMessage.getMessage(Code.EXPERIMENT_SCHEDULE_ERROR_NO_SOIL_COLUMNS.name(),
+		// this.experimentScheduleSelected.getGreenhouse().getName())));
+		// }
+
+		// checking fields of the form
+		// if (!Util.isThisDateValid(this.experimentScheduleEntity.getStartDate().toString(), Util.VALIDATION_FORMAT_DDMMAAAA)) {
+		// this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_SCHEDULE_ERROR_START_DATE_INVALID,
+		// this.applicationMessage.getMessage(Code.EXPERIMENT_SCHEDULE_ERROR_START_DATE_INVALID.name())));
+		// }
+		// if (!Util.isThisDateValid(this.experimentScheduleEntity.getFinishDate().toString(), Util.VALIDATION_FORMAT_DDMMAAAA)) {
+		// this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_SCHEDULE_ERROR_FINISH_DATE_INVALID,
+		// this.applicationMessage.getMessage(Code.EXPERIMENT_SCHEDULE_ERROR_FINISH_DATE_INVALID.name())));
+		// }
+
+		// evaluating processing result
+		if (this.processingResultsList.isErrorOrWarningOrException()) {
+			// returning result with error
+			return false;
+		} else {
+			// returning result with success
+			return true;
+		}
+	}
 
 	/**
 	 * Creates a new experiment from one SIEXP experiment
@@ -528,10 +658,57 @@ public class ExperimentController extends GeneralController implements Serializa
 	}
 
 	/**
-	 * Returns to experiments list
+	 * Returns the list of experiment
 	 */
-	public void returnExperimentList() {
-		this.pnlExperimentListRendered = true;
-		this.pnlExperimentRendered = false;
+	public void prepareReturnExperimentList() {
+		// configuring the rendering of the forms
+		this.pnlExperimentListRender = GeneralController.RENDERED;
+		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
+		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+
+		// configuring new action after current action
+		this.action = ActionEnum.SHOW_LIST;
+
+		// configuring function title
+		this.configureFunctionTitle();
+	}
+
+	/**
+	 * Cancel the creation or edition of the experiment.
+	 */
+	public void cancel(String dialogFormName) {
+		try {
+			// checking changes in the form
+			if (this.dataChanged) {
+				// showing the dialog panel with the details of experiment schedule
+				FacesUtil.getRequestContext().execute("PF('" + dialogFormName + "').show()");
+			} else {
+				// execute the cancel operation
+				this.executeCancel(dialogFormName);
+			}
+
+		} catch (GeneralException ge) {
+			// handling general exception of SITIS Web
+			this.handleGeneralException(ge);
+		}
+	}
+
+	/**
+	 * Executes the cancel of current operation in the form.
+	 */
+	public void executeCancel(String dialogFormName) {
+		// configuring action to show list
+		this.action = ActionEnum.SHOW_LIST;
+
+		// clearing all work instances
+		this.experimentSelected = null;
+		this.dataChanged = false;
+
+		// preparing list of experiment schedules
+		this.prepareListOfExperiments();
+
+		// close the the dialog panel
+		this.closeDialogForm(dialogFormName);
+
 	}
 }

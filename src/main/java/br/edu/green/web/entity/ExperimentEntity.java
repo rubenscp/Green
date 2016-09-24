@@ -7,13 +7,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
@@ -36,26 +40,38 @@ public class ExperimentEntity implements Serializable {
 	private static final long serialVersionUID = -7423754559233895498L;
 
 	@Id
+	@SequenceGenerator(name = "pk_sequence", sequenceName = "experiment_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pk_sequence")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Column(name = "public_identifier")
+	@NotNull
+	private Long publicIdentifier;
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "owner_person_id")
+	@NotNull
 	private PersonEntity ownerPerson;
 
 	@Column(name = "title")
 	@Size(max = 128)
 	private String title;
 
-	@Column(name = "short_title")
-	@Size(max = 20)
-	@Null
-	private String shortTitle;
+	@Column(name = "description")
+	@Size(max = 1000)
+	@NotNull
+	private String description;
 
 	@Column(name = "creation_date")
 	@Temporal(TemporalType.DATE)
-	@Null
+	@NotNull
 	private Date creationDate;
+
+	@Column(name = "last_update_date")
+	@Temporal(TemporalType.DATE)
+	@Null
+	private Date lastUpdateDate;
 
 	@Transient
 	private boolean editAction;
@@ -70,26 +86,27 @@ public class ExperimentEntity implements Serializable {
 	 * 
 	 */
 	public ExperimentEntity() {
-		this(new Long(0), new PersonEntity(), null, null, new Date());
+		this(new Long(0), new Long(0), new PersonEntity(), null, null, new Date(), null);
 	}
 
 	/**
 	 * @param id
+	 * @param publicIdentifier
 	 * @param ownerPerson
 	 * @param title
-	 * @param shortTitle
+	 * @param description
 	 * @param creationDate
-	 * @param editAction
-	 * @param deleteAction
-	 * @param viewAction
+	 * @param lastUpdateDate
 	 */
-	public ExperimentEntity(Long id, PersonEntity ownerPerson, String title, String shortTitle, Date creationDate) {
+	public ExperimentEntity(Long id, Long publicIdentifier, PersonEntity ownerPerson, String title, String description, Date creationDate, Date lastUpdateDate) {
 		super();
 		this.id = id;
+		this.publicIdentifier = publicIdentifier;
 		this.ownerPerson = ownerPerson;
 		this.title = title;
-		this.shortTitle = shortTitle;
+		this.description = description;
 		this.creationDate = creationDate;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	/**
@@ -112,6 +129,40 @@ public class ExperimentEntity implements Serializable {
 	}
 
 	/**
+	 * Returns the public identifier of experiment.
+	 * 
+	 * @return the publicIdentifier
+	 */
+	public Long getPublicIdentifier() {
+		return publicIdentifier;
+	}
+
+	/**
+	 * Sets the public identifier of experiment.
+	 * 
+	 * @param publicIdentifier
+	 *            The public identifier of experiment.
+	 */
+	public void setPublicIdentifier(Long publicIdentifier) {
+		this.publicIdentifier = publicIdentifier;
+	}
+
+	/**
+	 * @return the ownerPerson
+	 */
+	public PersonEntity getOwnerPerson() {
+		return ownerPerson;
+	}
+
+	/**
+	 * @param ownerPerson
+	 *            the ownerPerson to set
+	 */
+	public void setOwnerPerson(PersonEntity ownerPerson) {
+		this.ownerPerson = ownerPerson;
+	}
+
+	/**
 	 * Returns the title of the experiment.
 	 * 
 	 * @return String - Title of the experiment.
@@ -131,33 +182,34 @@ public class ExperimentEntity implements Serializable {
 	}
 
 	/**
-	 * @return the ownerPerson
-	 */
-	public PersonEntity getOwnerPerson() {
-		return ownerPerson;
-	}
-
-	/**
-	 * @param ownerPerson
-	 *            the ownerPerson to set
-	 */
-	public void setOwnerPerson(PersonEntity ownerPerson) {
-		this.ownerPerson = ownerPerson;
-	}
-
-	/**
-	 * @return the shortTitle
+	 * Returns the short title of the experiment.
+	 * 
+	 * @return String - The short title of the experiment.
 	 */
 	public String getShortTitle() {
+		String shortTitle = "";
+		int limit = 40;
+		if (this.title.length() > limit) {
+			shortTitle = this.title.substring(0, limit);
+		} else {
+			shortTitle = this.title;
+		}
 		return shortTitle;
 	}
 
 	/**
-	 * @param shortTitle
-	 *            the shortTitle to set
+	 * @return the description
 	 */
-	public void setShortTitle(String shortTitle) {
-		this.shortTitle = shortTitle;
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -173,6 +225,21 @@ public class ExperimentEntity implements Serializable {
 	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	/**
+	 * @return the lastUpdateDate
+	 */
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	/**
+	 * @param lastUpdateDate
+	 *            the lastUpdateDate to set
+	 */
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	/**

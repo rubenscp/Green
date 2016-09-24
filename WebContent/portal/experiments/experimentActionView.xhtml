@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- 
+	Name: experimentActionView.xhtml
+	Description: This code contains the identification of experiment  
+	Author: Rubens de Castro Pereira 
+	Version: 0.1
+	Date: 23/09/2016
+ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition>
+
+		<p:panel id="pnlExperimentView"
+			rendered="#{experimentController.pnlExperimentViewRender}"
+			style="border-style: none;">
+
+			<p:panel>
+
+				<h:panelGrid columns="2" cellpadding="1" cellspacing="5"
+					columnClasses="greenPanelgridColumnLeft, greenPanelgridColumnRight">
+
+					<!-- Identification of the experiment -->
+					<h:outputLabel for="idView"
+						value="#{labels['form.experiment.identification.publicIdentifier']}"
+						styleClass="greenOutputLabel" />
+					<h:outputLabel id="idView"
+						value="#{experimentController.experimentSelected.publicIdentifier}"
+						styleClass="greenOutputLabel" />
+
+					<!-- Owner of the experiment -->
+					<h:outputLabel for="ownerPersonView"
+						value="#{labels['form.experiment.identification.ownerPerson']}"
+						styleClass="greenOutputLabel" />
+					<h:outputLabel id="ownerPersonView"
+						value="#{experimentController.experimentSelected.ownerPerson.name}"
+						styleClass="greenOutputLabel" />
+
+					<!-- Title of the experiment -->
+					<h:outputLabel for="titleView"
+						value="#{labels['form.experiment.identification.title']}"
+						styleClass="greenOutputLabel" />
+					<h:outputLabel id="titleView"
+						value="#{experimentController.experimentSelected.title}"
+						styleClass="greenOutputLabel" />
+
+					<!-- Description of the experiment -->
+					<h:outputLabel for="descriptionView"
+						value="#{labels['form.experiment.identification.description']}"
+						styleClass="greenOutputLabel" />
+					<h:outputLabel id="descriptionView"
+						value="#{experimentController.experimentSelected.description}"
+						styleClass="greenOutputLabel" />
+
+					<!-- Creation date of the experiment -->
+					<h:outputLabel for="creationDateView"
+						value="#{labels['form.experiment.identification.creationDate']}"
+						styleClass="greenOutputLabel" />
+					<h:outputLabel id="creationDateView"
+						value="#{experimentController.experimentSelected.creationDate}"
+						styleClass="greenOutputLabel">
+						<f:convertDateTime type="both"
+							pattern="#{configuration['green.pattern.date.time']}" />
+					</h:outputLabel>
+
+					<!-- Last update of the experiment -->
+					<h:outputLabel for="lastUpdateDateView"
+						value="#{labels['form.experiment.identification.lastUpdateDate']}"
+						styleClass="greenOutputLabel" />
+					<h:outputLabel id="lastUpdateDateView"
+						value="#{experimentController.experimentSelected.lastUpdateDate}"
+						styleClass="greenOutputLabel">
+						<f:convertDateTime type="both"
+							pattern="#{configuration['green.pattern.date.time']}" />
+					</h:outputLabel>
+
+				</h:panelGrid>
+
+			</p:panel>
+
+			<!-- Buttons of the form   -->
+			<h:panelGrid columns="1">
+
+				<p:commandButton id="buttonReturnView"
+					value="#{labels['form.button.return.value']}"
+					actionListener="#{experimentController.prepareReturnExperimentList()}"
+					ajax="true" rendered="#{experimentController.buttonReturnRender}"
+					styleClass="greenCommandButton"
+					onclick="PF('wtipButtonReturn').hide()"
+					update="frmExperimentManager">
+					<p:tooltip id="tipButtonReturnView"
+						widgetVar="wtipButtonReturnView" for="buttonReturnView"
+						value="#{labels['form.button.return.tip']}"
+						styleClass="greenToolTip" />
+				</p:commandButton>
+
+			</h:panelGrid>
+
+		</p:panel>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

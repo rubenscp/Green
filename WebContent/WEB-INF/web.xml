@@ -9,18 +9,28 @@
 		<param-name>javax.faces.CONFIG_FILES</param-name>
 		<param-value>/WEB-INF/faces-config.xml</param-value>
 	</context-param>
+
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
+
+	<!-- Disabling the processing of the comments by Facelets -->
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 	<!-- <context-param> -->
 	<!-- <param-name>primefaces.THEME</param-name> -->
 	<!-- <param-value>#{sessionController.currentTheme}</param-value> -->
 	<!-- </context-param> -->
+
 	<context-param>
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>true</param-value>
 	</context-param>
+
 	<context-param>
 		<description>USAR O TIME ZONE PADRÃO DO SISTEMA OPERACIONAL</description>
 		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>

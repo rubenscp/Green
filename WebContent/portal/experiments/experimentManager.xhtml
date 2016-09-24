@@ -3,10 +3,10 @@
 
 <!-- 
 	Name: experimentManager.xhtml
-	Description: This code manages the operations related to SITIS experiments   
+	Description: This code manages the operations related to GREEN experiments   
 	Author: Rubens de Castro Pereira 
 	Version: 0.1
-	Date: 07/07/2016
+	Date: 23/09/2016
  -->
 
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -19,15 +19,14 @@
 
 <h:body>
 
-	<ui:composition
-		template="#{configuration['sitisweb.path.portal.main']}">
+	<ui:composition template="#{configuration['green.path.portal.main']}">
 
 		<ui:define name="center">
 
 			<h:form id="frmExperimentManager" prependId="false">
 
 				<!-- Function Title in the panel -->
-				<h:panelGrid columns="1" columnClasses="sitisFunctionTitlePanel"
+				<h:panelGrid columns="1" columnClasses="greenFunctionTitlePanel"
 					width="100%">
 					<h:outputLabel value="#{experimentController.functionTitle}" />
 				</h:panelGrid>
@@ -38,12 +37,16 @@
 					<ui:include src="experimentList.xhtml" />
 				</ui:insert>
 
-				<ui:insert name="experiment">
-					<ui:include src="experiment.xhtml" />
+				<ui:insert>
+					<ui:include src="/portal/experiments/experimentActionNewEdit.xhtml" />
 				</ui:insert>
 
 				<ui:insert>
-					<ui:include src="experimentActionDelete.xhtml" />
+					<ui:include src="/portal/experiments/experimentActionDelete.xhtml" />
+				</ui:insert>
+
+				<ui:insert>
+					<ui:include src="/portal/experiments/experimentActionView.xhtml" />
 				</ui:insert>
 
 			</h:form>

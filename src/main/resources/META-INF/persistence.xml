@@ -10,6 +10,7 @@
 		<jta-data-source>java:jboss/datasources/GreenDS</jta-data-source>
 
 		<class>br.edu.green.web.entity.PersonEntity</class>
+		<class>br.edu.green.web.entity.ExperimentEntity</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>NONE</validation-mode>

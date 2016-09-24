@@ -111,21 +111,21 @@ public class MenuController implements Serializable {
 	 */
 	private void BuildMenuGAS() {
 
-		DefaultSubMenu experimentsSubMenu = this.SubMenu(model, "menu.experiments");
-		ItemSubMenu(experimentsSubMenu, "menu.experimentSchedule", "", "experimentScheduleList.xhtml", "");
-		ItemSubMenu(experimentsSubMenu, "menu.experiment", "", "experimentList.xhtml", "ui-icon-home");
-
-		DefaultSubMenu paneControlSubMenu = this.SubMenu(this.model, "menu.controlPanel");
-		ItemSubMenu(paneControlSubMenu, "menu.underConstruction", "", "underConstruction.xhtml", "ui-icon-person");
-
-		DefaultSubMenu reportsSubMenu = this.SubMenu(this.model, "menu.reports");
-		ItemSubMenu(reportsSubMenu, "menu.underConstruction", "", "underConstruction.xhtml", "ui-icon-person");
-
-		DefaultSubMenu configurationsSubMenu = this.SubMenu(this.model, "menu.configurations");
-		ItemSubMenu(configurationsSubMenu, "menu.underConstruction", "", "underConstruction.xhtml", "ui-icon-person");
-
-		DefaultSubMenu helpSubMenu = this.SubMenu(this.model, "menu.help");
-		ItemSubMenu(helpSubMenu, "menu.underConstruction", "", "help.xhtml", "ui-icon-help");
+		// DefaultSubMenu experimentsSubMenu = this.SubMenu(model, "menu.experiments");
+		// ItemSubMenu(experimentsSubMenu, "menu.experimentSchedule", "", "experimentScheduleList.xhtml", "");
+		// ItemSubMenu(experimentsSubMenu, "menu.experiment", "", "experimentList.xhtml", "ui-icon-home");
+		//
+		// DefaultSubMenu paneControlSubMenu = this.SubMenu(this.model, "menu.controlPanel");
+		// ItemSubMenu(paneControlSubMenu, "menu.underConstruction", "", "underConstruction.xhtml", "ui-icon-person");
+		//
+		// DefaultSubMenu reportsSubMenu = this.SubMenu(this.model, "menu.reports");
+		// ItemSubMenu(reportsSubMenu, "menu.underConstruction", "", "underConstruction.xhtml", "ui-icon-person");
+		//
+		// DefaultSubMenu configurationsSubMenu = this.SubMenu(this.model, "menu.configurations");
+		// ItemSubMenu(configurationsSubMenu, "menu.underConstruction", "", "underConstruction.xhtml", "ui-icon-person");
+		//
+		// DefaultSubMenu helpSubMenu = this.SubMenu(this.model, "menu.help");
+		// ItemSubMenu(helpSubMenu, "menu.underConstruction", "", "help.xhtml", "ui-icon-help");
 
 	}
 
