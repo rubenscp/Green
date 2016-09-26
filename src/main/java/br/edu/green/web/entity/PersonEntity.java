@@ -81,6 +81,9 @@ public class PersonEntity implements Serializable {
 	@NotNull
 	private Date lastUpdateDate;
 
+	@Column(name = "last_experiment_public_identifier")
+	private Long lastExperimentPublicIdentifier;
+
 	public PersonEntity() {
 		super();
 
@@ -96,6 +99,7 @@ public class PersonEntity implements Serializable {
 		this.theme = "";
 		this.greenPersonProfileInitials = "USR";
 		this.lastUpdateDate = new Date();
+		this.lastExperimentPublicIdentifier = new Long(0);
 	}
 
 	/**
@@ -261,6 +265,21 @@ public class PersonEntity implements Serializable {
 	 */
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	/**
+	 * @return the lastExperimentPublicIdentifier
+	 */
+	public Long getLastExperimentPublicIdentifier() {
+		return lastExperimentPublicIdentifier;
+	}
+
+	/**
+	 * @param lastExperimentPublicIdentifier
+	 *            the lastExperimentPublicIdentifier to set
+	 */
+	public void setLastExperimentPublicIdentifier(Long lastExperimentPublicIdentifier) {
+		this.lastExperimentPublicIdentifier = lastExperimentPublicIdentifier;
 	}
 
 	@Override

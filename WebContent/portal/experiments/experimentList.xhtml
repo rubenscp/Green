@@ -3,7 +3,7 @@
 
 <!-- 
 	Name: experimentList.xhtml
-	Description: This code contains the list of GREEN experiment   
+	Description: This code contains the list of GREEN experiments   
 	Author: Rubens de Castro Pereira 
 	Version: 0.1
 	Date: 23/09/2016
@@ -58,7 +58,7 @@
 					<p:commandLink
 						actionListener="#{experimentController.prepareUpdateExperiment(experiment)}"
 						onclick="PF('wtipImgEdit').hide()"
-						update="msgs pnlExperimentList pnlExperimentNewEdit">
+						update="msgs frmExperimentManager pnlExperimentList pnlExperimentNewEdit">
 						<p:graphicImage id="imgEdit"
 							value="../../templates/images/actions/edit.png"
 							styleClass="greenActionImage" rendered="#{experiment.editAction}">
@@ -75,7 +75,7 @@
 					<p:commandLink
 						actionListener="#{experimentController.prepareDeleteExperiment(experiment)}"
 						onclick="PF('wtipImgDelete').hide()"
-						update="msgs pnlExperimentList">
+						update="msgs pnlExperimentList dlgConfirmDeleteExperiment">
 						<p:graphicImage id="imgDelete"
 							value="../../templates/images/actions/delete.png"
 							styleClass="greenActionImage"

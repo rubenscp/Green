@@ -188,13 +188,27 @@ public class ExperimentEntity implements Serializable {
 	 */
 	public String getShortTitle() {
 		String shortTitle = "";
-		int limit = 40;
+		int limit = 50;
 		if (this.title.length() > limit) {
 			shortTitle = this.title.substring(0, limit);
 		} else {
 			shortTitle = this.title;
 		}
 		return shortTitle;
+	}
+
+	public String getPublicIdentifierAndShortTitle() {
+		String publicIdentifierAndShortTitle = "";
+		String tail = "";
+		if (this.publicIdentifier != null && this.publicIdentifier > 0 && !this.title.equals("")) {
+			int sizeLimit = this.title.length();
+			if (sizeLimit > 50) {
+				sizeLimit = 50;
+				tail = "...";
+			}
+			publicIdentifierAndShortTitle = this.publicIdentifier + " - " + this.title.substring(0, sizeLimit) + tail;
+		}
+		return publicIdentifierAndShortTitle;
 	}
 
 	/**

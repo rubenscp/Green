@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.edu.green.web.entity.ExperimentEntity;
 import br.edu.green.web.entity.PersonEntity;
+import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
 import br.edu.green.web.entity.enumerate.ActionEnum;
 import br.edu.green.web.entity.enumerate.FilterEnum;
@@ -194,6 +195,10 @@ public class ExperimentController extends GeneralController implements Serializa
 		// creating new instance of experiment
 		this.experimentSelected = new ExperimentEntity();
 
+		// configuring attributes of the new experiment
+		this.experimentSelected.setOwnerPerson(this.loggedPerson);
+		this.experimentSelected.setPublicIdentifier(this.loggedPerson.getLastExperimentPublicIdentifier() + 1);
+
 		// configuring function title
 		this.configureFunctionTitle();
 
@@ -255,11 +260,17 @@ public class ExperimentController extends GeneralController implements Serializa
 	 * Configuring environment to query a experiment schedule.
 	 */
 	public void prepareViewExperiment(ExperimentEntity experiment) {
+		// defining the current action
+		this.action = ActionEnum.VIEW;
+
 		// setting experiment selected
 		this.experimentSelected = experiment;
 
 		// configuring the labels of experiment tabs
 		// this.prepareExperimentTabs();
+
+		// configuring function title
+		this.configureFunctionTitle();
 
 		// configuring visibility of the panels and buttons
 		this.pnlExperimentListRender = !GeneralController.RENDERED;
@@ -377,11 +388,11 @@ public class ExperimentController extends GeneralController implements Serializa
 				break;
 
 			case UPDATE:
-				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.update.experiment").trim() + ": " + this.experimentSelected.getShortTitle();
+				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.update.experiment").trim() + " " + this.experimentSelected.getPublicIdentifierAndShortTitle();
 				break;
 
 			case VIEW:
-				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.view.experiment").trim() + ": " + this.experimentSelected.getShortTitle();
+				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.view.experiment").trim() + " " + this.experimentSelected.getPublicIdentifierAndShortTitle();
 				break;
 
 			default:
@@ -517,6 +528,24 @@ public class ExperimentController extends GeneralController implements Serializa
 		return buttonReturnRender;
 	}
 
+	/**
+	 * Returns true if the current action is "update" to show the creation date of experiment.
+	 * 
+	 * @return boolean - The indicator to show the creation date of experiment.
+	 */
+	public boolean isCreationDateRender() {
+		return (this.action.equals(ActionEnum.UPDATE) ? true : false);
+	}
+
+	/**
+	 * Returns true if the current action is "update" to show the update date of experiment.
+	 * 
+	 * @return boolean - The indicator to show the update date of experiment.
+	 */
+	public boolean isLastUpdateDateRender() {
+		return (this.action.equals(ActionEnum.UPDATE) ? true : false);
+	}
+
 	// ***************************************************************
 	// Operations of the controller
 	// ***************************************************************
@@ -528,8 +557,8 @@ public class ExperimentController extends GeneralController implements Serializa
 			// consisting fields of the form
 			if (this.consist()) {
 				// configuring attributes of experiment
-				PersonEntity ownerPerson = this.personService.findByUserName(this.loggedPerson.getUserName());
-				this.experimentSelected.setOwnerPerson(ownerPerson);
+				// PersonEntity ownerPerson = this.personService.findByUserName(this.loggedPerson.getUserName());
+				// this.experimentSelected.setOwnerPerson(ownerPerson);
 
 				// configuring the last update date
 				this.experimentSelected.setLastUpdateDate(new Date());
@@ -569,23 +598,15 @@ public class ExperimentController extends GeneralController implements Serializa
 		// clearing the processing result list
 		this.processingResultsList.clear();
 
-		// checking if the map of soil columns was built
-		// if (!this.mapSchedulesSoilColumnBuilt) {
-		// // configuring error related to no soil columns recorded
-		// this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_SCHEDULE_ERROR_NO_SOIL_COLUMNS,
-		// this.applicationMessage.getMessage(Code.EXPERIMENT_SCHEDULE_ERROR_NO_SOIL_COLUMNS.name(),
-		// this.experimentScheduleSelected.getGreenhouse().getName())));
-		// }
-
-		// checking fields of the form
-		// if (!Util.isThisDateValid(this.experimentScheduleEntity.getStartDate().toString(), Util.VALIDATION_FORMAT_DDMMAAAA)) {
-		// this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_SCHEDULE_ERROR_START_DATE_INVALID,
-		// this.applicationMessage.getMessage(Code.EXPERIMENT_SCHEDULE_ERROR_START_DATE_INVALID.name())));
-		// }
-		// if (!Util.isThisDateValid(this.experimentScheduleEntity.getFinishDate().toString(), Util.VALIDATION_FORMAT_DDMMAAAA)) {
-		// this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_SCHEDULE_ERROR_FINISH_DATE_INVALID,
-		// this.applicationMessage.getMessage(Code.EXPERIMENT_SCHEDULE_ERROR_FINISH_DATE_INVALID.name())));
-		// }
+		// checking if there are errors
+		if ((this.experimentSelected.getTitle() == null) || (this.experimentSelected.getTitle() != null && this.experimentSelected.getTitle().length() < 10)) {
+			// configuring error related to title of the experiment
+			this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_ERROR_NO_TITLE, this.applicationMessage.getMessage(Code.EXPERIMENT_ERROR_NO_TITLE.name())));
+		}
+		if ((this.experimentSelected.getDescription() == null) || (this.experimentSelected.getDescription() != null && this.experimentSelected.getDescription().length() < 20)) {
+			// configuring error related to description of the experiment
+			this.processingResultsList.add(new ProcessingResultEntity(Code.EXPERIMENT_ERROR_NO_DESCRIPTION, this.applicationMessage.getMessage(Code.EXPERIMENT_ERROR_NO_DESCRIPTION.name())));
+		}
 
 		// evaluating processing result
 		if (this.processingResultsList.isErrorOrWarningOrException()) {

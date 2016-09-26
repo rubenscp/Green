@@ -49,24 +49,45 @@
 					<h:outputLabel for="title"
 						value="#{labels['form.experiment.identification.title']}"
 						styleClass="greenOutputLabel" />
-					<h:outputLabel id="title"
+					<p:inputText id="title"
 						value="#{experimentController.experimentSelected.title}"
-						styleClass="greenOutputLabel" />
+						maxlength="128" size="128" onclick="PF('wtipTitle').hide()"
+						styleClass="greenInputText" style="width:43em;" tabindex="1">
+						<f:validateLength maximum="128" />
+						<p:tooltip id="tipTitle" widgetVar="wtipTitle" for="title"
+							trackMouse="true"
+							value="#{labels['form.experiment.identification.title.tip']}"
+							styleClass="greenToolTip" />
+					</p:inputText>
+
 
 					<!-- Description of the experiment -->
 					<h:outputLabel for="description"
 						value="#{labels['form.experiment.identification.description']}"
 						styleClass="greenOutputLabel" />
-					<h:outputLabel id="description"
-						value="#{experimentController.experimentSelected.description}"
-						styleClass="greenOutputLabel" />
+					<h:panelGrid columns="1" cellpadding="0" cellspacing="1"
+						styleClass="greenDialogColumnRight">
+						<p:inputTextarea id="description"
+							value="#{experimentController.experimentSelected.description}"
+							rows="10" cols="72" maxlength="1000" counter="display"
+							counterTemplate="#{labels['form.experiment.identification.description.characters.remaining']}"
+							autoResize="false" styleClass="greenConfirmDialogInputText">
+							<p:tooltip id="tipDescription" widgetVar="wtipDescription"
+								for="description" trackMouse="true"
+								value="#{labels['form.experiment.identification.description.limit.characters.tip']}"
+								styleClass="greenToolTip" />
+						</p:inputTextarea>
+						<p:outputLabel id="display" styleClass="greenOutputText" />
+					</h:panelGrid>
 
 					<!-- Creation date of the experiment -->
 					<h:outputLabel for="creationDate"
 						value="#{labels['form.experiment.identification.creationDate']}"
+						rendered="#{experimentController.creationDateRender}"
 						styleClass="greenOutputLabel" />
 					<h:outputLabel id="creationDate"
 						value="#{experimentController.experimentSelected.creationDate}"
+						rendered="#{experimentController.creationDateRender}"
 						styleClass="greenOutputLabel">
 						<f:convertDateTime type="both"
 							pattern="#{configuration['green.pattern.date.time']}" />
@@ -75,9 +96,11 @@
 					<!-- Last update of the experiment -->
 					<h:outputLabel for="lastUpdateDate"
 						value="#{labels['form.experiment.identification.lastUpdateDate']}"
+						rendered="#{experimentController.lastUpdateDateRender}"
 						styleClass="greenOutputLabel" />
 					<h:outputLabel id="lastUpdateDate"
 						value="#{experimentController.experimentSelected.lastUpdateDate}"
+						rendered="#{experimentController.lastUpdateDateRender}"
 						styleClass="greenOutputLabel">
 						<f:convertDateTime type="both"
 							pattern="#{configuration['green.pattern.date.time']}" />
