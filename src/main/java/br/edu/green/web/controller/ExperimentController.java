@@ -65,6 +65,7 @@ public class ExperimentController extends GeneralController implements Serializa
 	private boolean pnlExperimentListRender;
 	private boolean pnlExperimentNewEditRender;
 	private boolean pnlExperimentViewRender;
+	private boolean pnlExperimentUploadImagesRender;
 
 	private boolean buttonNewExperimentRender;
 	private boolean buttonDeleteRender;
@@ -182,6 +183,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
 		this.buttonNewExperimentRender = GeneralController.RENDERED;
 	}
 
@@ -206,6 +208,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = !GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
 		this.buttonNewExperimentRender = !GeneralController.RENDERED;
 	}
 
@@ -226,6 +229,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = !GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
 		this.buttonNewExperimentRender = !GeneralController.RENDERED;
 	}
 
@@ -276,6 +280,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = !GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
 		this.pnlExperimentViewRender = GeneralController.RENDERED;
+		this.pnlExperimentUploadImagesRender = GeneralController.RENDERED;
 		this.buttonReturnRender = GeneralController.RENDERED;
 	}
 
@@ -508,6 +513,13 @@ public class ExperimentController extends GeneralController implements Serializa
 	}
 
 	/**
+	 * @return the pnlExperimentUploadImagesRender
+	 */
+	public boolean isPnlExperimentUploadImagesRender() {
+		return pnlExperimentUploadImagesRender;
+	}
+
+	/**
 	 * @return the buttonNewExperimentRender
 	 */
 	public boolean isButtonNewExperimentRender() {
@@ -686,6 +698,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
 
 		// configuring new action after current action
 		this.action = ActionEnum.SHOW_LIST;
