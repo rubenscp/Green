@@ -32,6 +32,9 @@
 				styleClass="greenDataTable"
 				emptyMessage="#{experimentController.emptyDatatableMessage}">
 
+				<!-- 				<p:ajax event="rowSelect" listener="#{dtSelectionView.onRowSelect}" -->
+				<!-- 					update=":form:msgs" /> -->
+
 				<p:column
 					headerText="#{labels['form.experiment.list.publicIdentifier']}"
 					width="11%" style="text-align:center;"
@@ -98,6 +101,24 @@
 							<p:tooltip id="tipImgView" widgetVar="wtipImgView" for="imgView"
 								trackMouse="true"
 								value="#{labels['form.action.image.view.tip']}"
+								styleClass="greenToolTip" />
+						</p:graphicImage>
+					</p:commandLink>
+
+					<p:spacer width="5" />
+
+					<p:commandLink
+						actionListener="#{experimentController.prepareImagesUpload(experiment)}"
+						onclick="PF('wtipImgImagesUpload').hide()"
+						update="frmExperimentManager">
+						<p:graphicImage id="imgImagesUpload"
+							value="../../templates/images/actions/upload.png"
+							styleClass="greenActionImage"
+							rendered="#{experiment.imagesUploadAction}">
+							<p:tooltip id="tipImgImagesUpload"
+								widgetVar="wtipImgImagesUpload" for="imgImagesUpload"
+								trackMouse="true"
+								value="#{labels['form.action.image.upload.tip']}"
 								styleClass="greenToolTip" />
 						</p:graphicImage>
 					</p:commandLink>

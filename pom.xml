@@ -149,5 +149,10 @@
 			<artifactId>primefaces-extensions</artifactId>
 			<version>4.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.deeplearning4j</groupId>
+			<artifactId>deeplearning4j-core</artifactId>
+			<version>0.6.0</version>
+		</dependency>
 	</dependencies>
 </project>

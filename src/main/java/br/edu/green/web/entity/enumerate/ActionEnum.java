@@ -20,8 +20,7 @@ public enum ActionEnum {
 	DELETE(4), //
 	VIEW(5), //
 	SHOW_LIST(6), //
-
-	IMPORT(7), //
+	IMAGES_UPLOAD(7), //
 
 	SHOW_LIST_FOR_APPROVAL(8), //
 	SUBMIT_APPROVAL_EXPERIMENT_SCHEDULE(9), //
@@ -82,7 +81,7 @@ public enum ActionEnum {
 			case 6:
 				return "Listar";
 			case 7:
-				return "Importar";
+				return "Upload de imagens";
 			case 8:
 				return "Listar Agendamentos do Experimento para Aprovacao";
 			case 9:
@@ -122,7 +121,7 @@ public enum ActionEnum {
 			case 6:
 				return SHOW_LIST;
 			case 7:
-				return IMPORT;
+				return IMAGES_UPLOAD;
 			case 8:
 				return SHOW_LIST_FOR_APPROVAL;
 			case 9:

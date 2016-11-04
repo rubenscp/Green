@@ -79,7 +79,7 @@ font-family: 'Verdana, Geneva', sans-serif !important;
 .greenInputText, .greenInputTextArea, .greenInputMask, .greenInputNumber,
 	.greenOutputText, .greenOutputLabel, .greenSearchField, .greenDropDown,
 	.greenTabView, .greenTabAccordionPanel, .greenCalendar, .greenCarousel,
-	.greenSelectOneButton, .greenToolTip {
+	.greenSelectOneButton, .greenToolTip, .greenFileUpload {
 	font-size: 0.9375em !important;
 }
 

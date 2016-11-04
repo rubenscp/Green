@@ -21,7 +21,7 @@ import br.edu.green.web.validate.ProcessingResultsList;
 
 @Local
 public interface ExperimentService {
-	public ProcessingResultsList save(ExperimentEntity experiment) throws GeneralException;
+	public ProcessingResultsList save(ExperimentEntity experiment, PersonEntity person) throws GeneralException;
 
 	public ProcessingResultsList delete(ExperimentEntity experiment) throws GeneralException;
 

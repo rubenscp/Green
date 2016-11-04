@@ -7,8 +7,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.FileUploadEvent;
 
 import br.edu.green.web.entity.ExperimentEntity;
 import br.edu.green.web.entity.PersonEntity;
@@ -65,7 +69,7 @@ public class ExperimentController extends GeneralController implements Serializa
 	private boolean pnlExperimentListRender;
 	private boolean pnlExperimentNewEditRender;
 	private boolean pnlExperimentViewRender;
-	private boolean pnlExperimentUploadImagesRender;
+	private boolean pnlExperimentImagesUploadRender;
 
 	private boolean buttonNewExperimentRender;
 	private boolean buttonDeleteRender;
@@ -157,6 +161,7 @@ public class ExperimentController extends GeneralController implements Serializa
 			experiment.setEditAction(GeneralController.RENDERED);
 			experiment.setDeleteAction(GeneralController.RENDERED);
 			experiment.setViewAction(GeneralController.RENDERED);
+			experiment.setImagesUploadAction(GeneralController.RENDERED);
 		}
 	}
 
@@ -183,7 +188,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
-		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
+		this.pnlExperimentImagesUploadRender = !GeneralController.RENDERED;
 		this.buttonNewExperimentRender = GeneralController.RENDERED;
 	}
 
@@ -199,7 +204,7 @@ public class ExperimentController extends GeneralController implements Serializa
 
 		// configuring attributes of the new experiment
 		this.experimentSelected.setOwnerPerson(this.loggedPerson);
-		this.experimentSelected.setPublicIdentifier(this.loggedPerson.getLastExperimentPublicIdentifier() + 1);
+		// this.experimentSelected.setPublicIdentifier(this.loggedPerson.getLastExperimentPublicIdentifier() + 1);
 
 		// configuring function title
 		this.configureFunctionTitle();
@@ -208,7 +213,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = !GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
-		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
+		this.pnlExperimentImagesUploadRender = !GeneralController.RENDERED;
 		this.buttonNewExperimentRender = !GeneralController.RENDERED;
 	}
 
@@ -229,7 +234,7 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = !GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
-		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
+		this.pnlExperimentImagesUploadRender = !GeneralController.RENDERED;
 		this.buttonNewExperimentRender = !GeneralController.RENDERED;
 	}
 
@@ -280,7 +285,31 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = !GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
 		this.pnlExperimentViewRender = GeneralController.RENDERED;
-		this.pnlExperimentUploadImagesRender = GeneralController.RENDERED;
+		this.pnlExperimentImagesUploadRender = GeneralController.RENDERED;
+		this.buttonReturnRender = GeneralController.RENDERED;
+	}
+
+	/**
+	 * Configuring environment to query a experiment schedule.
+	 */
+	public void prepareImagesUpload(ExperimentEntity experiment) {
+		// defining the current action
+		this.action = ActionEnum.IMAGES_UPLOAD;
+
+		// setting experiment selected
+		this.experimentSelected = experiment;
+
+		// configuring the labels of experiment tabs
+		// this.prepareExperimentTabs();
+
+		// configuring function title
+		this.configureFunctionTitle();
+
+		// configuring visibility of the panels and buttons
+		this.pnlExperimentListRender = !GeneralController.RENDERED;
+		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
+		this.pnlExperimentViewRender = !GeneralController.RENDERED;
+		this.pnlExperimentImagesUploadRender = GeneralController.RENDERED;
 		this.buttonReturnRender = GeneralController.RENDERED;
 	}
 
@@ -393,10 +422,8 @@ public class ExperimentController extends GeneralController implements Serializa
 				break;
 
 			case UPDATE:
-				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.update.experiment").trim() + " " + this.experimentSelected.getPublicIdentifierAndShortTitle();
-				break;
-
 			case VIEW:
+			case IMAGES_UPLOAD:
 				this.functionTitle = this.labels.getLabel("form.experiment.list.function.title.view.experiment").trim() + " " + this.experimentSelected.getPublicIdentifierAndShortTitle();
 				break;
 
@@ -446,6 +473,15 @@ public class ExperimentController extends GeneralController implements Serializa
 	 */
 	public void setExperimentSelected(ExperimentEntity experimentSelected) {
 		this.experimentSelected = experimentSelected;
+	}
+
+	/**
+	 * Returns true if the current action is "update" to show the update date of experiment.
+	 * 
+	 * @return boolean - The indicator to show the update date of experiment.
+	 */
+	public boolean isPublicIdentifierRender() {
+		return (this.action.equals(ActionEnum.UPDATE) ? true : false);
 	}
 
 	/**
@@ -515,8 +551,8 @@ public class ExperimentController extends GeneralController implements Serializa
 	/**
 	 * @return the pnlExperimentUploadImagesRender
 	 */
-	public boolean isPnlExperimentUploadImagesRender() {
-		return pnlExperimentUploadImagesRender;
+	public boolean isPnlExperimentImagesUploadRender() {
+		return pnlExperimentImagesUploadRender;
 	}
 
 	/**
@@ -561,6 +597,14 @@ public class ExperimentController extends GeneralController implements Serializa
 	// ***************************************************************
 	// Operations of the controller
 	// ***************************************************************
+
+	/**
+	 * Sets the indicator of change in any field of the form
+	 */
+	public void onKeyUp() {
+		this.dataChanged = true;
+	}
+
 	/**
 	 * Save the experiment.
 	 */
@@ -576,7 +620,7 @@ public class ExperimentController extends GeneralController implements Serializa
 				this.experimentSelected.setLastUpdateDate(new Date());
 
 				// saving experiment
-				this.processingResultsList = this.experimentService.save(this.experimentSelected);
+				this.processingResultsList = this.experimentService.save(this.experimentSelected, this.loggedPerson);
 
 				// checking the processing result
 				if (!this.processingResultsList.isErrorOrWarningOrException()) {
@@ -698,10 +742,13 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.pnlExperimentListRender = GeneralController.RENDERED;
 		this.pnlExperimentNewEditRender = !GeneralController.RENDERED;
 		this.pnlExperimentViewRender = !GeneralController.RENDERED;
-		this.pnlExperimentUploadImagesRender = !GeneralController.RENDERED;
+		this.pnlExperimentImagesUploadRender = !GeneralController.RENDERED;
 
 		// configuring new action after current action
 		this.action = ActionEnum.SHOW_LIST;
+
+		// configuring filter
+		this.filter = FilterEnum.MY;
 
 		// configuring function title
 		this.configureFunctionTitle();
@@ -743,6 +790,14 @@ public class ExperimentController extends GeneralController implements Serializa
 
 		// close the the dialog panel
 		this.closeDialogForm(dialogFormName);
+	}
 
+	public void handleFileUpload(FileUploadEvent event) {
+		String typeFile = event.getFile().getContentType();
+		String nameFile = event.getFile().getFileName();
+		Long sizeFile = event.getFile().getSize();
+
+		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 }

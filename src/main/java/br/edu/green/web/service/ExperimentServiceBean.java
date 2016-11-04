@@ -43,6 +43,9 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 	@EJB
 	EntityManagerWrapperService emws;
 
+	@EJB
+	PersonService personService;
+
 	// classes attributes
 	private ActionEnum action;
 
@@ -68,7 +71,7 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 	 * @throws GeneralException
 	 *             The generic exception of SITIS
 	 */
-	public ProcessingResultsList save(ExperimentEntity experiment) throws GeneralException {
+	public ProcessingResultsList save(ExperimentEntity experiment, PersonEntity person) throws GeneralException {
 		// clear the processing result map
 		super.processingResultMap.clear();
 
@@ -88,14 +91,21 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 			// starting bean transaction
 			this.userTransaction.begin();
 
+			// setting new public identifier of the experiment
+			person.setLastExperimentPublicIdentifier(person.getLastExperimentPublicIdentifier() + 1);
+			experiment.setPublicIdentifier(person.getLastExperimentPublicIdentifier());
+
 			// saving experiment schedule
 			experiment = this.saveExperiment(experiment);
 
+			// updating person
+			person = this.personService.save(person);
+
 			// defining proper message related to result with success
 			if (action.equals(ActionEnum.NEW)) {
-				super.processingResultMap.add(new ProcessingResultEntity(Code.EXPERIMENT_INFORMATION_SUCCESS_NEW_EXPERIMENT, applicationMessage.getMessage(Code.EXPERIMENT_INFORMATION_SUCCESS_NEW_EXPERIMENT.name())));
+				super.processingResultMap.add(new ProcessingResultEntity(Code.EXPERIMENT_INFORMATION_SUCCESS_NEW_EXPERIMENT, applicationMessage.getMessage(Code.EXPERIMENT_INFORMATION_SUCCESS_NEW_EXPERIMENT.name(), experiment.getTitle())));
 			} else {
-				super.processingResultMap.add(new ProcessingResultEntity(Code.EXPERIMENT_INFORMATION_SUCCESS_UPDATE_EXPERIMENT, applicationMessage.getMessage(Code.EXPERIMENT_INFORMATION_SUCCESS_UPDATE_EXPERIMENT.name())));
+				super.processingResultMap.add(new ProcessingResultEntity(Code.EXPERIMENT_INFORMATION_SUCCESS_UPDATE_EXPERIMENT, applicationMessage.getMessage(Code.EXPERIMENT_INFORMATION_SUCCESS_UPDATE_EXPERIMENT.name(), experiment.getTitle())));
 			}
 
 			// returning operation performed with success

@@ -82,6 +82,9 @@ public class ExperimentEntity implements Serializable {
 	@Transient
 	private boolean viewAction;
 
+	@Transient
+	private boolean imagesUploadAction;
+
 	/**
 	 * 
 	 */
@@ -311,6 +314,25 @@ public class ExperimentEntity implements Serializable {
 	 */
 	public void setViewAction(boolean viewAction) {
 		this.viewAction = viewAction;
+	}
+
+	/**
+	 * Returns the indicator of the experiment to do images upload.
+	 * 
+	 * @return boolean - The indicator of the experiment to do images upload.
+	 */
+	public boolean isImagesUploadAction() {
+		return imagesUploadAction;
+	}
+
+	/**
+	 * Sets the indicator of the experiment to do images upload.
+	 *
+	 * @param imagesUploadAction
+	 *            The indicator of the experiment to do images upload.
+	 */
+	public void setImagesUploadAction(boolean imagesUploadAction) {
+		this.imagesUploadAction = imagesUploadAction;
 	}
 
 	/**

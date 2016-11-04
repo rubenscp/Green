@@ -87,11 +87,16 @@ public class PersonServiceBean extends GeneralService implements PersonService {
 		}
 	}
 
-	// @Override
-	// public PersonEntity findById(long id) throws GeneralException {
-	// String sql = "select p from PersonEntity p where p.id = :id";
-	// return this.findOneObject(sql, "id", Long.toString(id));
-	// }
+	@Override
+	public PersonEntity findById(long id) throws GeneralException {
+		try {
+			String sql = "select p from PersonEntity p where p.id = :id";
+			return this.findOneObject(sql, "id", Long.toString(id));
+		} catch (Exception e) {
+			// configuring and throwing details of the actual exception
+			throw this.handleException(e, this.getClass().getSimpleName(), "findById", Code.DAO_EXCEPTION_FIND, this.getClass().getSimpleName());
+		}
+	}
 
 	/**
 	 * Finds a person by its email.

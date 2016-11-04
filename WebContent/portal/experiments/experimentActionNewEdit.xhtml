@@ -26,15 +26,19 @@
 
 			<p:panel>
 
+				<p:focus for="title" />
+
 				<h:panelGrid columns="2" cellpadding="1" cellspacing="5"
 					columnClasses="greenPanelgridColumnLeft, greenPanelgridColumnRight">
 
 					<!-- Identification of the experiment -->
-					<h:outputLabel for="id"
+					<h:outputLabel for="publicIdentifier"
 						value="#{labels['form.experiment.identification.publicIdentifier']}"
+						rendered="#{experimentController.publicIdentifierRender}"
 						styleClass="greenOutputLabel" />
-					<h:outputLabel id="id"
+					<h:outputLabel id="publicIdentifier"
 						value="#{experimentController.experimentSelected.publicIdentifier}"
+						rendered="#{experimentController.publicIdentifierRender}"
 						styleClass="greenOutputLabel" />
 
 					<!-- Owner of the experiment -->
@@ -54,12 +58,12 @@
 						maxlength="128" size="128" onclick="PF('wtipTitle').hide()"
 						styleClass="greenInputText" style="width:43em;" tabindex="1">
 						<f:validateLength maximum="128" />
+						<p:ajax event="keyup" listener="#{experimentController.onKeyUp()}" />
 						<p:tooltip id="tipTitle" widgetVar="wtipTitle" for="title"
 							trackMouse="true"
 							value="#{labels['form.experiment.identification.title.tip']}"
 							styleClass="greenToolTip" />
 					</p:inputText>
-
 
 					<!-- Description of the experiment -->
 					<h:outputLabel for="description"
@@ -69,9 +73,11 @@
 						styleClass="greenDialogColumnRight">
 						<p:inputTextarea id="description"
 							value="#{experimentController.experimentSelected.description}"
-							rows="10" cols="72" maxlength="1000" counter="display"
+							rows="10" cols="85" maxlength="1000" counter="display"
 							counterTemplate="#{labels['form.experiment.identification.description.characters.remaining']}"
-							autoResize="false" styleClass="greenConfirmDialogInputText">
+							autoResize="false" styleClass="greenInputTextArea" tabindex="2">
+							<p:ajax event="keyup"
+								listener="#{experimentController.onKeyUp()}" />
 							<p:tooltip id="tipDescription" widgetVar="wtipDescription"
 								for="description" trackMouse="true"
 								value="#{labels['form.experiment.identification.description.limit.characters.tip']}"
@@ -111,25 +117,13 @@
 			</p:panel>
 
 			<!-- Buttons of the form   -->
-			<h:panelGrid columns="3">
-
-				<p:commandButton id="buttonReturnNewEdit"
-					value="#{labels['form.button.return.value']}"
-					actionListener="#{experimentController.prepareReturnExperimentList()}"
-					ajax="true" styleClass="greenCommandButton"
-					onclick="PF('wtipButtonReturn').hide()"
-					update="frmExperimentManager">
-					<p:tooltip id="tipButtonReturnNewEdit"
-						widgetVar="wtipButtonReturnNewEdit" for="buttonReturnNewEdit"
-						value="#{labels['form.button.return.tip']}"
-						styleClass="greenToolTip" />
-				</p:commandButton>
-
+			<h:panelGrid columns="2">
 				<p:commandButton id="buttonSaveNewEdit"
 					value="#{labels['form.button.save.value']}"
 					actionListener="#{experimentController.executeSave}" ajax="true"
 					styleClass="greenCommandButton"
-					onclick="PF('wtipButtonSave').hide()" update="frmExperimentManager">
+					onclick="PF('wtipButtonSave').hide()" update="frmExperimentManager"
+					tabindex="3">
 					<p:tooltip id="tipButtonSaveNewEdit"
 						widgetVar="wtipButtonSaveNewEdit" for="buttonSaveNewEdit"
 						value="#{labels['form.button.save.tip']}"
@@ -141,13 +135,55 @@
 					actionListener="#{experimentController.cancel('wdlgConfirmCancel')}"
 					ajax="true" styleClass="greenCommandButton"
 					onclick="PF('wtipButtonCancel').hide()"
-					update="frmExperimentManager">
+					update="frmExperimentManager" tabindex="4">
 					<p:tooltip id="tipButtonCancelNewEdit"
 						widgetVar="wtipButtonCancelNewEdit" for="buttonCancelNewEdit"
 						value="#{labels['form.button.cancel.tip']}"
 						styleClass="greenToolTip" />
 				</p:commandButton>
 			</h:panelGrid>
+
+			<!-- ============= -->
+			<!-- Dialogs Forms -->
+			<!-- ============= -->
+
+			<!-- Dialog form to confirm the cancel operation -->
+			<p:dialog id="dlgConfirmCancel"
+				header="#{labels['form.dialog.experiment.confirm.cancel.title']}"
+				widgetVar="wdlgConfirmCancel" closable="true" closeOnEscape="true"
+				dynamic="true" resizable="false" position="center">
+
+				<h:panelGrid columns="1" columnClasses="greenPanelgridColumnCenter"
+					width="100%">
+
+					<!-- Message of the dialog  -->
+					<p:outputLabel
+						value="#{labels['form.dialog.experiment.confirm.cancel.message1']}"
+						styleClass="greenConfirmDialogMessage" />
+					<p:outputLabel
+						value="#{labels['form.dialog.experiment.confirm.cancel.message2']}"
+						styleClass="greenConfirmDialogMessage" />
+
+					<!-- Button of the confirm dialog form -->
+					<h:panelGrid columns="2"
+						columnClasses="greenPanelgridColumnLeft, greenPanelgridColumnRight"
+						width="100%">
+						<p:commandButton value="#{labels['form.button.yes.value']}"
+							actionListener="#{experimentController.executeCancel('wdlgConfirmCancel')}"
+							styleClass="greenConfirmDialogButton"
+							update="frmExperimentManager">
+						</p:commandButton>
+						<p:commandButton value="#{labels['form.button.no.value']}"
+							actionListener="#{experimentController.closeDialogForm('wdlgConfirmCancel')}"
+							styleClass="greenConfirmDialogButton">
+						</p:commandButton>
+					</h:panelGrid>
+
+				</h:panelGrid>
+
+			</p:dialog>
+
+
 
 		</p:panel>
 

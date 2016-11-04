@@ -24,7 +24,7 @@ public interface PersonService {
 
 	public void delete(PersonEntity person) throws GeneralException;
 
-	// public PersonEntity findById(long id) throws GeneralException;
+	public PersonEntity findById(long id) throws GeneralException;
 
 	public PersonEntity findByUserName(String userName) throws GeneralException;
 
