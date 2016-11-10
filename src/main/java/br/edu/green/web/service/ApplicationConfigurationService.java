@@ -58,7 +58,8 @@ public class ApplicationConfigurationService {
 		} catch (Exception e) {
 			// configuring and throwing details of the actual exception
 			GeneralException ge = new GeneralException();
-			ge.setProcessingResult(new ProcessingResultEntity(Code.INITIALIZING_SERVICE_EXCEPTION_FAILURE, "Falha na inicializaÃ§Ã£o do serviÃ§o Application Configuration Favor contatar a administraÃ§Ã£o do sistema."));
+			ge.setProcessingResult(new ProcessingResultEntity(Code.INITIALIZING_SERVICE_EXCEPTION_FAILURE, 
+			   "Falha na inicialização do serviço Application Configuration Favor contatar a administração do sistema."));
 			ge.setClassName(this.getClass().getName());
 			ge.setMethodName("ApplicationConfigurationService");
 			ge.setExceptionOriginalMessage(e.getMessage()); // the original exception message
