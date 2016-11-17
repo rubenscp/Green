@@ -44,8 +44,15 @@
 
 				<p:column
 					headerText="#{labels['form.experiment.list.experimentTitle']}"
-					width="50%" style="text-align:left;" sortBy="#{experiment.title}">
+					width="35%" style="text-align:left;" sortBy="#{experiment.title}">
 					<h:outputText value="#{experiment.title}" />
+				</p:column>
+
+				<p:column
+					headerText="#{labels['form.experiment.list.numberOfImages']}"
+					width="15%" style="text-align:center;"
+					sortBy="#{experiment.images.size()}">
+					<h:outputText value="#{experiment.images.size()}" />
 				</p:column>
 
 				<p:column headerText="#{labels['form.experiment.list.ownerPerson']}"

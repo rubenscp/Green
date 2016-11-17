@@ -1,13 +1,18 @@
 package br.edu.green.web.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -15,6 +20,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 
 import br.edu.green.web.entity.ExperimentEntity;
+import br.edu.green.web.entity.ImageEntity;
 import br.edu.green.web.entity.PersonEntity;
 import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
@@ -23,8 +29,11 @@ import br.edu.green.web.entity.enumerate.FilterEnum;
 import br.edu.green.web.exception.GeneralException;
 import br.edu.green.web.service.ExperimentService;
 import br.edu.green.web.service.ExperimentServiceBean;
+import br.edu.green.web.service.ImageService;
 import br.edu.green.web.service.PersonService;
 import br.edu.green.web.util.FacesUtil;
+import br.edu.green.web.util.Util;
+import br.edu.green.web.validate.ProcessingResultsList;
 
 /**
  * <p>
@@ -48,6 +57,9 @@ public class ExperimentController extends GeneralController implements Serializa
 
 	@EJB
 	private PersonService personService;
+
+	@EJB
+	private ImageService imageService;
 
 	// defining class attributes
 	private List<ExperimentEntity> experiments = new ArrayList<ExperimentEntity>();
@@ -293,6 +305,9 @@ public class ExperimentController extends GeneralController implements Serializa
 	 * Configuring environment to query a experiment schedule.
 	 */
 	public void prepareImagesUpload(ExperimentEntity experiment) {
+		// clearing the processing result list
+		this.processingResultsList.clear();
+
 		// defining the current action
 		this.action = ActionEnum.IMAGES_UPLOAD;
 
@@ -792,12 +807,121 @@ public class ExperimentController extends GeneralController implements Serializa
 		this.closeDialogForm(dialogFormName);
 	}
 
+	/**
+	 * Uploading images of the experiment.
+	 * 
+	 * @param event
+	 *            The event that contains the image to uploading.
+	 */
 	public void handleFileUpload(FileUploadEvent event) {
-		String typeFile = event.getFile().getContentType();
-		String nameFile = event.getFile().getFileName();
-		Long sizeFile = event.getFile().getSize();
+		try {
+			// defining image object
+			ImageEntity newImage = new ImageEntity();
 
-		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
+			// setting the image attributes
+			newImage.setExperiment(this.experimentSelected);
+			newImage.setExternalName(event.getFile().getFileName());
+			newImage.setInternalName("?");
+			newImage.setInternalPath("?");
+			newImage.setAcquireDate(null);
+			newImage.setSize(event.getFile().getSize());
+			newImage.setWidth(0);
+			newImage.setHeight(0);
+			newImage.setAltitude(0.0);
+			newImage.setLatitude(0.0);
+			newImage.setLongitude(0.0);
+			newImage.setImportDate(new Date());
+
+			// saving the data of image into database.
+			ProcessingResultsList auxiliaryProcessingResultsList = this.imageService.save(newImage);
+
+			// adding messages to list of processing result
+			for (ProcessingResultEntity result : auxiliaryProcessingResultsList.getProcessingResults()) {
+				this.processingResultsList.add(result);
+			}
+
+			String typeFile = event.getFile().getContentType();
+			String nameFile = event.getFile().getFileName();
+			Long sizeFile = event.getFile().getSize();
+
+			// this.log.info("Image uploaded: " + nameFile + " - " + typeFile + " - " + sizeFile);
+
+			System.out.println("Image uploaded: " + nameFile + " - " + typeFile + " - " + sizeFile);
+
+			String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+
+			Util.writeFile(event.getFile().getInputstream(), path, event.getFile().getFileName());
+
+			// preparing the processing result
+			this.preparePresentationProcessingResults();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (GeneralException ge) {
+			// handling general exception of SITIS Web
+			this.handleGeneralException(ge);
+		}
+	}
+
+	public void handleFileUpload2(FileUploadEvent event) {
+		try {
+			// defining image object
+			ImageEntity newImage = new ImageEntity();
+
+			// setting the image attributes
+			newImage.setExperiment(this.experimentSelected);
+			newImage.setExternalName(event.getFile().getFileName());
+			newImage.setInternalName("?");
+			newImage.setInternalPath("?");
+			newImage.setAcquireDate(null);
+			newImage.setSize(event.getFile().getSize());
+			newImage.setWidth(0);
+			newImage.setHeight(0);
+			newImage.setAltitude(0.0);
+			newImage.setLatitude(0.0);
+			newImage.setLongitude(0.0);
+			newImage.setImportDate(new Date());
+
+			// saving the data of image into database.
+			ProcessingResultsList auxiliaryProcessingResultsList = this.imageService.save(newImage);
+
+			// adding messages to list of processing result
+			for (ProcessingResultEntity result : auxiliaryProcessingResultsList.getProcessingResults()) {
+				this.processingResultsList.add(result);
+			}
+
+			String typeFile = event.getFile().getContentType();
+			String nameFile = event.getFile().getFileName();
+			Long sizeFile = event.getFile().getSize();
+
+			// this.log.info("Image uploaded: " + nameFile + " - " + typeFile + " - " + sizeFile);
+
+			System.out.println("Image uploaded: " + nameFile + " - " + typeFile + " - " + sizeFile);
+
+			String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
+			String name = fmt.format(new Date()) + event.getFile().getFileName().substring(event.getFile().getFileName().lastIndexOf('.'));
+			File file = new File(path + "/catalogo_imagens/" + name);
+
+			InputStream inputStream = event.getFile().getInputstream();
+			OutputStream out = new FileOutputStream(file);
+			byte buf[] = new byte[1024];
+			int len;
+			while ((len = inputStream.read(buf)) > 0)
+				out.write(buf, 0, len);
+			inputStream.close();
+			out.close();
+
+			// preparing the processing result
+			this.preparePresentationProcessingResults();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (GeneralException ge) {
+			// handling general exception of SITIS Web
+			this.handleGeneralException(ge);
+		}
 	}
 }

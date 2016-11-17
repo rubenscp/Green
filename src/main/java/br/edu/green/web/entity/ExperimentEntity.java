@@ -1,6 +1,7 @@
 package br.edu.green.web.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -94,7 +95,7 @@ public class ExperimentEntity implements Serializable {
 	 * 
 	 */
 	public ExperimentEntity() {
-		this(new Long(0), new Long(0), new PersonEntity(), null, null, new Date(), null);
+		this(new Long(0), new Long(0), new PersonEntity(), null, null, new Date(), null, new ArrayList<ImageEntity>(0));
 	}
 
 	/**
@@ -106,7 +107,8 @@ public class ExperimentEntity implements Serializable {
 	 * @param creationDate
 	 * @param lastUpdateDate
 	 */
-	public ExperimentEntity(Long id, Long publicIdentifier, PersonEntity ownerPerson, String title, String description, Date creationDate, Date lastUpdateDate) {
+	public ExperimentEntity(Long id, Long publicIdentifier, PersonEntity ownerPerson, String title, String description, Date creationDate, Date lastUpdateDate,
+			List<ImageEntity> images) {
 		super();
 		this.id = id;
 		this.publicIdentifier = publicIdentifier;
@@ -115,6 +117,7 @@ public class ExperimentEntity implements Serializable {
 		this.description = description;
 		this.creationDate = creationDate;
 		this.lastUpdateDate = lastUpdateDate;
+		this.images = images;
 	}
 
 	/**
@@ -262,6 +265,21 @@ public class ExperimentEntity implements Serializable {
 	 */
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	/**
+	 * @return the images
+	 */
+	public List<ImageEntity> getImages() {
+		return images;
+	}
+
+	/**
+	 * @param images
+	 *            the images to set
+	 */
+	public void setImages(List<ImageEntity> images) {
+		this.images = images;
 	}
 
 	/**

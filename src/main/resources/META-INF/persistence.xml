@@ -11,6 +11,7 @@
 
 		<class>br.edu.green.web.entity.PersonEntity</class>
 		<class>br.edu.green.web.entity.ExperimentEntity</class>
+		<class>br.edu.green.web.entity.ImageEntity</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>NONE</validation-mode>

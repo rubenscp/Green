@@ -1,5 +1,11 @@
 package br.edu.green.web.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -7,6 +13,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import javax.faces.context.FacesContext;
+
+import br.edu.green.web.entity.ProcessingResultEntity;
+import br.edu.green.web.entity.ProcessingResultEntity.Code;
+import br.edu.green.web.exception.GeneralException;
 
 /**
  * Util.java: This class contains utiity static methods.
@@ -225,5 +237,34 @@ public class Util {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Writes an file in a specific folder in the web server.
+	 * 
+	 * @param inputFile
+	 *            The input file to be write into the folder.
+	 * @param path
+	 *            The full path where the file will be wrote.
+	 * @param fullFileName
+	 *            The file name with its extension name.
+	 * @throws IOException
+	 *             The I/O exception.
+	 */
+	public static void writeFile(InputStream inputFile, String path, String fullFileName) throws IOException {
+		// creating objects to be wrote into the folder
+		File file = new File(path + fullFileName);
+		OutputStream outputFile = new FileOutputStream(file);
+
+		// writing the file byte per byte
+		byte buf[] = new byte[1024];
+		int length;
+		while ((length = inputFile.read(buf)) > 0) {
+			outputFile.write(buf, 0, length);
+		}
+
+		// closing files
+		inputFile.close();
+		outputFile.close();
 	}
 }

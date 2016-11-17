@@ -29,14 +29,15 @@
 				<h:panelGrid columns="2" cellpadding="1" cellspacing="5"
 					columnClasses="greenPanelgridColumnLeft, greenPanelgridColumnRight">
 
-					<p:fileUpload id="images"
+					<!-- sizeLimit="100000" fileLimit="3" -->
+					<p:fileUpload id="images" label="seleciona" uploadLabel="upload"
+						cancelLabel="cancela"
 						fileUploadListener="#{experimentController.handleFileUpload}"
 						mode="advanced" dragDropSupport="false" multiple="true"
-						update="messages" sizeLimit="100000" fileLimit="3"
-						allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						update="msgs" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 						styleClass="greenFileUpload" />
 
-					<p:growl id="messages" showDetail="true" />
+					<!-- 					<p:growl id="messages" showDetail="true" /> -->
 
 				</h:panelGrid>
 

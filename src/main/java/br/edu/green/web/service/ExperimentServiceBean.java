@@ -92,6 +92,9 @@ public class ExperimentServiceBean extends GeneralService implements ExperimentS
 			this.userTransaction.begin();
 
 			// setting new public identifier of the experiment
+			if (person.getLastExperimentPublicIdentifier() == null) {
+				person.setLastExperimentPublicIdentifier(new Long(0));
+			}
 			person.setLastExperimentPublicIdentifier(person.getLastExperimentPublicIdentifier() + 1);
 			experiment.setPublicIdentifier(person.getLastExperimentPublicIdentifier());
 

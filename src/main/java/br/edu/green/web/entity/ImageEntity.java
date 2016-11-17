@@ -65,6 +65,9 @@ public class ImageEntity implements Serializable {
 	@NotNull
 	private Date acquireDate;
 
+	@Column(name = "size")
+	private Long size;
+
 	@Column(name = "width")
 	private Integer width;
 
@@ -95,7 +98,7 @@ public class ImageEntity implements Serializable {
 	 * Default constructor
 	 */
 	public ImageEntity() {
-		this(new Long(0), new ExperimentEntity(), "", "", "", new Date(), new Integer(0), new Integer(0), new Double(0), new Double(0), new Double(0), new Date());
+		this(new Long(0), new ExperimentEntity(), "", "", "", new Date(), new Long(0), new Integer(0), new Integer(0), new Double(0), new Double(0), new Double(0), new Date());
 	}
 
 	/**
@@ -105,6 +108,7 @@ public class ImageEntity implements Serializable {
 	 * @param internalName
 	 * @param internalPath
 	 * @param acquireDate
+	 * @param size
 	 * @param width
 	 * @param height
 	 * @param altitude
@@ -112,8 +116,8 @@ public class ImageEntity implements Serializable {
 	 * @param longitude
 	 * @param importDate
 	 */
-	public ImageEntity(Long id, ExperimentEntity experiment, String externalName, String internalName, String internalPath, Date acquireDate, Integer width,
-			Integer height, Double altitude, Double latitude, Double longitude, Date importDate) {
+	public ImageEntity(Long id, ExperimentEntity experiment, String externalName, String internalName, String internalPath, Date acquireDate, Long size,
+			Integer width, Integer height, Double altitude, Double latitude, Double longitude, Date importDate) {
 		super();
 		this.id = id;
 		this.experiment = experiment;
@@ -121,6 +125,7 @@ public class ImageEntity implements Serializable {
 		this.internalName = internalName;
 		this.internalPath = internalPath;
 		this.acquireDate = acquireDate;
+		this.size = size;
 		this.width = width;
 		this.height = height;
 		this.altitude = altitude;
@@ -217,6 +222,21 @@ public class ImageEntity implements Serializable {
 	 */
 	public void setAcquireDate(Date acquireDate) {
 		this.acquireDate = acquireDate;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public Long getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size
+	 *            the size to set
+	 */
+	public void setSize(Long size) {
+		this.size = size;
 	}
 
 	/**
