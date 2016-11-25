@@ -1,5 +1,6 @@
 package br.edu.green.web.entity;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -88,17 +89,24 @@ public class ImageEntity implements Serializable {
 	@NotNull
 	private Date importDate;
 
+	@Column(name = "file_format")
+	@Size(max = 20)
+	private String fileFormat;
+
 	@Transient
 	private boolean deleteAction;
 
 	@Transient
 	private boolean viewAction;
 
+	@Transient
+	BufferedImage image;
+
 	/**
 	 * Default constructor
 	 */
 	public ImageEntity() {
-		this(new Long(0), new ExperimentEntity(), "", "", "", new Date(), new Long(0), new Integer(0), new Integer(0), new Double(0), new Double(0), new Double(0), new Date());
+		this(new Long(0), new ExperimentEntity(), "", "", "", new Date(), new Long(0), new Integer(0), new Integer(0), new Double(0), new Double(0), new Double(0), new Date(), null);
 	}
 
 	/**
@@ -117,7 +125,7 @@ public class ImageEntity implements Serializable {
 	 * @param importDate
 	 */
 	public ImageEntity(Long id, ExperimentEntity experiment, String externalName, String internalName, String internalPath, Date acquireDate, Long size,
-			Integer width, Integer height, Double altitude, Double latitude, Double longitude, Date importDate) {
+			Integer width, Integer height, Double altitude, Double latitude, Double longitude, Date importDate, BufferedImage image) {
 		super();
 		this.id = id;
 		this.experiment = experiment;
@@ -132,6 +140,7 @@ public class ImageEntity implements Serializable {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.importDate = importDate;
+		this.image = image;
 	}
 
 	/**
@@ -330,6 +339,25 @@ public class ImageEntity implements Serializable {
 	}
 
 	/**
+	 * Returns the image file format.
+	 * 
+	 * @return String - The image file format.
+	 */
+	public String getFileFormat() {
+		return fileFormat;
+	}
+
+	/**
+	 * Returns the image file format.
+	 * @param fileFormat
+	 * 
+	 * @return String - The image file format.
+	 */
+	public void setFileFormat(String fileFormat) {
+		this.fileFormat = fileFormat;
+	}
+
+	/**
 	 * Returns the indicator of that the experiment can be deleted by the person.
 	 * 
 	 * @return boolean - The indicator of that the experiment can be deleted by the person.
@@ -365,6 +393,21 @@ public class ImageEntity implements Serializable {
 	 */
 	public void setViewAction(boolean viewAction) {
 		this.viewAction = viewAction;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
 	/**

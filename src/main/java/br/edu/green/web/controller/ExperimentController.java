@@ -1,5 +1,6 @@
 package br.edu.green.web.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 
 import org.primefaces.event.FileUploadEvent;
 
@@ -32,7 +34,6 @@ import br.edu.green.web.service.ExperimentServiceBean;
 import br.edu.green.web.service.ImageService;
 import br.edu.green.web.service.PersonService;
 import br.edu.green.web.util.FacesUtil;
-import br.edu.green.web.util.Util;
 import br.edu.green.web.validate.ProcessingResultsList;
 
 /**
@@ -814,54 +815,62 @@ public class ExperimentController extends GeneralController implements Serializa
 	 *            The event that contains the image to uploading.
 	 */
 	public void handleFileUpload(FileUploadEvent event) {
+		// try {
+		// defining image object
+		ImageEntity newImage = new ImageEntity();
+
+		// setting the image attributes
+		newImage.setExperiment(this.experimentSelected);
+		newImage.setExternalName(event.getFile().getFileName());
+		String internalName = event.getFile().getFileName().replace(" ", "_").toLowerCase();
+		newImage.setInternalName(internalName);
+		String realPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/") + "\\";
+		String internalPath = realPath + this.loggedPerson.getId().toString() + "_" + this.loggedPerson.getName().replace(" ", "_").toLowerCase();
+		newImage.setInternalPath(internalPath);
+		newImage.setAcquireDate(null);
+		newImage.setSize(event.getFile().getSize());
+		BufferedImage bufferedImage;
 		try {
-			// defining image object
-			ImageEntity newImage = new ImageEntity();
-
-			// setting the image attributes
-			newImage.setExperiment(this.experimentSelected);
-			newImage.setExternalName(event.getFile().getFileName());
-			newImage.setInternalName("?");
-			newImage.setInternalPath("?");
-			newImage.setAcquireDate(null);
-			newImage.setSize(event.getFile().getSize());
-			newImage.setWidth(0);
-			newImage.setHeight(0);
-			newImage.setAltitude(0.0);
-			newImage.setLatitude(0.0);
-			newImage.setLongitude(0.0);
-			newImage.setImportDate(new Date());
-
-			// saving the data of image into database.
-			ProcessingResultsList auxiliaryProcessingResultsList = this.imageService.save(newImage);
-
-			// adding messages to list of processing result
-			for (ProcessingResultEntity result : auxiliaryProcessingResultsList.getProcessingResults()) {
-				this.processingResultsList.add(result);
-			}
-
-			String typeFile = event.getFile().getContentType();
-			String nameFile = event.getFile().getFileName();
-			Long sizeFile = event.getFile().getSize();
-
-			// this.log.info("Image uploaded: " + nameFile + " - " + typeFile + " - " + sizeFile);
-
-			System.out.println("Image uploaded: " + nameFile + " - " + typeFile + " - " + sizeFile);
-
-			String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-
-			Util.writeFile(event.getFile().getInputstream(), path, event.getFile().getFileName());
-
-			// preparing the processing result
-			this.preparePresentationProcessingResults();
-
+			bufferedImage = ImageIO.read(event.getFile().getInputstream());
+			newImage.setImage(bufferedImage);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// error
 			e.printStackTrace();
-		} catch (GeneralException ge) {
-			// handling general exception of SITIS Web
-			this.handleGeneralException(ge);
+			return;
 		}
+		newImage.setWidth(bufferedImage.getWidth());
+		newImage.setHeight(bufferedImage.getHeight());
+		newImage.setAltitude(0.0);
+		newImage.setLatitude(0.0);
+		newImage.setLongitude(0.0);
+		newImage.setImportDate(new Date());
+		newImage.setFileFormat(event.getFile().getContentType());
+
+		// adding new image to experiment
+		this.experimentSelected.getImages().add(newImage);
+
+		// saving the data of image into database.
+		ProcessingResultsList auxiliaryProcessingResultsList = new ProcessingResultsList();
+		// auxiliaryProcessingResultsList = this.imageService.save(newImage);
+
+		// adding messages to list of processing result
+		for (ProcessingResultEntity result : auxiliaryProcessingResultsList.getProcessingResults()) {
+			this.processingResultsList.add(result);
+		}
+
+		// String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+		// Util.writeFile(event.getFile().getInputstream(), path, event.getFile().getFileName());
+
+		// preparing the processing result
+		this.preparePresentationProcessingResults();
+
+		// } catch (IOException e) {
+		// e.printStackTrace();
+
+		// } catch (GeneralException ge) {
+		// // handling general exception of SITIS Web
+		// this.handleGeneralException(ge);
+		// }
 	}
 
 	public void handleFileUpload2(FileUploadEvent event) {

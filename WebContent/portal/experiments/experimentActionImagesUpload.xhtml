@@ -30,8 +30,10 @@
 					columnClasses="greenPanelgridColumnLeft, greenPanelgridColumnRight">
 
 					<!-- sizeLimit="100000" fileLimit="3" -->
-					<p:fileUpload id="images" label="seleciona" uploadLabel="upload"
-						cancelLabel="cancela"
+					<p:fileUpload id="images"
+						label="#{labels['form.image.upload.button.select']}"
+						uploadLabel="#{labels['form.image.upload.button.upload']}"
+						cancelLabel="#{labels['form.image.upload.button.cancel']}"
 						fileUploadListener="#{experimentController.handleFileUpload}"
 						mode="advanced" dragDropSupport="false" multiple="true"
 						update="msgs" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
@@ -44,7 +46,7 @@
 			</p:panel>
 
 			<!-- Buttons of the form   -->
-			<h:panelGrid columns="1">
+			<h:panelGrid columns="2">
 
 				<p:commandButton id="buttonReturnImagesUpload"
 					value="#{labels['form.button.return.value']}"
@@ -57,6 +59,19 @@
 						widgetVar="wtipButtonReturnImagesUpload"
 						for="buttonReturnImagesUpload"
 						value="#{labels['form.button.return.tip']}"
+						styleClass="greenToolTip" />
+				</p:commandButton>
+
+				<p:commandButton id="buttonSaveImagesUpload"
+					value="#{labels['form.button.save.value']}"
+					actionListener="#{experimentController.executeSave}" ajax="true"
+					styleClass="greenCommandButton"
+					onclick="PF('wtipButtonSave').hide()" update="frmExperimentManager"
+					tabindex="3">
+					<p:tooltip id="tipButtonSaveImagesUpload"
+						widgetVar="wtipButtonSaveImagesUpload"
+						for="buttonSaveImagesUpload"
+						value="#{labels['form.button.save.tip']}"
 						styleClass="greenToolTip" />
 				</p:commandButton>
 

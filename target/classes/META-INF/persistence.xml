@@ -9,14 +9,17 @@
 
 		<jta-data-source>java:jboss/datasources/GreenDS</jta-data-source>
 
-		<class>br.edu.green.web.entity.PersonEntity</class>
-		<class>br.edu.green.web.entity.ExperimentEntity</class>
-		<class>br.edu.green.web.entity.ImageEntity</class>
+		<!-- <class>br.edu.green.web.entity.PersonEntity</class> -->
+		<!-- <class>br.edu.green.web.entity.ExperimentEntity</class> -->
+		<!-- <class>br.edu.green.web.entity.ImageEntity</class> -->
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>NONE</validation-mode>
 
 		<properties>
+			<!-- Scan for annotated classes and Hibernate mapping XML files -->
+			<property name="hibernate.archive.autodetection" value="class, hbm" />
+
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="@HIBERNATESHOWSQL@" />
 			<property name="hibernate.show_sql" value="false" />
@@ -24,7 +27,7 @@
 			<property name="hibernate.cache.use_second_level_cache"
 				value="true" />
 			<property name="hibernate.cache.use_query_cache" value="true" />
-			<!-- <property name="hibernate.hbm2ddl.auto" value="update"/> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 
 	</persistence-unit>

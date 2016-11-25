@@ -1,9 +1,12 @@
 package br.edu.green.web.service;
 
+import java.io.File;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.imageio.ImageIO;
 
 import br.edu.green.web.dao.EntityManagerWrapperService;
 import br.edu.green.web.entity.ImageEntity;
@@ -65,22 +68,22 @@ public class ImageServiceBean extends GeneralService implements ImageService {
 	 *            The image object to be save
 	 * @return ProcessingResultMap - The processing result map
 	 * @throws GeneralException
-	 *             The generic exception of SITIS.
+	 *             The generic exception of Green.
 	 */
 	public ProcessingResultsList save(ImageEntity image) throws GeneralException {
-		// clear the processing result map
-		super.processingResultMap.clear();
-
-		// consisting experiment schedule
-		// if (!this.consistSave(experiment)) {
-		// // returning operation performed with error
-		// return this.processingResultMap;
-		// }
-
-		// defining action
-		this.action = (image.getId() == 0 ? ActionEnum.NEW : ActionEnum.UPDATE);
-
 		try {
+			// clear the processing result map
+			super.processingResultMap.clear();
+
+			// consisting experiment schedule
+			// if (!this.consistSave(experiment)) {
+			// // returning operation performed with error
+			// return this.processingResultMap;
+			// }
+
+			// defining action
+			this.action = (image.getId() == 0 ? ActionEnum.NEW : ActionEnum.UPDATE);
+
 			// getting user transaction object
 			this.userTransaction = this.ejbContext.getUserTransaction();
 
@@ -89,6 +92,9 @@ public class ImageServiceBean extends GeneralService implements ImageService {
 
 			// saving experiment schedule
 			image = this.saveImage(image);
+
+			// saving image to local system (disk)
+			this.saveImageOnDisk(image);
 
 			// defining proper message related to result with success
 			if (action.equals(ActionEnum.NEW)) {
@@ -101,6 +107,16 @@ public class ImageServiceBean extends GeneralService implements ImageService {
 			return this.processingResultMap;
 
 		} catch (Exception e) {
+			try {
+				// committing bean transaction
+				if (this.userTransaction != null) {
+					this.userTransaction.rollback();
+				}
+			} catch (Exception e2) {
+				// configuring and throwing details of the actual exception
+				throw this.handleException(e2, this.getClass().getSimpleName(), "save - rollback", Code.EJB_EXCEPTION, this.getClass().getSimpleName());
+			}
+
 			throw this.handleException(e.getCause().getCause().getCause(), this.getClass().getSimpleName(), "save", Code.EJB_EXCEPTION, this.getClass().getSimpleName());
 
 		} finally {
@@ -210,6 +226,24 @@ public class ImageServiceBean extends GeneralService implements ImageService {
 		} catch (Exception e) {
 			// configuring and throwing details of the actual exception
 			throw this.handleException(e, this.getClass().getSimpleName(), "deleteImage", Code.DAO_EXCEPTION_DELETE, this.getClass().getSimpleName());
+		}
+	}
+
+	/**
+	 * Saves (create or update) an image in the disk.
+	 * 
+	 * @param image
+	 *            The image object to be save
+	 * @throws GeneralException
+	 *             The generic exception of Green.
+	 */
+	private void saveImageOnDisk(ImageEntity imageEntity) throws GeneralException {
+		try {
+			File file = new File(imageEntity.getInternalPath() + imageEntity.getInternalName());
+			ImageIO.write(imageEntity.getImage(), imageEntity.getFileFormat(), file);
+		} catch (Exception e) {
+			// configuring and throwing details of the actual exception
+			throw this.handleException(e, this.getClass().getSimpleName(), "saveImageOnDisk", Code.IO_OPERATION_WRITE_FILE, this.getClass().getSimpleName());
 		}
 	}
 

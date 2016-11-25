@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -76,7 +77,7 @@ public class ExperimentEntity implements Serializable {
 	private Date lastUpdateDate;
 
 	// mapping one to many related to ExperimentEntity class
-	@OneToMany(mappedBy = "experiment", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "experiment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<ImageEntity> images;
 
 	@Transient

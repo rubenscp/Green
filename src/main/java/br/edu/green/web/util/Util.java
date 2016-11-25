@@ -1,7 +1,6 @@
 package br.edu.green.web.util;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,12 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import javax.faces.context.FacesContext;
-
-import br.edu.green.web.entity.ProcessingResultEntity;
-import br.edu.green.web.entity.ProcessingResultEntity.Code;
-import br.edu.green.web.exception.GeneralException;
 
 /**
  * Util.java: This class contains utiity static methods.
