@@ -1,6 +1,7 @@
 package br.edu.green.web.service;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -8,7 +9,10 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.imageio.ImageIO;
 
+import com.google.common.io.Files;
+
 import br.edu.green.web.dao.EntityManagerWrapperService;
+import br.edu.green.web.entity.ExperimentEntity;
 import br.edu.green.web.entity.ImageEntity;
 import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
@@ -59,6 +63,25 @@ public class ImageServiceBean extends GeneralService implements ImageService {
 
 		// initializing services
 		this.initializeServices();
+	}
+
+	public ProcessingResultsList saveOnFolder(ImageEntity image) throws GeneralException {
+		// clear the processing result map
+		super.processingResultMap.clear();
+
+		// create folder of the person and experiment
+		new File(image.getInternalPath()).mkdirs();
+
+		// saving image on folder
+		try {
+			ImageIO.write(image.getImage(), "jpg", new File(image.getInternalPath() + image.getInternalName()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// returning the result of processing
+		return this.processingResultMap;
 	}
 
 	/**

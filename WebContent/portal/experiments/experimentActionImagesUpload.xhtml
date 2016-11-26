@@ -43,6 +43,34 @@
 
 				</h:panelGrid>
 
+				<!-- Table with images of the experiments  -->
+				<p:dataTable id="tblImages" var="image"
+					value="#{experimentController.experimentSelected.images}"
+					paginator="true" rows="10" rowsPerPageTemplate="5,10,20,30"
+					styleClass="greenDataTable"
+					emptyMessage="#{experimentController.emptyDatatableMessage}">
+
+					<p:column headerText="#{labels['form.experiment.list.actions']}"
+						width="18%" style="text-align:center;">
+
+						<p:commandLink
+							actionListener="#{experimentController.prepareUpdateExperiment(experiment)}"
+							onclick="PF('wtipImgEdit').hide()"
+							update="msgs frmExperimentManager pnlExperimentList pnlExperimentNewEdit">
+							<p:graphicImage id="imgImage" value="#{image}"
+								styleClass="greenActionImage"
+								rendered="#{experiment.editAction}">
+								<p:tooltip id="tipImgImage" widgetVar="wtipImgImage"
+									for="imgImage" trackMouse="true"
+									value="#{labels['form.action.image.edit.tip']}"
+									styleClass="greenToolTip" />
+							</p:graphicImage>
+						</p:commandLink>
+
+					</p:column>
+
+				</p:dataTable>
+
 			</p:panel>
 
 			<!-- Buttons of the form   -->

@@ -2,6 +2,7 @@ package br.edu.green.web.service;
 
 import javax.ejb.Local;
 
+import br.edu.green.web.entity.ExperimentEntity;
 import br.edu.green.web.entity.ImageEntity;
 import br.edu.green.web.exception.GeneralException;
 import br.edu.green.web.validate.ProcessingResultsList;
@@ -18,6 +19,8 @@ import br.edu.green.web.validate.ProcessingResultsList;
 
 @Local
 public interface ImageService {
+	public ProcessingResultsList saveOnFolder(ImageEntity image) throws GeneralException;
+
 	public ProcessingResultsList save(ImageEntity image) throws GeneralException;
 
 	public ProcessingResultsList delete(ImageEntity image) throws GeneralException;

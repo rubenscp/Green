@@ -38,6 +38,7 @@ public class GeneralService implements Serializable {
 
 	// defining the general objects
 	protected ApplicationMessageService applicationMessage;
+	protected ApplicationConfigurationService applicationConfiguration;
 	protected LogService log;
 	protected ProcessingResultsList processingResultMap;
 
@@ -59,6 +60,7 @@ public class GeneralService implements Serializable {
 		try {
 			// initializing services
 			this.applicationMessage = ApplicationMessageService.getInstanceof();
+			this.applicationConfiguration = ApplicationConfigurationService.getInstanceof();
 			this.log = new LogService(this);
 			this.processingResultMap = new ProcessingResultsList();
 

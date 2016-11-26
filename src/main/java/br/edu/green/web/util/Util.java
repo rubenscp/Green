@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +28,16 @@ public class Util {
 	public static final byte FORMAT_DDMMAAAA_HHMMSS = 1;
 	public static final byte FORMAT_DDMMAAAA = 2;
 	public static final String VALIDATION_FORMAT_DDMMAAAA = "dd/MM/yyyy";
+	public static final String FORMAT_NUMBER_0 = "0";
+	public static final String FORMAT_NUMBER_00 = "00";
+	public static final String FORMAT_NUMBER_000 = "000";
+	public static final String FORMAT_NUMBER_0000 = "0000";
+	public static final String FORMAT_NUMBER_00000 = "00000";
+	public static final String FORMAT_NUMBER_000000 = "000000";
+	public static final String FORMAT_NUMBER_0000000 = "0000000";
+	public static final String FORMAT_NUMBER_00000000 = "00000000";
+	public static final String FORMAT_NUMBER_000000000 = "000000000";
+	public static final String FORMAT_NUMBER_0000000000 = "0000000000";
 
 	// methods that obtaining the class name from the full class name
 	public static String className(String classFullName) {
@@ -145,6 +156,18 @@ public class Util {
 
 		// return formatted date
 		return formattedDate;
+	}
+
+	/**
+	 * Returns an text with the value formatted. The possible pattern are:
+	 * 
+	 * @param pattern
+	 * @param value
+	 * @return
+	 */
+	public static String numberFormat(String pattern, double value) {
+		DecimalFormat myFormatter = new DecimalFormat(pattern);
+		return myFormatter.format(value);
 	}
 
 	/**
