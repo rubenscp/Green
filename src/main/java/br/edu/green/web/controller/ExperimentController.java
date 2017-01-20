@@ -835,13 +835,14 @@ public class ExperimentController extends GeneralController implements Serializa
 			String rootFolder = this.applicationConfiguration.getStringValue("green.root.folder.images.experiments") + "\\";
 			String personFolder = "person_" + Util.numberFormat(Util.FORMAT_NUMBER_00000000, (double) this.loggedPerson.getId()) + "_" + this.loggedPerson.getName().trim().replace(" ", "_").toLowerCase() + "\\";
 			String experimentFolder = "experiment_" + Util.numberFormat(Util.FORMAT_NUMBER_00000000, experimentSelected.getId()) + "\\";
-			String internalPath = rootFolder + personFolder + experimentFolder;
+			String internalPath = rootFolder + personFolder + experimentFolder + "input\\";
 			newImage.setInternalPath(internalPath);
 			newImage.setAcquireDate(null);
 			newImage.setSize(event.getFile().getSize());
 			BufferedImage bufferedImage;
 			try {
 				bufferedImage = ImageIO.read(event.getFile().getInputstream());
+				event.getFile().getInputstream().close();
 				newImage.setImage(bufferedImage);
 			} catch (IOException e) {
 				// error

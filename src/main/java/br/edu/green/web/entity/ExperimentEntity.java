@@ -43,8 +43,8 @@ public class ExperimentEntity implements Serializable {
 	private static final long serialVersionUID = -7423754559233895498L;
 
 	@Id
-	@SequenceGenerator(name = "pk_sequence", sequenceName = "experiment_id_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pk_sequence")
+	@SequenceGenerator(name = "pk_sequence_experiment", sequenceName = "experiment_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pk_sequence_experiment")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 

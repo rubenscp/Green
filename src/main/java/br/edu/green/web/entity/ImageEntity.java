@@ -39,8 +39,8 @@ public class ImageEntity implements Serializable {
 	private static final long serialVersionUID = -5256294703085348308L;
 
 	@Id
-	@SequenceGenerator(name = "pk_sequence", sequenceName = "image_id_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pk_sequence")
+	@SequenceGenerator(name = "pk_sequence_image", sequenceName = "image_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pk_sequence_image")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
@@ -349,6 +349,7 @@ public class ImageEntity implements Serializable {
 
 	/**
 	 * Returns the image file format.
+	 * 
 	 * @param fileFormat
 	 * 
 	 * @return String - The image file format.

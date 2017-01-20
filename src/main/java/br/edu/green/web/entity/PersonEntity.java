@@ -31,8 +31,8 @@ public class PersonEntity implements Serializable {
 	private static final long serialVersionUID = -6513294307557663963L;
 
 	@Id
-	@SequenceGenerator(name = "pk_sequence", sequenceName = "person_id_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pk_sequence")
+	@SequenceGenerator(name = "pk_sequence_person", sequenceName = "person_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pk_sequence_person")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 

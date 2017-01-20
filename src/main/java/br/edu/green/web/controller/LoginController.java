@@ -1,14 +1,19 @@
 package br.edu.green.web.controller;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
+import br.edu.green.web.entity.PersonEntity;
 import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
+import br.edu.green.web.entity.enumerate.EmailTemplateIdentifierEnum;
 import br.edu.green.web.exception.GeneralException;
 import br.edu.green.web.service.PersonAuthenticationService;
 import br.edu.green.web.util.FacesUtil;
@@ -40,6 +45,9 @@ public class LoginController extends GeneralController implements Serializable {
 
 	@EJB
 	private PersonAuthenticationService personAuthenticationService;
+
+	// @EJB
+	// private EmailTemplateService emailTemplateService;
 
 	// ***************************************************************
 	// Initializers Methods
@@ -167,6 +175,10 @@ public class LoginController extends GeneralController implements Serializable {
 				// updating the status of the changed language
 				FacesUtil.getSession().setAttribute(Util.className(SessionController.class.getName()), false);
 
+				// recovering logged person and sends email
+				// PersonEntity loggedPerson = FacesUtil.recoverObjectInSession(new PersonEntity());
+				// this.sendEmail(loggedPerson);
+
 				// calling SITIS main form
 				FacesUtil.getContext().getExternalContext().redirect(this.applicationConfiguration.getStringValue("xhtml.form.name.activities.web.project"));
 			}
@@ -213,4 +225,46 @@ public class LoginController extends GeneralController implements Serializable {
 		}
 	}
 
+	/**
+	 * Sends email
+	 */
+	// private void sendEmail(PersonEntity person) {
+	// try {
+	// // checking environment to send an email
+	// if (person.getEmail() == null || person.getEmail() == "") {
+	// return;
+	// }
+	//
+	// // getting email template
+	// EmailTemplateEntity emailTemplate = this.emailTemplateService.findByIdentifier(EmailTemplateIdentifierEnum.USER_LOGIN.getEmailTemplateIdentifier());
+	//
+	// // checking email template
+	// if (emailTemplate == null) {
+	// return;
+	// }
+	//
+	// // getting instance of email formatter
+	// EmailFormatter emailFormatter = EmailFormatter.getInstanceof();
+	//
+	// // preparing list of destination e-mails
+	// // List<String> toEmails = new ArrayList<String>(0);
+	// emailTemplate.getToEmails().add(person.getEmail());
+	//
+	// // preparing values used in the body of email
+	// Map<String, String> bodyValues = new HashMap<String, String>(0);
+	// // bodyValues.put("personRegistration", String.valueOf(person.getRegistration()));
+	// bodyValues.put("personName", person.getName());
+	// bodyValues.put("currentDate", Util.formatterDate(new Date(), Util.FORMAT_DDMMAAAA_HHMMSS));
+	//
+	// // preparing email
+	// emailTemplate = emailFormatter.format(emailTemplate, null, bodyValues);
+	//
+	// // sending an email
+	// this.emailService.send(emailTemplate);
+	//
+	// } catch (GeneralException e) {
+	// // writing error message
+	// this.log.error(this.applicationMessage.getMessage("EMAIL_SERVICE_ERROR_SEND"));
+	// }
+	// }
 }

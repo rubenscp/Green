@@ -54,6 +54,7 @@ public class GeneralController implements Serializable {
 	// protected ProcessingResultFormatter processingResultFormatter;
 	protected LabelService labels;
 	protected LogService log;
+	// protected EmailService emailService;
 	String email;
 	String namePerson;
 
