@@ -1,19 +1,14 @@
 package br.edu.green.web.controller;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
-import br.edu.green.web.entity.PersonEntity;
 import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;
-import br.edu.green.web.entity.enumerate.EmailTemplateIdentifierEnum;
 import br.edu.green.web.exception.GeneralException;
 import br.edu.green.web.service.PersonAuthenticationService;
 import br.edu.green.web.util.FacesUtil;

@@ -9,10 +9,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.imageio.ImageIO;
 
-import com.google.common.io.Files;
-
 import br.edu.green.web.dao.EntityManagerWrapperService;
-import br.edu.green.web.entity.ExperimentEntity;
 import br.edu.green.web.entity.ImageEntity;
 import br.edu.green.web.entity.ProcessingResultEntity;
 import br.edu.green.web.entity.ProcessingResultEntity.Code;

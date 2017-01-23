@@ -8,9 +8,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<jta-data-source>java:jboss/datasources/GreenDS</jta-data-source>
-		<class>br.edu.green.web.entity.ExperimentEntity</class>
-		<class>br.edu.green.web.entity.ImageEntity</class>
-		<class>br.edu.green.web.entity.PersonEntity</class>
+		<!-- <class>br.edu.green.web.entity.ExperimentEntity</class> -->
+		<!-- <class>br.edu.green.web.entity.ImageEntity</class> -->
+		<!-- <class>br.edu.green.web.entity.PersonEntity</class> -->
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>NONE</validation-mode>
@@ -21,7 +21,7 @@
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="@HIBERNATESHOWSQL@" />
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.validator.apply_to_ddl" value="false" />
 			<property name="hibernate.cache.use_second_level_cache"
 				value="true" />
